@@ -1,0 +1,122 @@
+{
+  "common": {
+    "search": "Search",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings",
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "getStarted": "Get Started",
+    "getStartedFree": "Get Started Free",
+    "startFreeTrial": "Start Free Trial",
+    "learnMore": "Learn More",
+    "newOrder": "New order received",
+    "lowStock": "Low stock",
+    "minutes": "minutes",
+    "hours": "hours",
+    "ago": "ago"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "analytics": "Analytics",
+    "automation": "Automation",
+    "suppliers": "Suppliers",
+    "channels": "Sales Channels",
+    "dropship": "Dropship",
+    "howItWorks": "How it Works",
+    "findProducts": "Find Products",
+    "catalog": "Catalog",
+    "integrations": "Integrations",
+    "shopify": "Shopify",
+    "woocommerce": "WooCommerce",
+    "wix": "Wix",
+    "bigcommerce": "BigCommerce",
+    "resources": "Resources",
+    "blog": "Blog",
+    "guides": "Guides",
+    "help": "Help",
+    "academy": "Academy",
+    "tools": "Tools",
+    "productResearch": "Product Research",
+    "marketAnalysis": "Market Analysis",
+    "winningProducts": "Winning Products",
+    "pricing": "Pricing"
+  },
+  "home": {
+    "hero": {
+      "title": "Build Your Dream Store",
+      "subtitle": "with AI-Powered Dropshipping",
+      "description": "Launch and scale your e-commerce business with our all-in-one dropshipping platform. Access millions of products, automate your operations, and boost sales with AI optimization."
+    },
+    "features": {
+      "title": "Everything You Need to Succeed",
+      "description": "Powerful tools and features to help you build a profitable dropshipping business"
+    },
+    "cta": {
+      "title": "Ready to start your journey?",
+      "subtitle": "Join thousands of successful entrepreneurs",
+      "noCreditCard": "No credit card required",
+      "freeTrial": "14-day free trial",
+      "cancelAnytime": "Cancel anytime"
+    }
+  },
+  "features": {
+    "globalSuppliers": {
+      "title": "Global Suppliers",
+      "description": "Connect with verified suppliers worldwide and import products directly to your store."
+    },
+    "aiAutomation": {
+      "title": "AI Automation",
+      "description": "Automate product optimization, pricing, and inventory management with AI."
+    },
+    "marketAnalysis": {
+      "title": "Market Analysis",
+      "description": "Get real-time insights and discover trending products in your niche."
+    },
+    "productResearch": {
+      "title": "Product Research",
+      "description": "Find winning products with our advanced product research tools."
+    },
+    "multiChannel": {
+      "title": "Multi-Channel",
+      "description": "Sell across multiple channels and marketplaces from one platform."
+    },
+    "orderManagement": {
+      "title": "Order Management",
+      "description": "Streamline your order fulfillment and shipping processes."
+    }
+  },
+  "stats": {
+    "activeUsers": "Active Users",
+    "productsOptimized": "Products Optimized",
+    "revenueGenerated": "Revenue Generated",
+    "countries": "Countries"
+  },
+  "footer": {
+    "description": "AI-powered e-commerce optimization platform helping businesses scale globally.",
+    "copyright": "All rights reserved.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "integrations": "Integrations",
+      "api": "API"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "careers": "Careers",
+      "press": "Press"
+    },
+    "resources": {
+      "title": "Resources",
+      "documentation": "Documentation",
+      "helpCenter": "Help Center",
+      "guides": "Guides",
+      "partners": "Partners"
+    }
+  }
+}

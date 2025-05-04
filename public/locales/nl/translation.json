@@ -1,0 +1,23 @@
+{
+  "common": {
+    "search": "Zoeken",
+    "notifications": "Meldingen",
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "signOut": "Uitloggen",
+    "newOrder": "Nieuwe bestelling ontvangen",
+    "lowStock": "Lage voorraad",
+    "minutes": "minuten",
+    "hours": "uren",
+    "ago": "geleden"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "products": "Producten",
+    "orders": "Bestellingen",
+    "analytics": "Analyse",
+    "automation": "Automatisering",
+    "suppliers": "Leveranciers",
+    "channels": "Verkoopkanalen"
+  }
+}

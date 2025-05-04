@@ -1,0 +1,23 @@
+{
+  "common": {
+    "search": "Buscar",
+    "notifications": "Notificaciones",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "signOut": "Cerrar sesión",
+    "newOrder": "Nuevo pedido recibido",
+    "lowStock": "Stock bajo",
+    "minutes": "minutos",
+    "hours": "horas",
+    "ago": "hace"
+  },
+  "nav": {
+    "dashboard": "Panel de control",
+    "products": "Productos",
+    "orders": "Pedidos",
+    "analytics": "Análisis",
+    "automation": "Automatización",
+    "suppliers": "Proveedores",
+    "channels": "Canales de venta"
+  }
+}

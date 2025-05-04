@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Shopopti+ Product Importer",
+  "version": "1.0.0",
+  "description": "Import products to your Shopify store with one click",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.aliexpress.com/*",
+    "https://*.amazon.com/*",
+    "https://*.myshopify.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.amazon.com/*/dp/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
