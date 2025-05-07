@@ -1,0 +1,1 @@
+/* Admin-only route with redirect to /access-denied */

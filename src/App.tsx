@@ -1,10 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
+
 import { ShopProvider } from './contexts/ShopContext';
 import { UserProvider } from './contexts/UserContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import Layout from './components/layout/Layout';
+
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
@@ -20,7 +24,7 @@ import Logistics from './pages/Logistics';
 import Suppliers from './pages/Suppliers';
 import Channels from './pages/Channels';
 import ImportProducts from './pages/ImportProducts';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+
 import './App.css';
 import './i18n';
 
@@ -31,15 +35,21 @@ function App() {
         <UserProvider>
           <ShopProvider>
             <Routes>
+              {/* Pages publiques */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/app" element={
-                <ProtectedRoute>
-                  <Layout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<Navigate to="/app/dashboard" replace />} />
+
+              {/* Zone protégée /app */}
+              <Route
+                path="/app"
+                element={
+                  <ProtectedRoute>
+                    <Layout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate to="dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="import-products" element={<ImportProducts />} />
@@ -54,7 +64,9 @@ function App() {
                 <Route path="channels" element={<Channels />} />
               </Route>
             </Routes>
-            <Toaster position="top-right" expand={true} richColors />
+
+            {/* Notifications */}
+            <Toaster position="top-right" expand richColors />
           </ShopProvider>
         </UserProvider>
       </LanguageProvider>

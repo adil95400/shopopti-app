@@ -1,0 +1,1 @@
+export default function BlogSEO() { return <div>AI Blog Generator</div>; }

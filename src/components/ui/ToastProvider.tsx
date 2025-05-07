@@ -1,0 +1,1 @@
+/* Global toast notifications setup */
