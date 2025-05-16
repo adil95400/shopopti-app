@@ -1,6 +1,13 @@
-import React from 'react';
+from pathlib import Path
+
+# Contenu corrigé du fichier Sidebar.tsx
+sidebar_code = """import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, ShoppingBag, PackageCheck, BarChart3, Sparkles, Store, Import, MessageSquare, Bot, Truck, Share2, Settings, Building, Users, CreditCard, FileText, HelpCircle, Book, Palette, Globe, Mail, Bell, Boxes, PenTool as Tool, GraduationCap, BookOpen, BarChart, Newspaper, Briefcase, Calculator, Link } from 'lucide-react';
+import {
+  LayoutDashboard, ShoppingBag, PackageCheck, BarChart3, Sparkles, Store, Import,
+  MessageSquare, Bot, Truck, Share2, Settings, Building, Users, CreditCard, FileText,
+  HelpCircle, Book, Palette, Globe, Mail, Bell
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import Logo from './Logo';
 
@@ -52,30 +59,13 @@ const Sidebar: React.FC = () => {
       
       <nav className="flex-1 overflow-y-auto p-4">
         <div className="space-y-8">
-          {/* Principal */}
-          <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Principal
-            </h3>
-            <ul
 
-      <li><a href="/assistant">🧠 Assistant IA</a></li>
-      <li><a href="/ai-products">🔥 Produit Gagnant</a></li>
-      <li><a href="/chrome-extension">🔗 Extension Chrome</a></li>
-      <li><a href="/multichannel-publish">🌍 Multicanal</a></li>
-      <li><a href="/mobile-app">📱 Appli Mobile</a></li>
-      <li><a href="/blog-generator">✍️ Blog AI</a></li>
-      <li><a href="/onboarding">🚀 Onboarding</a></li>
-      <li><a href="/help">❓ Aide & FAQ</a></li>
- className="mt-3 space-y-2">
+          <div>
+            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">Principal</h3>
+            <ul className="mt-3 space-y-2">
               {mainNavItems.map((item) => (
                 <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) => 
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
+                  <NavLink to={item.to} className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                     {item.icon}
                     <span>{item.label}</span>
                   </NavLink>
@@ -84,30 +74,12 @@ const Sidebar: React.FC = () => {
             </ul>
           </div>
 
-          {/* Business */}
           <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Business
-            </h3>
-            <ul
-
-      <li><a href="/assistant">🧠 Assistant IA</a></li>
-      <li><a href="/ai-products">🔥 Produit Gagnant</a></li>
-      <li><a href="/chrome-extension">🔗 Extension Chrome</a></li>
-      <li><a href="/multichannel-publish">🌍 Multicanal</a></li>
-      <li><a href="/mobile-app">📱 Appli Mobile</a></li>
-      <li><a href="/blog-generator">✍️ Blog AI</a></li>
-      <li><a href="/onboarding">🚀 Onboarding</a></li>
-      <li><a href="/help">❓ Aide & FAQ</a></li>
- className="mt-3 space-y-2">
+            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">Business</h3>
+            <ul className="mt-3 space-y-2">
               {businessNavItems.map((item) => (
                 <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) => 
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
+                  <NavLink to={item.to} className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                     {item.icon}
                     <span>{item.label}</span>
                   </NavLink>
@@ -116,30 +88,12 @@ const Sidebar: React.FC = () => {
             </ul>
           </div>
 
-          {/* Système */}
           <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Système
-            </h3>
-            <ul
-
-      <li><a href="/assistant">🧠 Assistant IA</a></li>
-      <li><a href="/ai-products">🔥 Produit Gagnant</a></li>
-      <li><a href="/chrome-extension">🔗 Extension Chrome</a></li>
-      <li><a href="/multichannel-publish">🌍 Multicanal</a></li>
-      <li><a href="/mobile-app">📱 Appli Mobile</a></li>
-      <li><a href="/blog-generator">✍️ Blog AI</a></li>
-      <li><a href="/onboarding">🚀 Onboarding</a></li>
-      <li><a href="/help">❓ Aide & FAQ</a></li>
- className="mt-3 space-y-2">
+            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">Système</h3>
+            <ul className="mt-3 space-y-2">
               {systemNavItems.map((item) => (
                 <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) => 
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
+                  <NavLink to={item.to} className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                     {item.icon}
                     <span>{item.label}</span>
                   </NavLink>
@@ -148,30 +102,12 @@ const Sidebar: React.FC = () => {
             </ul>
           </div>
 
-          {/* Aide */}
           <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Aide
-            </h3>
-            <ul
-
-      <li><a href="/assistant">🧠 Assistant IA</a></li>
-      <li><a href="/ai-products">🔥 Produit Gagnant</a></li>
-      <li><a href="/chrome-extension">🔗 Extension Chrome</a></li>
-      <li><a href="/multichannel-publish">🌍 Multicanal</a></li>
-      <li><a href="/mobile-app">📱 Appli Mobile</a></li>
-      <li><a href="/blog-generator">✍️ Blog AI</a></li>
-      <li><a href="/onboarding">🚀 Onboarding</a></li>
-      <li><a href="/help">❓ Aide & FAQ</a></li>
- className="mt-3 space-y-2">
+            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">Aide</h3>
+            <ul className="mt-3 space-y-2">
               {helpNavItems.map((item) => (
                 <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) => 
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
+                  <NavLink to={item.to} className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                     {item.icon}
                     <span>{item.label}</span>
                   </NavLink>
@@ -179,6 +115,7 @@ const Sidebar: React.FC = () => {
               ))}
             </ul>
           </div>
+
         </div>
       </nav>
     </motion.aside>
@@ -186,3 +123,10 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
+"""
+
+# Créer et écrire le fichier Sidebar.tsx
+output_path = Path("/mnt/data/Sidebar.tsx")
+output_path.write_text(sidebar_code, encoding="utf-8")
+
+output_path.name
