@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -9,7 +9,7 @@ const Layout: React.FC = () => {
   const { isConnected } = useShopContext();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     if (!isConnected) {
       navigate('/app/store-connection');
     }
