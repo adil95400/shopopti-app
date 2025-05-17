@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -68,37 +67,18 @@ const Sidebar: React.FC = () => {
 
       <nav className="flex-1 overflow-y-auto p-4">
         <div className="space-y-8">
-          <Section title="Principal" items={mainNavItems} />
-          <Section title="Business" items={businessNavItems} />
-          <Section title="Système" items={systemNavItems} />
-          <Section title="Aide" items={helpNavItems} />
-
-          <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Modules IA
-            </h3>
-            <ul className="mt-3 space-y-2">
-              {aiModulesNav.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) =>
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
-                    <span>{item.label}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <SidebarSection title="Principal" items={mainNavItems} />
+          <SidebarSection title="Business" items={businessNavItems} />
+          <SidebarSection title="Système" items={systemNavItems} />
+          <SidebarSection title="Aide" items={helpNavItems} />
+          <SidebarAISection />
         </div>
       </nav>
     </motion.aside>
   );
 };
 
-const Section = ({
+const SidebarSection = ({
   title,
   items
 }: {
@@ -106,19 +86,39 @@ const Section = ({
   items: { to: string; icon: React.ReactNode; label: string }[];
 }) => (
   <div>
-    <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-      {title}
-    </h3>
+    <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">{title}</h3>
     <ul className="mt-3 space-y-2">
       {items.map((item) => (
         <li key={item.to}>
           <NavLink
             to={item.to}
             className={({ isActive }) =>
-              `sidebar-link ${isActive ? 'active' : ''}`
+              `sidebar-link transition-all duration-200 hover:pl-3 ${isActive ? 'active' : ''}`
             }
           >
-            {item.icon}
+            <span className="flex items-center gap-2">
+              {item.icon}
+              {item.label}
+            </span>
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const SidebarAISection = () => (
+  <div>
+    <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">Modules IA</h3>
+    <ul className="mt-3 space-y-2">
+      {aiModulesNav.map((item) => (
+        <li key={item.to}>
+          <NavLink
+            to={item.to}
+            className={({ isActive }) =>
+              `sidebar-link transition-all duration-200 hover:pl-3 ${isActive ? 'active' : ''}`
+            }
+          >
             <span>{item.label}</span>
           </NavLink>
         </li>
