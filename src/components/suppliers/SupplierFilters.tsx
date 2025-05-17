@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filter, Star, Shield, MapPin, Clock, Package, Search } from 'lucide-react';
+import { Filter, Star, Shield, MapPin, Clock, Package, Search, DollarSign } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface SupplierFiltersProps {
@@ -27,30 +27,33 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="bg-white rounded-lg border border-neutral-200 p-4 space-y-4"
+      className="card space-y-6"
     >
       <div className="flex items-center justify-between">
-        <h3 className="font-medium text-neutral-900">Filters</h3>
+        <div className="flex items-center space-x-2">
+          <Filter className="h-5 w-5 text-primary-400" />
+          <h3 className="font-medium text-white">Filters</h3>
+        </div>
         <button
           onClick={onReset}
-          className="text-sm text-primary-500 hover:text-primary-600"
+          className="text-sm text-accent-200 hover:text-white transition-colors"
         >
           Reset
         </button>
       </div>
 
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-accent-400" />
         <input
           type="text"
           placeholder="Search suppliers..."
-          className="input pl-10 w-full"
+          className="input w-full pl-10"
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-white mb-2">
           Minimum Rating
         </label>
         <div className="flex items-center space-x-2">
@@ -58,15 +61,15 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
             <button
               key={rating}
               onClick={() => onFilterChange('minRating', rating)}
-              className={`flex items-center space-x-1 px-3 py-1.5 rounded-md ${
+              className={`flex items-center space-x-1 px-3 py-1.5 rounded-md transition-colors ${
                 filters.minRating === rating
-                  ? 'bg-primary-50 text-primary-600'
-                  : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100'
+                  ? 'bg-primary-400/10 text-primary-400'
+                  : 'bg-secondary-400 text-accent-200 hover:text-white'
               }`}
             >
               <Star
                 size={14}
-                className={filters.minRating === rating ? 'fill-primary-500' : ''}
+                className={filters.minRating === rating ? 'fill-primary-400' : ''}
               />
               <span>{rating}+</span>
             </button>
@@ -75,15 +78,15 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-white mb-2">
           Verification
         </label>
         <button
           onClick={() => onFilterChange('verified', !filters.verified)}
-          className={`flex items-center space-x-2 px-3 py-1.5 rounded-md w-full ${
+          className={`flex items-center space-x-2 px-3 py-2 rounded-md w-full transition-colors ${
             filters.verified
-              ? 'bg-primary-50 text-primary-600'
-              : 'bg-neutral-50 text-neutral-600 hover:bg-neutral-100'
+              ? 'bg-primary-400/10 text-primary-400'
+              : 'bg-secondary-400 text-accent-200 hover:text-white'
           }`}
         >
           <Shield size={16} />
@@ -92,7 +95,7 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-white mb-2">
           Processing Time
         </label>
         <select
@@ -108,15 +111,15 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-white mb-2">
           Minimum Order Value
         </label>
         <select
           className="input w-full"
           value={filters.minOrderValue}
-          onChange={(e) => onFilterChange('minOrderValue', e.target.value)}
+          onChange={(e) => onFilterChange('minOrderValue', parseInt(e.target.value))}
         >
-          <option value="">Any</option>
+          <option value="0">Any</option>
           <option value="100">$100+</option>
           <option value="500">$500+</option>
           <option value="1000">$1,000+</option>
@@ -125,7 +128,7 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-white mb-2">
           Shipping From
         </label>
         <select
@@ -138,7 +141,18 @@ const SupplierFilters: React.FC<SupplierFiltersProps> = ({
           <option value="CN">China</option>
           <option value="UK">United Kingdom</option>
           <option value="EU">European Union</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
         </select>
+      </div>
+
+      <div className="pt-4 border-t border-accent-200/10">
+        <div className="flex items-center space-x-2 text-accent-200">
+          <Package size={16} />
+          <span className="text-sm">
+            {filters.verified ? 'Showing verified suppliers only' : 'Showing all suppliers'}
+          </span>
+        </div>
       </div>
     </motion.div>
   );

@@ -1,108 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Building, Search, Filter, SlidersHorizontal } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
-import { supplierService, Supplier } from '../services/supplierService';
-import SupplierList from '../components/suppliers/SupplierList';
-import SupplierFilters from '../components/suppliers/SupplierFilters';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 
-const Suppliers: React.FC = () => {
-  const { isConnected } = useShopContext();
-  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState({
-    country: '',
-    category: '',
-    verified: false,
-    minRating: 0,
-    dropshippingOnly: true
-  });
+const Suppliers = () => {
+  const [suppliers, setSuppliers] = useState([]);
+  const [country, setCountry] = useState('');
+  const [category, setCategory] = useState('');
+  const [verified, setVerified] = useState('');
 
   useEffect(() => {
-    loadSuppliers();
-  }, [filters]);
+    fetchSuppliers();
+  }, []);
 
-  const loadSuppliers = async () => {
-    try {
-      setLoading(true);
-      const data = await supplierService.getDropshippingSuppliers(filters);
-      setSuppliers(data);
-    } catch (err) {
-      setError('Failed to load suppliers');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+  const fetchSuppliers = async () => {
+    const { data, error } = await supabase.from('suppliers').select('*');
+    if (!error) setSuppliers(data);
   };
 
-  const handleFilterChange = (key: string, value: any) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
-  };
-
-  const handleSupplierClick = async (supplier: Supplier) => {
-    try {
-      const products = await supplierService.getSupplierProducts(supplier.id);
-      // Handle displaying products...
-    } catch (err) {
-      console.error('Failed to load supplier products:', err);
-    }
-  };
-
-  if (!isConnected) {
-    return (
-      <div className="flex h-full flex-col items-center justify-center py-12 text-center">
-        <div className="rounded-full bg-neutral-100 p-3">
-          <Building size={28} className="text-neutral-400" />
-        </div>
-        <h2 className="mt-4 text-lg font-medium text-neutral-900">No store connected</h2>
-        <p className="mt-1 text-neutral-500">Connect your store to browse suppliers</p>
-      </div>
-    );
-  }
+  const filtered = suppliers.filter(s =>
+    (!country || s.country.toLowerCase().includes(country.toLowerCase())) &&
+    (!category || s.category.toLowerCase().includes(category.toLowerCase())) &&
+    (!verified || (verified === 'yes' ? s.is_verified : !s.is_verified))
+  );
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-neutral-900 md:text-3xl">Dropshipping Suppliers</h1>
-          <p className="text-neutral-500">
-            Find and connect with verified dropshipping suppliers worldwide
-          </p>
-        </div>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Marketplace Fournisseurs</h1>
+      <div className="flex flex-wrap gap-4 mb-4">
+        <input placeholder="Pays" value={country} onChange={e => setCountry(e.target.value)} className="border p-2 rounded" />
+        <input placeholder="Catégorie" value={category} onChange={e => setCategory(e.target.value)} className="border p-2 rounded" />
+        <select value={verified} onChange={e => setVerified(e.target.value)} className="border p-2 rounded">
+          <option value="">Tous</option>
+          <option value="yes">Vérifiés</option>
+          <option value="no">Non vérifiés</option>
+        </select>
       </div>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
-        <div className="lg:col-span-1">
-          <SupplierFilters
-            filters={filters}
-            onFilterChange={handleFilterChange}
-            onReset={() => setFilters({
-              country: '',
-              category: '',
-              verified: false,
-              minRating: 0,
-              dropshippingOnly: true
-            })}
-          />
-        </div>
-
-        <div className="lg:col-span-3">
-          {loading ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
-            </div>
-          ) : error ? (
-            <div className="rounded-lg bg-error-50 p-4 text-error-500">
-              {error}
-            </div>
-          ) : (
-            <SupplierList
-              suppliers={suppliers}
-              onSupplierClick={handleSupplierClick}
-            />
-          )}
-        </div>
+      <div className="grid md:grid-cols-3 gap-4">
+        {filtered.map((s: any) => (
+          <div key={s.id} className="border p-4 rounded shadow">
+            <h2 className="text-lg font-bold">{s.name}</h2>
+            <p>🌍 {s.country}</p>
+            <p>📦 {s.category}</p>
+            <p>🚚 {s.delivery}</p>
+            <a href={s.website} target="_blank" rel="noreferrer" className="text-blue-600 underline mt-2 inline-block">Voir site</a>
+            {s.is_verified && <p className="text-green-600 mt-1">✔ Fournisseur vérifié</p>}
+          </div>
+        ))}
       </div>
     </div>
   );

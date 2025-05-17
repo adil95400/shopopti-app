@@ -15,44 +15,60 @@ const navItems: NavItem[] = [
     label: 'Dropship',
     href: '#',
     items: [
-      { label: 'Comment ça marche', href: '/how-it-works' },
-      { label: 'Trouver des produits', href: '/find-products' },
-      { label: 'Catalogue', href: '/catalog' },
-      { label: 'Fournisseurs', href: '/suppliers' }
+      { label: 'How it Works', href: '/how-it-works' },
+      { label: 'Find Products', href: '/find-products' },
+      { label: 'Catalog', href: '/catalog' },
+      { label: 'Suppliers', href: '/suppliers' }
     ]
   },
   {
-    label: 'Intégrations',
-    href: '#',
+    label: 'Integrations',
+    href: '/integrations',
     items: [
-      { label: 'Shopify', href: '/shopify' },
-      { label: 'WooCommerce', href: '/woocommerce' },
-      { label: 'Wix', href: '/wix' },
-      { label: 'BigCommerce', href: '/bigcommerce' }
+      { label: 'Shopify', href: '/integrations/shopify' },
+      { label: 'WooCommerce', href: '/integrations/woocommerce' },
+      { label: 'Wix', href: '/integrations/wix' },
+      { label: 'BigCommerce', href: '/integrations/bigcommerce' },
+      { label: 'Square', href: '/integrations/square' },
+      { label: 'Ecwid', href: '/integrations/ecwid' },
+      { label: 'Squarespace', href: '/integrations/squarespace' }
     ]
   },
   {
-    label: 'Ressources',
+    label: 'Resources',
     href: '#',
     items: [
       { label: 'Blog', href: '/blog' },
+      { label: 'Academy', href: '/academy' },
       { label: 'Guides', href: '/guides' },
-      { label: 'Aide', href: '/help' },
-      { label: 'Académie', href: '/academy' }
+      { label: 'Help Center', href: '/help' },
+      { label: 'Statistics', href: '/statistics' },
+      { label: 'Glossary', href: '/glossary' }
     ]
   },
   {
-    label: 'Outils',
-    href: '#',
+    label: 'Tools',
+    href: '/tools',
     items: [
-      { label: 'Recherche de produits', href: '/product-research' },
-      { label: 'Analyse de marché', href: '/market-analysis' },
-      { label: 'Produits gagnants', href: '/winning-products' },
-      { label: 'Automatisation', href: '/automation' }
+      { label: 'Product Research', href: '/tools/product-research' },
+      { label: 'Market Analysis', href: '/tools/market-analysis' },
+      { label: 'Profit Calculator', href: '/tools/profit-calculator' },
+      { label: 'ROAS Calculator', href: '/tools/roas-calculator' },
+      { label: 'Inventory Calculator', href: '/tools/inventory-calculator' }
     ]
   },
-  { label: 'Produits gagnants', href: '/winning-products' },
-  { label: 'Tarification', href: '/pricing' }
+  {
+    label: 'Compare',
+    href: '/compare',
+    items: [
+      { label: 'vs AliExpress', href: '/compare/aliexpress' },
+      { label: 'vs CJDropshipping', href: '/compare/cjdropshipping' },
+      { label: 'vs Zendrop', href: '/compare/zendrop' },
+      { label: 'vs DSers', href: '/compare/dsers' },
+      { label: 'vs AutoDS', href: '/compare/autods' }
+    ]
+  },
+  { label: 'Pricing', href: '/pricing' }
 ];
 
 const Navbar: React.FC = () => {

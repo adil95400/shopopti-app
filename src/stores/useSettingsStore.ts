@@ -12,11 +12,16 @@ interface Settings {
     push: boolean;
     orders: boolean;
     stock: boolean;
+    sound: boolean;
+    doNotDisturb: boolean;
   };
   display: {
     compactMode: boolean;
     showThumbnails: boolean;
     tableRows: number;
+    animations: boolean;
+    reducedMotion: boolean;
+    denseGrid: boolean;
   };
   import: {
     autoOptimize: boolean;
@@ -40,12 +45,17 @@ const defaultSettings: Settings = {
     email: true,
     push: true,
     orders: true,
-    stock: true
+    stock: true,
+    sound: true,
+    doNotDisturb: false
   },
   display: {
     compactMode: false,
     showThumbnails: true,
-    tableRows: 10
+    tableRows: 10,
+    animations: true,
+    reducedMotion: false,
+    denseGrid: false
   },
   import: {
     autoOptimize: true,
@@ -64,7 +74,6 @@ export const useSettingsStore = create<SettingsStore>()(
         })),
       resetSettings: () => {
         set({ settings: defaultSettings });
-        // Réinitialiser aussi les cookies
         Object.keys(Cookies.get()).forEach(key => {
           if (key.startsWith('app_')) {
             Cookies.remove(key);
