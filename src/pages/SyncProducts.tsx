@@ -1,0 +1,1 @@
+// Page de synchronisation des produits
