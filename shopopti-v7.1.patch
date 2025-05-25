@@ -1,0 +1,129 @@
+
+diff --git a/src/pages/blog-ai.tsx b/src/pages/blog-ai.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/pages/blog-ai.tsx
+@@
++import React, { useState } from 'react';
++import { askChatGPT } from '@/lib/openai';
++import { Input } from '@/components/ui/input';
++import { Textarea } from '@/components/ui/textarea';
++import { Button } from '@/components/ui/button';
++
++export default function BlogAIPage() {
++  const [productName, setProductName] = useState('');
++  const [blogContent, setBlogContent] = useState('');
++
++  const generateBlog = async () => {
++    const prompt = `Rédige un article de blog optimisé SEO pour le produit suivant : ${productName}`;
++    const content = await askChatGPT(prompt);
++    setBlogContent(content);
++  };
++
++  return (
++    <div className="p-6 max-w-3xl mx-auto space-y-4">
++      <h1 className="text-2xl font-bold">Génération Blog IA</h1>
++      <Input
++        placeholder="Nom du produit"
++        value={productName}
++        onChange={(e) => setProductName(e.target.value)}
++      />
++      <Button onClick={generateBlog}>Générer l'article</Button>
++      <Textarea rows={15} value={blogContent} className="w-full" readOnly />
++    </div>
++  );
++}
+diff --git a/src/pages/generateInvoice.tsx b/src/pages/generateInvoice.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/pages/generateInvoice.tsx
+@@
++import React from 'react';
++import jsPDF from 'jspdf';
++
++export default function GenerateInvoice() {
++  const generatePDF = () => {
++    const doc = new jsPDF();
++    doc.text("Facture", 20, 20);
++    doc.text("Client : Jean Dupont", 20, 30);
++    doc.text("Produit : Pack E-commerce IA", 20, 40);
++    doc.text("Total : 199€ TTC", 20, 50);
++    doc.save("facture-shopopti.pdf");
++  };
++
++  return (
++    <div className="p-6 max-w-md mx-auto">
++      <h1 className="text-2xl font-bold mb-4">Générer une facture PDF</h1>
++      <button className="bg-primary text-white px-4 py-2 rounded" onClick={generatePDF}>
++        Télécharger la facture
++      </button>
++    </div>
++  );
++}
+diff --git a/src/pages/tracking.tsx b/src/pages/tracking.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/pages/tracking.tsx
+@@
++import React, { useState } from 'react';
++import { Input } from '@/components/ui/input';
++import { Button } from '@/components/ui/button';
++
++export default function TrackingPage() {
++  const [trackingNumber, setTrackingNumber] = useState('');
++  const [result, setResult] = useState<any>(null);
++
++  const handleSearch = async () => {
++    const response = await fetch(`https://api.17track.net/api/track?number=${trackingNumber}`);
++    const data = await response.json();
++    setResult(data);
++  };
++
++  return (
++    <div className="p-6 max-w-2xl mx-auto space-y-4">
++      <h1 className="text-2xl font-bold">Suivi de livraison</h1>
++      <Input
++        placeholder="Numéro de suivi"
++        value={trackingNumber}
++        onChange={(e) => setTrackingNumber(e.target.value)}
++      />
++      <Button onClick={handleSearch}>Rechercher</Button>
++
++      {result && (
++        <div className="mt-4 bg-muted p-4 rounded">
++          <p><strong>Statut :</strong> {result.status}</p>
++          <p><strong>Transporteur :</strong> {result.carrier}</p>
++          <ul className="mt-2 list-disc pl-4">
++            {result.history?.map((step: any, i: number) => (
++              <li key={i}>{step.date} – {step.description}</li>
++            ))}
++          </ul>
++        </div>
++      )}
++    </div>
++  );
++}
+diff --git a/src/components/Sidebar.tsx b/src/components/Sidebar.tsx
+--- a/src/components/Sidebar.tsx
++++ b/src/components/Sidebar.tsx
+@@
+ export const sidebarLinks = [
+   { path: "/dashboard", label: "Dashboard" },
+   { path: "/import-products", label: "Import produits" },
++  { path: "/tracking", label: "Suivi de livraison" },
++  { path: "/generate-invoice", label: "Factures PDF" },
++  { path: "/blog-ai", label: "Blog IA" },
+ ];
+diff --git a/src/routes.tsx b/src/routes.tsx
+--- a/src/routes.tsx
++++ b/src/routes.tsx
+@@
+ import TrackingPage from '@/pages/tracking';
+ import GenerateInvoice from '@/pages/generateInvoice';
+ import BlogAIPage from '@/pages/blog-ai';
+
+ export const routes = [
+   { path: "/tracking", element: <TrackingPage /> },
+   { path: "/generate-invoice", element: <GenerateInvoice /> },
+   { path: "/blog-ai", element: <BlogAIPage /> },
+ ];

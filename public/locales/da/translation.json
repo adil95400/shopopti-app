@@ -1,0 +1,23 @@
+{
+  "common": {
+    "search": "Søg",
+    "notifications": "Notifikationer",
+    "profile": "Profil",
+    "settings": "Indstillinger",
+    "signOut": "Log ud",
+    "newOrder": "Ny ordre modtaget",
+    "lowStock": "Lav lagerbeholdning",
+    "minutes": "minutter",
+    "hours": "timer",
+    "ago": "siden"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "products": "Produkter",
+    "orders": "Ordrer",
+    "analytics": "Analyse",
+    "automation": "Automatisering",
+    "suppliers": "Leverandører",
+    "channels": "Salgskanaler"
+  }
+}

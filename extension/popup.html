@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopopti+ Product Importer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="w-80 p-4 bg-gray-50">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-lg font-semibold">Shopopti+</h1>
+    <div id="status" class="text-sm"></div>
+  </div>
+
+  <div id="login-form" class="hidden">
+    <input type="text" id="shop-url" placeholder="your-store.myshopify.com" class="w-full mb-2 p-2 border rounded">
+    <input type="password" id="access-token" placeholder="Access Token" class="w-full mb-2 p-2 border rounded">
+    <button id="login" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Connect Store</button>
+  </div>
+
+  <div id="import-panel" class="hidden">
+    <div id="product-preview" class="mb-4">
+      <img id="product-image" class="w-full h-40 object-cover rounded mb-2">
+      <h2 id="product-title" class="text-sm font-medium mb-1"></h2>
+      <p id="product-price" class="text-sm text-gray-600"></p>
+    </div>
+
+    <button id="import" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 mb-2">
+      Import to Shopify
+    </button>
+
+    <div id="settings" class="text-sm">
+      <label class="flex items-center mb-2">
+        <input type="checkbox" id="optimize-title" checked class="mr-2">
+        Optimize title with AI
+      </label>
+      <label class="flex items-center">
+        <input type="checkbox" id="optimize-description" checked class="mr-2">
+        Generate optimized description
+      </label>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
