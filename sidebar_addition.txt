@@ -1,0 +1,8 @@
+// Dans ton fichier de navigation (ex: SideNav.tsx ou mainNavItems.ts)
+// Ajoute cette entrée dans la liste :
+
+{
+  to: '/seo-competitor',
+  icon: <Sparkles size={20} />,
+  label: 'SEO Concurrent'
+}

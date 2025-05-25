@@ -1,5 +1,5 @@
-
-import React, { useState } from 'react';
+// ✅ SEOAIPage corrigé et optimisé comme composant React valide
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,9 +11,11 @@ export default function SEOAIPage() {
   const [loading, setLoading] = useState(false);
 
   const generateSEO = async () => {
+    if (!productName.trim()) return alert('Veuillez entrer un nom de produit.');
+
     setLoading(true);
-    const prompt = \`
-Produit : \${productName}
+    const prompt = `
+Produit : ${productName}
 
 Génère un JSON SEO complet avec :
 {
@@ -22,7 +24,7 @@ Génère un JSON SEO complet avec :
   "tags": ["...", "...", "..."],
   "jsonLD": { "@context": "https://schema.org", ... }
 }
-\`;
+`;
 
     try {
       const raw = await askChatGPT(prompt);
@@ -56,7 +58,12 @@ Génère un JSON SEO complet avec :
           <p><strong>Tags :</strong> {seo.tags?.join(', ')}</p>
           <div>
             <strong>Rich Snippet JSON-LD :</strong>
-            <Textarea value={JSON.stringify(seo.jsonLD, null, 2)} rows={8} className="mt-2" readOnly />
+            <Textarea
+              value={JSON.stringify(seo.jsonLD, null, 2)}
+              rows={8}
+              className="mt-2"
+              readOnly
+            />
           </div>
         </div>
       )}

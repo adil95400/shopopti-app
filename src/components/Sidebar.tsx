@@ -1,7 +1,10 @@
-// ✅ Sidebar.tsx optimisé avec drawer mobile + sections distinctes
+// ✅ Sidebar.tsx mis à jour avec Audit SEO + Analyse concurrente
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X, LayoutDashboard, FileText, Bot, Truck, Sparkles, Globe, Zap, Import } from 'lucide-react';
+import {
+  Menu, X, LayoutDashboard, FileText, Bot, Truck,
+  Sparkles, Globe, Zap, Import, Search
+} from 'lucide-react';
 
 const sections = [
   {
@@ -16,6 +19,8 @@ const sections = [
     links: [
       { path: "/blog-ai", label: "Blog IA", icon: <Bot size={18} /> },
       { path: "/seo-ai", label: "SEO IA", icon: <Sparkles size={18} /> },
+      { path: "/app/seo-audit", label: "Audit SEO", icon: <Sparkles size={18} /> },
+      { path: "/app/seo-competitor", label: "Analyse concurrente", icon: <Search size={18} /> },
     ]
   },
   {
