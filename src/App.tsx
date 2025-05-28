@@ -9,6 +9,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import Layout from './components/layout/Layout';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import ChatbotWidget from './components/ChatbotWidget';
+import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -23,6 +24,10 @@ import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
 import Support from './pages/Support';
 import Contact from './pages/Contact';
+import Pricing from './pages/Pricing';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
+import Subscription from './pages/Account/Subscription';
 
 import BlogAIPage from './pages/blog-ai';
 import SEOAIPage from './pages/seo-ai';
@@ -31,7 +36,7 @@ import GenerateInvoice from './pages/generateInvoice';
 import AutomationsPage from './pages/automations';
 import MarketplaceB2B from './pages/marketplace-b2b';
 import SeoAuditPage from './pages/SeoAudit';
-import SeoCompetitorScore from './pages/seo-competitor'; // ✅ Ajout ici
+import SeoCompetitorScore from './pages/seo-competitor';
 
 function App() {
   return (
@@ -39,10 +44,14 @@ function App() {
       <LanguageProvider>
         <UserProvider>
           <ShopProvider>
+            <SubscriptionBanner />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/cancel" element={<Cancel />} />
 
               {/* Pages IA et outils */}
               <Route path="/blog-ai" element={<BlogAIPage />} />
@@ -52,7 +61,7 @@ function App() {
               <Route path="/automations" element={<AutomationsPage />} />
               <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
               <Route path="/app/seo-audit" element={<SeoAuditPage />} />
-              <Route path="/app/seo-competitor" element={<SeoCompetitorScore />} /> {/* ✅ Ajout route */}
+              <Route path="/app/seo-competitor" element={<SeoCompetitorScore />} />
 
               <Route
                 path="/app"
@@ -73,6 +82,7 @@ function App() {
                 <Route path="settings" element={<Settings />} />
                 <Route path="support" element={<Support />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="subscription" element={<Subscription />} />
               </Route>
             </Routes>
 
