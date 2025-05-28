@@ -1,3 +1,10 @@
+import { OpenAI } from 'openai';
+
+const openai = new OpenAI({
+  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true
+});
+
 export async function auditSEOWithAI({
   title,
   description,
@@ -23,23 +30,20 @@ Retourne un JSON avec :
 }
 `;
 
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: \`Bearer \${import.meta.env.VITE_OPENAI_API_KEY}\`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+  try {
+    const response = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [
         { role: "system", content: "Tu es un expert en SEO e-commerce." },
         { role: "user", content: prompt }
       ],
       temperature: 0.7
-    })
-  });
+    });
 
-  const data = await res.json();
-  const content = data.choices[0].message.content;
-  return JSON.parse(content);
+    const content = response.choices[0].message.content || "{}";
+    return JSON.parse(content);
+  } catch (error) {
+    console.error('OpenAI API Error:', error);
+    throw new Error('Failed to get SEO analysis');
+  }
 }
