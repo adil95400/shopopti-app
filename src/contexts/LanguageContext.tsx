@@ -1,24 +1,37 @@
-// ✅ LanguageContext optimisé avec i18n et détection navigateur
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import i18n from '@/i18n';
 
+export const availableLanguages = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
+];
+
 type LanguageContextType = {
-  language: string;
-  setLanguage: (lang: string) => void;
+  currentLanguage: typeof availableLanguages[0];
+  setLanguage: (code: string) => void;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<string>(() => localStorage.getItem('shopopti-lang') || 'fr');
+  const [currentLanguage, setCurrentLanguage] = useState(availableLanguages[0]);
 
-  useEffect(() => {
-    i18n.changeLanguage(language);
-    localStorage.setItem('shopopti-lang', language);
-  }, [language]);
+  const setLanguage = (code: string) => {
+    const language = availableLanguages.find(lang => lang.code === code);
+    if (language) {
+      setCurrentLanguage(language);
+      i18n.changeLanguage(code);
+    }
+  };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ currentLanguage, setLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -26,6 +39,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (!context) throw new Error('useLanguage must be used within a LanguageProvider');
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
   return context;
 };

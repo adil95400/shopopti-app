@@ -1,37 +1,40 @@
-// ✅ UserContext optimisé avec persist auth et typage clair
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
-type User = {
+interface User {
   id: string;
+  name: string;
   email: string;
-  role?: string;
-};
+}
 
-type UserContextType = {
+interface UserContextType {
   user: User | null;
-  login: (user: User) => void;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isAuthenticated: boolean;
-};
+}
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem('shopopti-user');
-    return saved ? JSON.parse(saved) : null;
-  });
+  const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('shopopti-user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('shopopti-user');
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      // Implement your login logic here
+      setUser({
+        id: '1',
+        name: 'Test User',
+        email: email
+      });
+      return true;
+    } catch (error) {
+      return false;
     }
-  }, [user]);
+  };
 
-  const login = (data: User) => setUser(data);
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+  };
 
   return (
     <UserContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
@@ -40,8 +43,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useUser = () => {
+export const useUserContext = () => {
   const context = useContext(UserContext);
-  if (!context) throw new Error('useUser must be used within a UserProvider');
+  if (!context) {
+    throw new Error('useUserContext must be used within a UserProvider');
+  }
   return context;
 };
