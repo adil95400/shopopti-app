@@ -41,6 +41,10 @@ import Dropshipping from './pages/Dropshipping';
 import MultiChannel from './pages/MultiChannel';
 import AiHub from './pages/AiHub';
 import AdvancedAnalytics from './pages/AdvancedAnalytics';
+import Integrations from './pages/Integrations';
+import Webhooks from './pages/Webhooks';
+import InternationalSelling from './pages/InternationalSelling';
+import CustomReports from './pages/CustomReports';
 
 function App() {
   return (
@@ -70,6 +74,10 @@ function App() {
               <Route path="/multi-channel" element={<MultiChannel />} />
               <Route path="/ai-hub" element={<AiHub />} />
               <Route path="/advanced-analytics" element={<AdvancedAnalytics />} />
+              <Route path="/integrations" element={<Integrations />} />
+              <Route path="/webhooks" element={<Webhooks />} />
+              <Route path="/international-selling" element={<InternationalSelling />} />
+              <Route path="/custom-reports" element={<CustomReports />} />
 
               <Route
                 path="/app"
@@ -79,7 +87,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                <Route index element={<Navigate to="/app/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="orders" element={<Orders />} />

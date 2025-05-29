@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, FileText, Bot, Truck,
   Sparkles, Globe, Zap, Import, Search, CreditCard,
-  ShoppingBag, BarChart3, Share2
+  ShoppingBag, BarChart3, Share2, Settings, Code,
+  Webhook, Languages, FileBarChart2
 } from 'lucide-react';
 
 const sections = [
@@ -32,6 +33,15 @@ const sections = [
       { path: "/multi-channel", label: "Multi-Channel", icon: <Share2 size={18} /> },
       { path: "/automation", label: "Automations", icon: <Zap size={18} /> },
       { path: "/advanced-analytics", label: "Advanced Analytics", icon: <BarChart3 size={18} /> },
+    ]
+  },
+  {
+    title: "Intégrations",
+    links: [
+      { path: "/integrations", label: "Intégrations", icon: <Code size={18} /> },
+      { path: "/webhooks", label: "Webhooks", icon: <Webhook size={18} /> },
+      { path: "/international-selling", label: "International", icon: <Languages size={18} /> },
+      { path: "/custom-reports", label: "Rapports personnalisés", icon: <FileBarChart2 size={18} /> },
     ]
   },
   {
