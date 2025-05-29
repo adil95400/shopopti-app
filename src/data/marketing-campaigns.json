@@ -1,0 +1,225 @@
+{
+  "campaigns": [
+    {
+      "id": "camp-001",
+      "name": "Promotion Été 2025",
+      "type": "seasonal",
+      "status": "active",
+      "start_date": "2025-06-01",
+      "end_date": "2025-08-31",
+      "budget": 5000,
+      "channels": ["email", "social", "sms"],
+      "target_audience": ["existing_customers", "inactive_30d"],
+      "metrics": {
+        "sent": 15000,
+        "opened": 4260,
+        "clicked": 1815,
+        "converted": 525,
+        "revenue": 31500
+      },
+      "content": {
+        "email_subject": "☀️ Profitez de l'été avec 20% de réduction !",
+        "email_preview": "Découvrez notre collection été et économisez avec le code SUMMER20",
+        "sms_content": "Soldes d'été Shopopti+ ! 20% sur tout avec code SUMMER20. Offre jusqu'au 31/08. Shopopti.com/ete",
+        "social_posts": [
+          {
+            "platform": "facebook",
+            "content": "L'été est arrivé ! ☀️ Profitez de 20% de réduction sur toute notre collection estivale avec le code SUMMER20. Offre valable jusqu'au 31 août. #SoldesEte #Shopopti",
+            "image": "https://images.pexels.com/photos/5876687/pexels-photo-5876687.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "engagement": {
+              "likes": 245,
+              "shares": 78,
+              "comments": 32
+            }
+          },
+          {
+            "platform": "instagram",
+            "content": "SOLDES D'ÉTÉ 🌞 20% sur toute notre collection avec le code SUMMER20 ! Cliquez sur le lien en bio pour en profiter. Offre jusqu'au 31/08. #SoldesEte #Shopping #Ete2025",
+            "image": "https://images.pexels.com/photos/5876686/pexels-photo-5876686.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "engagement": {
+              "likes": 512,
+              "comments": 45
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "camp-002",
+      "name": "Bienvenue Nouveaux Clients",
+      "type": "automated",
+      "status": "active",
+      "start_date": "2025-01-01",
+      "end_date": null,
+      "budget": 0,
+      "channels": ["email"],
+      "target_audience": ["new_customers"],
+      "metrics": {
+        "sent": 2500,
+        "opened": 1075,
+        "clicked": 458,
+        "converted": 130,
+        "revenue": 7800
+      },
+      "content": {
+        "email_subject": "Bienvenue chez Shopopti+ ! Voici votre cadeau de bienvenue",
+        "email_preview": "Merci de nous rejoindre ! Profitez de 10% sur votre première commande",
+        "automation_trigger": "new_account_creation",
+        "automation_delay": "1 day"
+      }
+    },
+    {
+      "id": "camp-003",
+      "name": "Panier Abandonné",
+      "type": "automated",
+      "status": "active",
+      "start_date": "2025-01-01",
+      "end_date": null,
+      "budget": 0,
+      "channels": ["email"],
+      "target_audience": ["cart_abandoners"],
+      "metrics": {
+        "sent": 3800,
+        "opened": 1482,
+        "clicked": 722,
+        "converted": 342,
+        "revenue": 18500
+      },
+      "content": {
+        "email_subject": "Vous avez oublié quelque chose dans votre panier !",
+        "email_preview": "Vos articles vous attendent - Complétez votre achat maintenant",
+        "automation_trigger": "cart_abandonment",
+        "automation_delay": "4 hours"
+      }
+    },
+    {
+      "id": "camp-004",
+      "name": "Lancement Produit XYZ",
+      "type": "product_launch",
+      "status": "scheduled",
+      "start_date": "2025-07-25",
+      "end_date": "2025-08-15",
+      "budget": 3500,
+      "channels": ["email", "social", "sms", "push"],
+      "target_audience": ["all_customers", "lookalike_audience"],
+      "metrics": null,
+      "content": {
+        "email_subject": "🚀 Découvrez notre nouveau produit révolutionnaire !",
+        "email_preview": "Le produit XYZ est enfin disponible - Soyez parmi les premiers à l'essayer",
+        "sms_content": "NOUVEAU ! Le produit XYZ est disponible dès maintenant. Découvrez-le sur Shopopti.com/xyz",
+        "social_posts": [
+          {
+            "platform": "facebook",
+            "content": "🚀 LANCEMENT EXCLUSIF ! Notre nouveau produit XYZ est enfin disponible. Découvrez comment il va transformer votre quotidien. Lien en commentaire. #ProduitXYZ #Innovation",
+            "image": "https://images.pexels.com/photos/5876685/pexels-photo-5876685.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "scheduled_for": "2025-07-25T10:00:00Z"
+          },
+          {
+            "platform": "instagram",
+            "content": "🚀 NOUVEAU ! XYZ est arrivé ! Swipez pour découvrir toutes ses fonctionnalités incroyables. Lien en bio pour commander. #ProduitXYZ #Innovation #Nouveau",
+            "image": "https://images.pexels.com/photos/5876684/pexels-photo-5876684.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "scheduled_for": "2025-07-25T12:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "id": "camp-005",
+      "name": "Réengagement Clients Inactifs",
+      "type": "reactivation",
+      "status": "active",
+      "start_date": "2025-05-01",
+      "end_date": "2025-12-31",
+      "budget": 2000,
+      "channels": ["email", "sms"],
+      "target_audience": ["inactive_90d"],
+      "metrics": {
+        "sent": 5200,
+        "opened": 1248,
+        "clicked": 468,
+        "converted": 182,
+        "revenue": 9100
+      },
+      "content": {
+        "email_subject": "Vous nous manquez ! Voici 15% de réduction pour votre retour",
+        "email_preview": "Revenez profiter de nos nouveautés avec ce code promo exclusif",
+        "sms_content": "Vous nous manquez ! 15% de réduction avec le code RETOUR15. Valable 7 jours. Shopopti.com",
+        "automation_trigger": "90_days_inactivity",
+        "automation_delay": "0 days"
+      }
+    },
+    {
+      "id": "camp-006",
+      "name": "Black Friday 2025",
+      "type": "seasonal",
+      "status": "draft",
+      "start_date": "2025-11-25",
+      "end_date": "2025-12-02",
+      "budget": 10000,
+      "channels": ["email", "social", "sms", "push", "ads"],
+      "target_audience": ["all_customers", "website_visitors", "lookalike_audience"],
+      "metrics": null,
+      "content": {
+        "email_subject": "⚡ BLACK FRIDAY : Jusqu'à 70% de réduction !",
+        "email_preview": "Les plus grandes réductions de l'année sont arrivées",
+        "sms_content": "BLACK FRIDAY Shopopti+ ! Jusqu'à 70% de réduction. Offres limitées. Shopopti.com/blackfriday",
+        "social_posts": [
+          {
+            "platform": "facebook",
+            "content": "⚡ BLACK FRIDAY WEEK ⚡ Jusqu'à 70% de réduction sur des milliers d'articles ! Offres limitées, ne tardez pas. #BlackFriday #Promos #Shopopti",
+            "image": "https://images.pexels.com/photos/5876683/pexels-photo-5876683.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "scheduled_for": "2025-11-25T08:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "id": "camp-007",
+      "name": "Programme de Fidélité",
+      "type": "loyalty",
+      "status": "active",
+      "start_date": "2025-01-01",
+      "end_date": null,
+      "budget": 1500,
+      "channels": ["email", "in_app"],
+      "target_audience": ["repeat_customers"],
+      "metrics": {
+        "sent": 8500,
+        "opened": 4250,
+        "clicked": 2125,
+        "converted": 850,
+        "revenue": 42500
+      },
+      "content": {
+        "email_subject": "Vos points fidélité vous attendent !",
+        "email_preview": "Découvrez vos récompenses et comment les utiliser",
+        "automation_trigger": "points_milestone",
+        "automation_delay": "0 days"
+      }
+    },
+    {
+      "id": "camp-008",
+      "name": "Anniversaire Client",
+      "type": "automated",
+      "status": "paused",
+      "start_date": "2025-01-01",
+      "end_date": null,
+      "budget": 0,
+      "channels": ["email"],
+      "target_audience": ["all_customers"],
+      "metrics": {
+        "sent": 1200,
+        "opened": 648,
+        "clicked": 312,
+        "converted": 96,
+        "revenue": 4800
+      },
+      "content": {
+        "email_subject": "🎂 Joyeux anniversaire ! Voici votre cadeau",
+        "email_preview": "Un code promo spécial pour célébrer votre journée",
+        "automation_trigger": "customer_birthday",
+        "automation_delay": "0 days"
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "suppliers": [
+    {
+      "id": "sup-001",
+      "name": "TechPro Supply",
+      "country": "US",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-7 days",
+      "minimum_order": 50,
+      "logo": "https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Premier supplier of consumer electronics and accessories with fast shipping across North America.",
+      "performance": {
+        "on_time_delivery": 98,
+        "quality_rating": 96,
+        "response_rate": 99,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "sup-002",
+      "name": "EcoHome Essentials",
+      "country": "UK",
+      "category": "Home & Garden",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 30,
+      "logo": "https://images.pexels.com/photos/4439901/pexels-photo-4439901.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Sustainable home goods and eco-friendly products for the conscious consumer.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "sup-003",
+      "name": "StyleHub Global",
+      "country": "IT",
+      "category": "Fashion",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-8 days",
+      "minimum_order": 100,
+      "logo": "https://images.pexels.com/photos/6214476/pexels-photo-6214476.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Trendy fashion items from Italian designers with worldwide shipping.",
+      "performance": {
+        "on_time_delivery": 94,
+        "quality_rating": 97,
+        "response_rate": 92,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "sup-004",
+      "name": "FitLife Gear",
+      "country": "AU",
+      "category": "Sports & Outdoors",
+      "verified": true,
+      "rating": 4.9,
+      "processing_time": "1-2 days",
+      "shipping_time": "5-10 days",
+      "minimum_order": 75,
+      "logo": "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Premium fitness equipment and outdoor gear from Australia.",
+      "performance": {
+        "on_time_delivery": 99,
+        "quality_rating": 99,
+        "response_rate": 98,
+        "response_time": "1h"
+      }
+    },
+    {
+      "id": "sup-005",
+      "name": "BeautyWorld Cosmetics",
+      "country": "FR",
+      "category": "Beauty & Personal Care",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-7 days",
+      "minimum_order": 60,
+      "logo": "https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Luxury beauty products and cosmetics from France.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 98,
+        "response_rate": 94,
+        "response_time": "3h"
+      }
+    }
+  ],
+  "total_suppliers": 400,
+  "categories": [
+    "Electronics",
+    "Home & Garden",
+    "Fashion",
+    "Sports & Outdoors",
+    "Beauty & Personal Care",
+    "Toys & Games",
+    "Jewelry & Accessories",
+    "Health & Wellness",
+    "Pet Supplies",
+    "Automotive",
+    "Office Supplies",
+    "Baby & Kids",
+    "Food & Beverages",
+    "Art & Crafts"
+  ],
+  "countries": [
+    {"code": "US", "name": "United States", "region": "North America"},
+    {"code": "UK", "name": "United Kingdom", "region": "Europe"},
+    {"code": "DE", "name": "Germany", "region": "Europe"},
+    {"code": "FR", "name": "France", "region": "Europe"},
+    {"code": "IT", "name": "Italy", "region": "Europe"},
+    {"code": "ES", "name": "Spain", "region": "Europe"},
+    {"code": "AU", "name": "Australia", "region": "Oceania"},
+    {"code": "CA", "name": "Canada", "region": "North America"},
+    {"code": "CN", "name": "China", "region": "Asia"},
+    {"code": "JP", "name": "Japan", "region": "Asia"},
+    {"code": "KR", "name": "South Korea", "region": "Asia"},
+    {"code": "IN", "name": "India", "region": "Asia"},
+    {"code": "BR", "name": "Brazil", "region": "South America"},
+    {"code": "MX", "name": "Mexico", "region": "North America"},
+    {"code": "AE", "name": "United Arab Emirates", "region": "Middle East"},
+    {"code": "ZA", "name": "South Africa", "region": "Africa"},
+    {"code": "NL", "name": "Netherlands", "region": "Europe"},
+    {"code": "BE", "name": "Belgium", "region": "Europe"},
+    {"code": "SE", "name": "Sweden", "region": "Europe"},
+    {"code": "NO", "name": "Norway", "region": "Europe"}
+  ]
+}

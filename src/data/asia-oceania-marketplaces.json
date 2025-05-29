@@ -1,0 +1,252 @@
+{
+  "marketplaces": [
+    {
+      "id": "amazon-au",
+      "name": "Amazon Australia",
+      "countries": ["AU"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace en Australie, en pleine croissance depuis son lancement en 2017.",
+      "commission": "8-15%",
+      "monthly_fee": "AUD 49.95",
+      "setup_fee": "AUD 0",
+      "requirements": [
+        "Numéro d'entreprise australien (ABN)",
+        "Enregistrement à la GST",
+        "Solution de retour locale"
+      ],
+      "pros": [
+        "Marché en croissance rapide",
+        "Moins concurrentiel que les marchés américain et européen",
+        "Logistique FBA disponible"
+      ],
+      "cons": [
+        "Base de clients plus petite",
+        "Coûts d'expédition élevés",
+        "Exigences de conformité spécifiques à l'Australie"
+      ]
+    },
+    {
+      "id": "amazon-jp",
+      "name": "Amazon Japan",
+      "countries": ["JP"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace au Japon avec une forte pénétration du marché.",
+      "commission": "8-15%",
+      "monthly_fee": "JPY 4,900",
+      "setup_fee": "JPY 0",
+      "requirements": [
+        "Entité commerciale japonaise (recommandée mais pas obligatoire)",
+        "Traductions en japonais",
+        "Conformité aux normes japonaises"
+      ],
+      "pros": [
+        "Marché à fort pouvoir d'achat",
+        "Clients fidèles",
+        "Logistique FBA disponible"
+      ],
+      "cons": [
+        "Barrière linguistique",
+        "Attentes élevées en matière de qualité",
+        "Réglementations strictes sur certains produits"
+      ]
+    },
+    {
+      "id": "amazon-sg",
+      "name": "Amazon Singapore",
+      "countries": ["SG"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace Amazon pour Singapour et l'Asie du Sud-Est.",
+      "commission": "8-15%",
+      "monthly_fee": "SGD 39.99",
+      "setup_fee": "SGD 0",
+      "requirements": [
+        "Numéro d'entreprise (local ou international)",
+        "Conformité aux réglementations de Singapour",
+        "Expédition vers Singapour"
+      ],
+      "pros": [
+        "Porte d'entrée vers l'Asie du Sud-Est",
+        "Clients à fort pouvoir d'achat",
+        "Marché en croissance"
+      ],
+      "cons": [
+        "Marché relativement petit",
+        "Concurrence locale forte",
+        "Attentes élevées en matière de service"
+      ]
+    },
+    {
+      "id": "rakuten",
+      "name": "Rakuten",
+      "countries": ["JP"],
+      "logo": "https://images.pexels.com/photos/5632394/pexels-photo-5632394.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Deuxième plus grande marketplace au Japon avec plus de 50 millions d'utilisateurs.",
+      "commission": "8-12%",
+      "monthly_fee": "JPY 0-50,000",
+      "setup_fee": "JPY 60,000",
+      "requirements": [
+        "Entité commerciale japonaise",
+        "Traductions en japonais",
+        "Service client japonais"
+      ],
+      "pros": [
+        "Programme de fidélité puissant",
+        "Moins concurrentiel qu'Amazon Japon",
+        "Forte présence locale"
+      ],
+      "cons": [
+        "Frais d'installation élevés",
+        "Barrière linguistique importante",
+        "Processus d'intégration complexe"
+      ]
+    },
+    {
+      "id": "flipkart",
+      "name": "Flipkart",
+      "countries": ["IN"],
+      "logo": "https://images.pexels.com/photos/5632393/pexels-photo-5632393.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace en Inde avec plus de 300 millions d'utilisateurs enregistrés.",
+      "commission": "5-15%",
+      "monthly_fee": "INR 0",
+      "setup_fee": "INR 0",
+      "requirements": [
+        "Entité commerciale indienne",
+        "Enregistrement à la GST",
+        "Entrepôt local"
+      ],
+      "pros": [
+        "Énorme marché en croissance",
+        "Moins concurrentiel pour les marques étrangères",
+        "Options logistiques intégrées"
+      ],
+      "cons": [
+        "Nécessite une présence locale",
+        "Concurrence sur les prix",
+        "Complexités réglementaires"
+      ]
+    },
+    {
+      "id": "lazada",
+      "name": "Lazada",
+      "countries": ["SG", "MY", "TH", "ID", "PH", "VN"],
+      "logo": "https://images.pexels.com/photos/5632392/pexels-photo-5632392.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Principale marketplace en Asie du Sud-Est, présente dans 6 pays.",
+      "commission": "2-5%",
+      "monthly_fee": "USD 0",
+      "setup_fee": "USD 0",
+      "requirements": [
+        "Enregistrement d'entreprise dans un pays d'Asie du Sud-Est",
+        "Solution de retour locale"
+      ],
+      "pros": [
+        "Commissions basses",
+        "Marchés en forte croissance",
+        "Propriété d'Alibaba (ressources importantes)"
+      ],
+      "cons": [
+        "Logistique complexe",
+        "Multiples langues et réglementations",
+        "Attentes en matière de prix bas"
+      ]
+    },
+    {
+      "id": "shopee",
+      "name": "Shopee",
+      "countries": ["SG", "MY", "TH", "ID", "PH", "VN", "TW"],
+      "logo": "https://images.pexels.com/photos/5632391/pexels-photo-5632391.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace mobile-first en forte croissance en Asie du Sud-Est et à Taïwan.",
+      "commission": "1-6%",
+      "monthly_fee": "USD 0",
+      "setup_fee": "USD 0",
+      "requirements": [
+        "Compte bancaire local ou international",
+        "Capacité d'expédition vers l'Asie du Sud-Est"
+      ],
+      "pros": [
+        "Commissions très basses",
+        "Interface mobile optimisée",
+        "Croissance rapide"
+      ],
+      "cons": [
+        "Attentes de prix très bas",
+        "Logistique complexe",
+        "Support vendeur limité"
+      ]
+    },
+    {
+      "id": "tmall-global",
+      "name": "Tmall Global",
+      "countries": ["CN"],
+      "logo": "https://images.pexels.com/photos/5632390/pexels-photo-5632390.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Plateforme transfrontalière d'Alibaba permettant aux marques étrangères de vendre en Chine.",
+      "commission": "2-5%",
+      "monthly_fee": "USD 1,000+",
+      "setup_fee": "USD 5,000-10,000",
+      "requirements": [
+        "Marque enregistrée internationalement",
+        "Entreprise établie depuis 2+ ans",
+        "Produits conformes aux réglementations chinoises"
+      ],
+      "pros": [
+        "Accès au plus grand marché e-commerce mondial",
+        "Forte demande pour les produits étrangers",
+        "Infrastructure logistique puissante"
+      ],
+      "cons": [
+        "Coûts d'entrée très élevés",
+        "Processus d'approbation complexe",
+        "Barrières culturelles et linguistiques"
+      ]
+    },
+    {
+      "id": "jd-worldwide",
+      "name": "JD Worldwide",
+      "countries": ["CN"],
+      "logo": "https://images.pexels.com/photos/5632389/pexels-photo-5632389.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Plateforme transfrontalière de JD.com pour les marques étrangères en Chine.",
+      "commission": "2-8%",
+      "monthly_fee": "USD 1,000+",
+      "setup_fee": "USD 5,000+",
+      "requirements": [
+        "Marque enregistrée internationalement",
+        "Produits authentiques et de qualité",
+        "Conformité aux réglementations chinoises"
+      ],
+      "pros": [
+        "Réputation de qualité et d'authenticité",
+        "Logistique propriétaire efficace",
+        "Moins concurrentiel que Tmall"
+      ],
+      "cons": [
+        "Coûts d'entrée élevés",
+        "Processus d'approbation strict",
+        "Nécessite un partenaire local"
+      ]
+    },
+    {
+      "id": "coupang",
+      "name": "Coupang",
+      "countries": ["KR"],
+      "logo": "https://images.pexels.com/photos/5632388/pexels-photo-5632388.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace en Corée du Sud avec livraison ultra-rapide.",
+      "commission": "10-15%",
+      "monthly_fee": "KRW 0",
+      "setup_fee": "KRW 0",
+      "requirements": [
+        "Entité commerciale coréenne (recommandée)",
+        "Traductions en coréen",
+        "Conformité aux normes coréennes"
+      ],
+      "pros": [
+        "Marché à fort pouvoir d'achat",
+        "Système logistique ultra-rapide",
+        "Forte croissance"
+      ],
+      "cons": [
+        "Barrière linguistique",
+        "Attentes élevées en matière de livraison",
+        "Marché relativement fermé"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "marketplaces": [
+    {
+      "id": "amazon-us",
+      "name": "Amazon US",
+      "countries": ["US"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace aux États-Unis avec plus de 200 millions de clients.",
+      "commission": "8-15%",
+      "monthly_fee": "$39.99",
+      "setup_fee": "$0",
+      "requirements": [
+        "Entité commerciale américaine ou internationale",
+        "Compte bancaire américain",
+        "Informations fiscales américaines (W-8BEN ou W-9)"
+      ],
+      "pros": [
+        "Énorme base de clients",
+        "Logistique FBA disponible",
+        "Outils marketing avancés"
+      ],
+      "cons": [
+        "Commissions élevées",
+        "Concurrence intense",
+        "Règles strictes"
+      ]
+    },
+    {
+      "id": "amazon-ca",
+      "name": "Amazon Canada",
+      "countries": ["CA"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace au Canada avec une forte présence nationale.",
+      "commission": "8-15%",
+      "monthly_fee": "CAD 39.99",
+      "setup_fee": "CAD 0",
+      "requirements": [
+        "Numéro d'entreprise canadien (facultatif)",
+        "Numéro de TPS/TVH pour les vendeurs canadiens",
+        "Expédition vers le Canada"
+      ],
+      "pros": [
+        "Marché moins concurrentiel qu'aux États-Unis",
+        "Intégration facile pour les vendeurs Amazon existants",
+        "Logistique FBA disponible"
+      ],
+      "cons": [
+        "Marché plus petit qu'aux États-Unis",
+        "Coûts d'expédition plus élevés",
+        "Exigences de conformité spécifiques au Canada"
+      ]
+    },
+    {
+      "id": "walmart",
+      "name": "Walmart Marketplace",
+      "countries": ["US"],
+      "logo": "https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Deuxième plus grande marketplace aux États-Unis avec plus de 120 millions de visiteurs mensuels.",
+      "commission": "6-15%",
+      "monthly_fee": "$0",
+      "setup_fee": "$0",
+      "requirements": [
+        "Entité commerciale américaine",
+        "Codes UPC pour tous les produits",
+        "Historique de vente en ligne prouvé",
+        "Expédition rapide (2 jours)"
+      ],
+      "pros": [
+        "Pas de frais mensuels",
+        "Moins de concurrence qu'Amazon",
+        "Intégration avec les magasins physiques"
+      ],
+      "cons": [
+        "Processus d'approbation strict",
+        "Exigences de performance élevées",
+        "Limité aux États-Unis"
+      ]
+    },
+    {
+      "id": "ebay-us",
+      "name": "eBay US",
+      "countries": ["US"],
+      "logo": "https://images.pexels.com/photos/5632400/pexels-photo-5632400.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace établie avec plus de 159 millions d'acheteurs actifs dans le monde.",
+      "commission": "10-12%",
+      "monthly_fee": "$0-$299.95",
+      "setup_fee": "$0",
+      "requirements": [
+        "Compte PayPal ou compte marchand eBay",
+        "Adresse de retour aux États-Unis (recommandée)"
+      ],
+      "pros": [
+        "Facile à démarrer",
+        "Options de vente aux enchères et à prix fixe",
+        "Présence mondiale"
+      ],
+      "cons": [
+        "Commissions élevées",
+        "Attentes élevées des acheteurs",
+        "Concurrence sur les prix"
+      ]
+    },
+    {
+      "id": "ebay-ca",
+      "name": "eBay Canada",
+      "countries": ["CA"],
+      "logo": "https://images.pexels.com/photos/5632400/pexels-photo-5632400.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Version canadienne d'eBay avec une forte présence locale.",
+      "commission": "10-12%",
+      "monthly_fee": "CAD 0-299.95",
+      "setup_fee": "CAD 0",
+      "requirements": [
+        "Compte PayPal ou compte marchand eBay",
+        "Expédition vers le Canada"
+      ],
+      "pros": [
+        "Facile à démarrer",
+        "Intégration avec eBay global",
+        "Moins concurrentiel que le marché américain"
+      ],
+      "cons": [
+        "Marché plus petit",
+        "Commissions élevées",
+        "Attentes en matière d'expédition"
+      ]
+    },
+    {
+      "id": "etsy",
+      "name": "Etsy",
+      "countries": ["US", "CA"],
+      "logo": "https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace spécialisée dans les produits faits main, vintage et fournitures créatives.",
+      "commission": "5% + $0.20 par annonce",
+      "monthly_fee": "$0",
+      "setup_fee": "$0",
+      "requirements": [
+        "Produits faits main, vintage (20+ ans) ou fournitures créatives uniquement",
+        "Photos originales",
+        "Conformité aux politiques d'Etsy"
+      ],
+      "pros": [
+        "Clientèle ciblée et engagée",
+        "Communauté de vendeurs solidaire",
+        "Moins concurrentiel pour les produits de niche"
+      ],
+      "cons": [
+        "Limité aux produits artisanaux et vintage",
+        "Frais par annonce",
+        "Attentes élevées en matière de qualité"
+      ]
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify Marketplace",
+      "countries": ["US", "CA"],
+      "logo": "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Plateforme permettant aux marchands Shopify de vendre sur d'autres boutiques Shopify.",
+      "commission": "0-15%",
+      "monthly_fee": "$0 (nécessite un abonnement Shopify)",
+      "setup_fee": "$0",
+      "requirements": [
+        "Boutique Shopify active",
+        "Produits conformes aux directives de Shopify"
+      ],
+      "pros": [
+        "Intégration facile pour les utilisateurs Shopify",
+        "Contrôle total sur la marque",
+        "Multiples canaux de vente"
+      ],
+      "cons": [
+        "Nécessite un abonnement Shopify",
+        "Moins de trafic organique",
+        "Nécessite des efforts marketing"
+      ]
+    },
+    {
+      "id": "newegg",
+      "name": "Newegg",
+      "countries": ["US", "CA"],
+      "logo": "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace spécialisée dans l'électronique et la technologie.",
+      "commission": "8-15%",
+      "monthly_fee": "$0-$99",
+      "setup_fee": "$0",
+      "requirements": [
+        "Entité commerciale enregistrée",
+        "Produits neufs avec garantie",
+        "Conformité aux normes de qualité"
+      ],
+      "pros": [
+        "Clientèle ciblée pour l'électronique",
+        "Moins concurrentiel qu'Amazon",
+        "Options logistiques intégrées"
+      ],
+      "cons": [
+        "Limité principalement aux produits technologiques",
+        "Attentes élevées des clients",
+        "Processus d'approbation rigoureux"
+      ]
+    },
+    {
+      "id": "wayfair",
+      "name": "Wayfair",
+      "countries": ["US", "CA"],
+      "logo": "https://images.pexels.com/photos/5632396/pexels-photo-5632396.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace spécialisée dans les meubles et la décoration d'intérieur.",
+      "commission": "15-25%",
+      "monthly_fee": "$0",
+      "setup_fee": "$0",
+      "requirements": [
+        "Produits de maison et d'ameublement",
+        "Capacité de livraison directe",
+        "Intégration EDI ou API"
+      ],
+      "pros": [
+        "Spécialisé dans l'ameublement",
+        "Pas de concurrence sur les prix",
+        "Marketing géré par Wayfair"
+      ],
+      "cons": [
+        "Commissions élevées",
+        "Exigences logistiques strictes",
+        "Contrôle limité sur la présentation"
+      ]
+    },
+    {
+      "id": "bestbuy",
+      "name": "Best Buy Marketplace",
+      "countries": ["US", "CA"],
+      "logo": "https://images.pexels.com/photos/5632395/pexels-photo-5632395.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace du géant de l'électronique avec une forte présence physique.",
+      "commission": "12-15%",
+      "monthly_fee": "$0",
+      "setup_fee": "$0",
+      "requirements": [
+        "Produits électroniques et accessoires",
+        "Garantie fabricant",
+        "Expédition rapide"
+      ],
+      "pros": [
+        "Clientèle ciblée pour l'électronique",
+        "Intégration avec les magasins physiques",
+        "Forte crédibilité de la marque"
+      ],
+      "cons": [
+        "Processus d'approbation strict",
+        "Limité principalement à l'électronique",
+        "Attentes élevées en matière de service"
+      ]
+    }
+  ]
+}

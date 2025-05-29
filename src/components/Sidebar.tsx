@@ -5,7 +5,7 @@ import {
   Menu, X, LayoutDashboard, FileText, Bot, Truck,
   Sparkles, Globe, Zap, Import, Search, CreditCard,
   ShoppingBag, BarChart3, Share2, Settings, Code,
-  Webhook, Languages, FileBarChart2
+  Webhook, Languages, FileBarChart2, Building, Megaphone
 } from 'lucide-react';
 
 const sections = [
@@ -30,9 +30,17 @@ const sections = [
     title: "Dropshipping",
     links: [
       { path: "/dropshipping", label: "Dropshipping", icon: <ShoppingBag size={18} /> },
+      { path: "/advanced-suppliers", label: "Fournisseurs Avancés", icon: <Building size={18} /> },
       { path: "/multi-channel", label: "Multi-Channel", icon: <Share2 size={18} /> },
+      { path: "/global-marketplaces", label: "Marketplaces Mondiales", icon: <Globe size={18} /> },
       { path: "/automation", label: "Automations", icon: <Zap size={18} /> },
       { path: "/advanced-analytics", label: "Advanced Analytics", icon: <BarChart3 size={18} /> },
+    ]
+  },
+  {
+    title: "Marketing",
+    links: [
+      { path: "/marketing-hub", label: "Marketing Hub", icon: <Megaphone size={18} /> },
     ]
   },
   {

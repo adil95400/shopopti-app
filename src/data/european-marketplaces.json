@@ -1,0 +1,254 @@
+{
+  "marketplaces": [
+    {
+      "id": "amazon-eu",
+      "name": "Amazon EU",
+      "countries": ["DE", "FR", "IT", "ES", "UK", "NL", "SE", "PL"],
+      "logo": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace en Europe avec une présence dans 8 pays européens.",
+      "commission": "8-15%",
+      "monthly_fee": "39.99€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Adresse de retour dans l'UE",
+        "Service client dans la langue locale"
+      ],
+      "pros": [
+        "Énorme base de clients",
+        "Logistique FBA disponible",
+        "Ventes multi-pays faciles"
+      ],
+      "cons": [
+        "Commissions élevées",
+        "Concurrence intense",
+        "Règles strictes"
+      ]
+    },
+    {
+      "id": "cdiscount",
+      "name": "Cdiscount",
+      "countries": ["FR"],
+      "logo": "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Deuxième plus grande marketplace en France avec plus de 10 millions de clients actifs.",
+      "commission": "5-12%",
+      "monthly_fee": "39.99€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Entreprise enregistrée en France (SIRET)",
+        "Numéro de TVA français",
+        "Service client francophone"
+      ],
+      "pros": [
+        "Fort trafic en France",
+        "Commissions compétitives",
+        "Bonne visibilité pour les nouveaux vendeurs"
+      ],
+      "cons": [
+        "Limité principalement à la France",
+        "Interface moins intuitive",
+        "Support vendeur limité"
+      ]
+    },
+    {
+      "id": "allegro",
+      "name": "Allegro",
+      "countries": ["PL"],
+      "logo": "https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace en Pologne avec plus de 20 millions d'utilisateurs mensuels.",
+      "commission": "6-15%",
+      "monthly_fee": "0€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Traductions en polonais",
+        "Expédition vers la Pologne"
+      ],
+      "pros": [
+        "Domination du marché polonais",
+        "Pas de frais mensuels",
+        "Moins de concurrence internationale"
+      ],
+      "cons": [
+        "Barrière linguistique",
+        "Limité principalement à la Pologne",
+        "Attentes élevées en matière de livraison"
+      ]
+    },
+    {
+      "id": "bol",
+      "name": "Bol.com",
+      "countries": ["NL", "BE"],
+      "logo": "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande marketplace aux Pays-Bas et en Belgique avec plus de 12 millions de clients.",
+      "commission": "5-17%",
+      "monthly_fee": "40€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Traductions en néerlandais",
+        "Solution de retour locale"
+      ],
+      "pros": [
+        "Leader du marché au Benelux",
+        "Clients à fort pouvoir d'achat",
+        "Bonne infrastructure logistique"
+      ],
+      "cons": [
+        "Marché plus petit",
+        "Attentes élevées en matière de service",
+        "Nécessite du contenu en néerlandais"
+      ]
+    },
+    {
+      "id": "zalando",
+      "name": "Zalando",
+      "countries": ["DE", "FR", "IT", "ES", "UK", "NL", "BE", "SE", "DK", "FI", "NO", "PL", "AT", "CH", "IE", "LU"],
+      "logo": "https://images.pexels.com/photos/5632396/pexels-photo-5632396.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "La plus grande plateforme de mode en ligne d'Europe, présente dans 16 pays.",
+      "commission": "5-20%",
+      "monthly_fee": "0€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Approbation de la marque",
+        "Images produit de haute qualité",
+        "Conformité aux normes européennes"
+      ],
+      "pros": [
+        "Spécialisé dans la mode",
+        "Présence dans 16 pays européens",
+        "Clientèle fidèle"
+      ],
+      "cons": [
+        "Processus d'approbation strict",
+        "Limité aux produits de mode",
+        "Exigences élevées en matière de qualité"
+      ]
+    },
+    {
+      "id": "otto",
+      "name": "Otto",
+      "countries": ["DE"],
+      "logo": "https://images.pexels.com/photos/5632395/pexels-photo-5632395.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Deuxième plus grande marketplace en Allemagne avec plus de 9 millions de clients actifs.",
+      "commission": "10-15%",
+      "monthly_fee": "39.90€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Enregistrement d'entreprise allemande",
+        "Traductions en allemand",
+        "Service client local"
+      ],
+      "pros": [
+        "Fort trafic en Allemagne",
+        "Moins concurrentiel qu'Amazon",
+        "Bonne réputation auprès des consommateurs"
+      ],
+      "cons": [
+        "Limité principalement à l'Allemagne",
+        "Processus d'intégration plus long",
+        "Interface moins moderne"
+      ]
+    },
+    {
+      "id": "fnac",
+      "name": "Fnac Marketplace",
+      "countries": ["FR", "ES", "PT", "BE"],
+      "logo": "https://images.pexels.com/photos/5632394/pexels-photo-5632394.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace spécialisée dans les produits culturels, l'électronique et les appareils ménagers.",
+      "commission": "7-15%",
+      "monthly_fee": "39.99€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Traductions dans la langue locale",
+        "Service client dans la langue locale"
+      ],
+      "pros": [
+        "Clientèle fidèle",
+        "Bonne réputation",
+        "Spécialisé dans l'électronique et les produits culturels"
+      ],
+      "cons": [
+        "Catégories de produits limitées",
+        "Frais mensuels",
+        "Processus d'approbation strict"
+      ]
+    },
+    {
+      "id": "emag",
+      "name": "eMAG",
+      "countries": ["RO", "BG", "HU", "PL"],
+      "logo": "https://images.pexels.com/photos/5632393/pexels-photo-5632393.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Leader du e-commerce en Europe de l'Est, présent en Roumanie, Bulgarie, Hongrie et Pologne.",
+      "commission": "5-15%",
+      "monthly_fee": "0€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Traductions dans la langue locale",
+        "Expédition vers l'Europe de l'Est"
+      ],
+      "pros": [
+        "Leader en Europe de l'Est",
+        "Pas de frais mensuels",
+        "Moins de concurrence internationale"
+      ],
+      "cons": [
+        "Marchés moins développés",
+        "Barrières linguistiques",
+        "Attentes différentes des consommateurs"
+      ]
+    },
+    {
+      "id": "idealo",
+      "name": "Idealo",
+      "countries": ["DE", "FR", "UK", "IT", "ES", "AT"],
+      "logo": "https://images.pexels.com/photos/5632392/pexels-photo-5632392.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Comparateur de prix et marketplace présent dans 6 pays européens.",
+      "commission": "3-10%",
+      "monthly_fee": "0€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Flux de produits au format XML/CSV",
+        "Mise à jour régulière des stocks et prix"
+      ],
+      "pros": [
+        "Commissions plus basses",
+        "Trafic qualifié",
+        "Modèle basé sur le CPC (coût par clic)"
+      ],
+      "cons": [
+        "Moins de volume de ventes",
+        "Concurrence sur les prix",
+        "Nécessite une gestion technique des flux"
+      ]
+    },
+    {
+      "id": "kaufland",
+      "name": "Kaufland.de",
+      "countries": ["DE"],
+      "logo": "https://images.pexels.com/photos/5632391/pexels-photo-5632391.jpeg?auto=compress&cs=tinysrgb&w=300",
+      "description": "Marketplace allemande en forte croissance, anciennement connue sous le nom de real.de.",
+      "commission": "3-11%",
+      "monthly_fee": "0€",
+      "setup_fee": "0€",
+      "requirements": [
+        "Numéro de TVA européen",
+        "Traductions en allemand",
+        "Expédition vers l'Allemagne"
+      ],
+      "pros": [
+        "Commissions compétitives",
+        "Pas de frais mensuels",
+        "Croissance rapide en Allemagne"
+      ],
+      "cons": [
+        "Limité principalement à l'Allemagne",
+        "Notoriété encore en développement",
+        "Moins de fonctionnalités avancées"
+      ]
+    }
+  ]
+}

@@ -45,6 +45,9 @@ import Integrations from './pages/Integrations';
 import Webhooks from './pages/Webhooks';
 import InternationalSelling from './pages/InternationalSelling';
 import CustomReports from './pages/CustomReports';
+import MarketingHub from './pages/MarketingHub';
+import GlobalMarketplaces from './pages/GlobalMarketplaces';
+import AdvancedSuppliers from './pages/AdvancedSuppliers';
 
 function App() {
   return (
@@ -78,6 +81,9 @@ function App() {
               <Route path="/webhooks" element={<Webhooks />} />
               <Route path="/international-selling" element={<InternationalSelling />} />
               <Route path="/custom-reports" element={<CustomReports />} />
+              <Route path="/marketing-hub" element={<MarketingHub />} />
+              <Route path="/global-marketplaces" element={<GlobalMarketplaces />} />
+              <Route path="/advanced-suppliers" element={<AdvancedSuppliers />} />
 
               <Route
                 path="/app"
