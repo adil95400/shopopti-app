@@ -37,6 +37,10 @@ import AutomationsPage from './pages/automations';
 import MarketplaceB2B from './pages/marketplace-b2b';
 import SeoAuditPage from './pages/SeoAudit';
 import SeoCompetitorScore from './pages/seo-competitor';
+import Dropshipping from './pages/Dropshipping';
+import MultiChannel from './pages/MultiChannel';
+import AiHub from './pages/AiHub';
+import AdvancedAnalytics from './pages/AdvancedAnalytics';
 
 function App() {
   return (
@@ -62,6 +66,10 @@ function App() {
               <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
               <Route path="/app/seo-audit" element={<SeoAuditPage />} />
               <Route path="/app/seo-competitor" element={<SeoCompetitorScore />} />
+              <Route path="/dropshipping" element={<Dropshipping />} />
+              <Route path="/multi-channel" element={<MultiChannel />} />
+              <Route path="/ai-hub" element={<AiHub />} />
+              <Route path="/advanced-analytics" element={<AdvancedAnalytics />} />
 
               <Route
                 path="/app"
@@ -71,7 +79,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                <Route index element={<Navigate to="/app/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="orders" element={<Orders />} />

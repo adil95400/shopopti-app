@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, FileText, Bot, Truck,
-  Sparkles, Globe, Zap, Import, Search, CreditCard
+  Sparkles, Globe, Zap, Import, Search, CreditCard,
+  ShoppingBag, BarChart3, Share2
 } from 'lucide-react';
 
 const sections = [
@@ -21,6 +22,16 @@ const sections = [
       { path: "/seo-ai", label: "SEO IA", icon: <Sparkles size={18} /> },
       { path: "/app/seo-audit", label: "Audit SEO", icon: <Sparkles size={18} /> },
       { path: "/app/seo-competitor", label: "Analyse concurrente", icon: <Search size={18} /> },
+      { path: "/ai-hub", label: "AI Hub", icon: <Bot size={18} /> },
+    ]
+  },
+  {
+    title: "Dropshipping",
+    links: [
+      { path: "/dropshipping", label: "Dropshipping", icon: <ShoppingBag size={18} /> },
+      { path: "/multi-channel", label: "Multi-Channel", icon: <Share2 size={18} /> },
+      { path: "/automation", label: "Automations", icon: <Zap size={18} /> },
+      { path: "/advanced-analytics", label: "Advanced Analytics", icon: <BarChart3 size={18} /> },
     ]
   },
   {
