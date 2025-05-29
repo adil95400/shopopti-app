@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Logo from './Logo';
+import { useUserContext } from '../../contexts/UserContext';
 
 interface NavItem {
   label: string;
@@ -74,6 +75,8 @@ const navItems: NavItem[] = [
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { isAuthenticated } = useUserContext();
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary-500/80 backdrop-blur-sm border-b border-accent-200/10">
@@ -129,15 +132,26 @@ const Navbar: React.FC = () => {
               <option value="fr">🇫🇷 Français</option>
               <option value="en">🇺🇸 English</option>
             </select>
-            <Link to="/login" className="text-accent-200 hover:text-white">
-              Se connecter
-            </Link>
-            <Link
-              to="/register"
-              className="btn btn-primary"
-            >
-              Commencer
-            </Link>
+            {isAuthenticated ? (
+              <button 
+                onClick={() => navigate('/app/dashboard')}
+                className="text-accent-200 hover:text-white"
+              >
+                Dashboard
+              </button>
+            ) : (
+              <>
+                <Link to="/login" className="text-accent-200 hover:text-white">
+                  Se connecter
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn btn-primary"
+                >
+                  Commencer
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="md:hidden">
@@ -165,6 +179,7 @@ const Navbar: React.FC = () => {
                   <Link
                     to={item.href}
                     className="block px-3 py-2 text-accent-200 hover:text-white"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
@@ -175,6 +190,7 @@ const Navbar: React.FC = () => {
                           key={subItem.label}
                           to={subItem.href}
                           className="block px-3 py-2 text-sm text-accent-200 hover:text-white"
+                          onClick={() => setMobileMenuOpen(false)}
                         >
                           {subItem.label}
                         </Link>
@@ -184,18 +200,32 @@ const Navbar: React.FC = () => {
                 </div>
               ))}
               <div className="pt-4 border-t border-accent-200/10">
-                <Link
-                  to="/login"
-                  className="block px-3 py-2 text-accent-200 hover:text-white"
-                >
-                  Se connecter
-                </Link>
-                <Link
-                  to="/register"
-                  className="block px-3 py-2 text-primary-400 hover:text-primary-500"
-                >
-                  Commencer
-                </Link>
+                {isAuthenticated ? (
+                  <Link
+                    to="/app/dashboard"
+                    className="block px-3 py-2 text-accent-200 hover:text-white"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="block px-3 py-2 text-accent-200 hover:text-white"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Se connecter
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="block px-3 py-2 text-primary-400 hover:text-primary-500"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Commencer
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>

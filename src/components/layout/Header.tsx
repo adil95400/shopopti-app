@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
-import { Menu, Bell, ChevronDown, Search, Settings, LogOut } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, Bell, ChevronDown, Search, Settings, LogOut, CreditCard } from 'lucide-react';
 import { useUserContext } from '../../contexts/UserContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSelector from '../LanguageSelector';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
 
 const Header: React.FC = () => {
   const { user, logout } = useUserContext();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [subscription, setSubscription] = useState<any>(null);
+
+  useEffect(() => {
+    fetchSubscription();
+  }, []);
+
+  const fetchSubscription = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.user) {
+        return;
+      }
+      
+      const { data } = await supabase
+        .from('subscriptions')
+        .select('plan, status')
+        .eq('user_id', session.user.id)
+        .eq('status', 'active')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+      
+      setSubscription(data);
+    } catch (error) {
+      console.error('Error fetching subscription:', error);
+    }
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -113,8 +142,23 @@ const Header: React.FC = () => {
                   <div className="border-b border-accent-200/10 px-4 py-3">
                     <p className="text-sm font-medium text-white">{user?.name || 'Utilisateur'}</p>
                     <p className="text-xs text-accent-200">{user?.email || 'user@example.com'}</p>
+                    {subscription && (
+                      <div className="mt-1 flex items-center">
+                        <span className="inline-flex items-center rounded-full bg-primary-400/10 px-2 py-0.5 text-xs font-medium text-primary-400">
+                          {subscription.plan.charAt(0).toUpperCase() + subscription.plan.slice(1)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-2">
+                    <Link 
+                      to="/app/subscription" 
+                      className="flex w-full items-center rounded-md px-4 py-2 text-sm text-accent-200 hover:bg-secondary-500 hover:text-white"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <CreditCard size={16} className="mr-2" />
+                      Abonnement
+                    </Link>
                     <button onClick={() => navigate('/app/settings')} className="flex w-full items-center rounded-md px-4 py-2 text-sm text-accent-200 hover:bg-secondary-500 hover:text-white">
                       <Settings size={16} className="mr-2" />
                       Paramètres

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, FileText, Bot, Truck,
-  Sparkles, Globe, Zap, Import, Search
+  Sparkles, Globe, Zap, Import, Search, CreditCard
 } from 'lucide-react';
 
 const sections = [
@@ -28,6 +28,7 @@ const sections = [
     links: [
       { path: "/tracking", label: "Suivi de livraison", icon: <Truck size={18} /> },
       { path: "/generate-invoice", label: "Factures PDF", icon: <FileText size={18} /> },
+      { path: "/app/subscription", label: "Abonnement", icon: <CreditCard size={18} /> },
     ]
   },
   {
