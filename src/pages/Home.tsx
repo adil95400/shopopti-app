@@ -18,11 +18,14 @@ import {
   Star,
   Users
 } from 'lucide-react';
+import MainNavbar from '../components/layout/MainNavbar';
 import Footer from '../components/layout/Footer';
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen">
+      <MainNavbar />
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-orange-50 to-amber-50">
         <div className="mx-auto max-w-7xl">
