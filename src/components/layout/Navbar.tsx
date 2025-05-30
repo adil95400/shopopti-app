@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X, ShoppingBag, Globe, Zap, Search, Users, Sun, Moon } from 'lucide-react';
 import Logo from './Logo';
-import { useUserContext } from '../../contexts/UserContext';
+import { supabase } from '../../lib/supabase';
 
 interface NavItem {
   label: string;
@@ -16,8 +16,29 @@ const Navbar: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { isAuthenticated } = useUserContext();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    // Vérifier si l'utilisateur est connecté
+    const checkAuth = async () => {
+      const { data } = await supabase.auth.getSession();
+      setIsAuthenticated(!!data.session);
+    };
+    
+    checkAuth();
+    
+    // Écouter les changements d'authentification
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setIsAuthenticated(!!session);
+      }
+    );
+    
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     // Check for user preference in localStorage
@@ -88,7 +109,7 @@ const Navbar: React.FC = () => {
         { label: 'Blog', href: '/blog' },
         { label: 'Académie', href: '/academy' },
         { label: 'Guides', href: '/guides' },
-        { label: 'Centre d\'aide', href: '/help' },
+        { label: 'Centre d\'aide', href: '/help-center' },
         { label: 'Statistiques', href: '/statistics' },
         { label: 'Glossaire', href: '/glossary' }
       ]
@@ -134,7 +155,7 @@ const Navbar: React.FC = () => {
                 >
                   <Link
                     to={item.href}
-                    className={`flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 ${location.pathname === item.href ? 'text-orange-500 dark:text-orange-400' : ''}`}
+                    className={`flex items-center px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary ${location.pathname === item.href ? 'text-primary dark:text-primary' : ''}`}
                   >
                     {item.label}
                     {item.items && (
@@ -154,7 +175,7 @@ const Navbar: React.FC = () => {
                           <Link
                             key={subItem.label}
                             to={subItem.href}
-                            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400"
+                            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-primary dark:hover:text-primary"
                           >
                             {subItem.label}
                           </Link>
@@ -176,7 +197,7 @@ const Navbar: React.FC = () => {
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             
-            <select className="bg-transparent text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 cursor-pointer border-none focus:ring-0">
+            <select className="bg-transparent text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary cursor-pointer border-none focus:ring-0">
               <option value="fr">🇫🇷 Français</option>
               <option value="en">🇺🇸 English</option>
               <option value="es">🇪🇸 Español</option>
@@ -186,18 +207,18 @@ const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <button 
                 onClick={() => window.location.href = '/app/dashboard'}
-                className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400"
+                className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
               >
-                Dashboard
+                Tableau de bord
               </button>
             ) : (
               <>
-                <Link to="/login" className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400">
+                <Link to="/login" className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">
                   Se connecter
                 </Link>
                 <Link
                   to="/register"
-                  className="btn bg-orange-500 hover:bg-orange-600 text-white"
+                  className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-600"
                 >
                   Commencer
                 </Link>
@@ -216,7 +237,7 @@ const Navbar: React.FC = () => {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -237,7 +258,7 @@ const Navbar: React.FC = () => {
                 <div key={item.label}>
                   <Link
                     to={item.href}
-                    className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium"
+                    className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -248,7 +269,7 @@ const Navbar: React.FC = () => {
                         <Link
                           key={subItem.label}
                           to={subItem.href}
-                          className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400"
+                          className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {subItem.label}
@@ -262,23 +283,23 @@ const Navbar: React.FC = () => {
                 {isAuthenticated ? (
                   <Link
                     to="/app/dashboard"
-                    className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium"
+                    className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Dashboard
+                    Tableau de bord
                   </Link>
                 ) : (
                   <>
                     <Link
                       to="/login"
-                      className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium"
+                      className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Se connecter
                     </Link>
                     <Link
                       to="/register"
-                      className="block px-3 py-2 text-orange-500 dark:text-orange-400 hover:text-orange-600 dark:hover:text-orange-500 font-medium"
+                      className="block px-3 py-2 text-primary dark:text-primary hover:text-primary-600 dark:hover:text-primary-500 font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Commencer
