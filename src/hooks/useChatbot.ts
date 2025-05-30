@@ -30,11 +30,11 @@ Question du client : "${input}"
 
       const response = await askChatGPT(prompt);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error getting response:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "Je suis désolé, je rencontre actuellement des difficultés techniques. Veuillez réessayer dans quelques instants ou contacter notre équipe support à support@shopopti.com." 
+        content: error.message || "Je suis désolé, je rencontre actuellement des difficultés techniques. Veuillez réessayer dans quelques instants ou contacter notre équipe support à support@shopopti.com."
       }]);
     } finally {
       setLoading(false);

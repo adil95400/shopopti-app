@@ -14,8 +14,14 @@ export async function askChatGPT(prompt: string): Promise<string> {
     });
 
     return response.choices[0].message.content || "No response generated";
-  } catch (error) {
+  } catch (error: any) {
     console.error('OpenAI API Error:', error);
-    throw new Error('Failed to get response from OpenAI');
+    
+    // Handle quota exceeded error specifically
+    if (error?.status === 429) {
+      throw new Error('Le service est temporairement indisponible en raison d\'une utilisation élevée. Veuillez réessayer dans quelques minutes ou contacter le support si le problème persiste.');
+    }
+    
+    throw new Error('Une erreur est survenue lors de la communication avec notre service AI. Veuillez réessayer plus tard.');
   }
 }
