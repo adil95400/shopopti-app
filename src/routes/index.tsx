@@ -97,7 +97,7 @@ const AppRoutes = () => {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate to="/app/dashboard" replace />} />
+                <Route index element={<Navigate to="/app/dashboard\" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="orders" element={<Orders />} />
@@ -127,7 +127,7 @@ const AppRoutes = () => {
               </Route>
               
               {/* Redirection par défaut */}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<Navigate to="/\" replace />} />
             </Routes>
             
             <Toaster position="top-right" expand={true} richColors />
