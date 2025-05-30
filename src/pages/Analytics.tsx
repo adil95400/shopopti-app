@@ -10,7 +10,7 @@ import {
   ArrowDownRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 import { 
   LineChart, 
   Line, 
@@ -67,7 +67,7 @@ const productPerformanceData = [
 const COLORS = ['#3366FF', '#00C8B3', '#FF7D00', '#FFCB00', '#FF5630'];
 
 const Analytics: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [timeRange, setTimeRange] = useState('30days');
 
   // Animation variants for staggered animations
