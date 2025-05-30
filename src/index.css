@@ -3,18 +3,17 @@
 @tailwind utilities;
 
 :root {
-  /* Primary colors - Orange */
-  --primary-50: #fff7ed;
-  --primary-100: #ffedd5;
-  --primary-200: #fed7aa;
-  --primary-300: #fdba74;
-  --primary-400: #FF7A3D;
-  --primary-400-rgb: 255, 122, 61;
-  --primary-500: #f97316;
-  --primary-600: #ea580c;
-  --primary-700: #c2410c;
-  --primary-800: #9a3412;
-  --primary-900: #7c2d12;
+  /* Primary colors - Blue */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-200: #bfdbfe;
+  --primary-300: #93c5fd;
+  --primary-400: #60a5fa;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
+  --primary-900: #1e3a8a;
 
   /* Secondary colors - Deep Purple */
   --secondary-50: #f5f3ff;
@@ -66,7 +65,7 @@
   }
 
   body {
-    @apply bg-secondary-400 text-white;
+    @apply bg-white text-gray-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -100,7 +99,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary-400 text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2;
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2;
   }
 
   .btn-secondary {
@@ -112,11 +111,11 @@
   }
 
   .btn-outline {
-    @apply border border-accent-200 bg-transparent text-accent-200 hover:bg-[rgba(var(--accent-200-rgb),0.1)] focus:outline-none focus:ring-2 focus:ring-accent-200 focus:ring-offset-2;
+    @apply border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
   }
 
   .card {
-    @apply rounded-lg bg-secondary-500 p-6 shadow-sm transition-shadow duration-200 hover:shadow-md border border-accent-200 border-opacity-10;
+    @apply rounded-lg bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md border border-gray-200;
   }
 
   .metric-card {
@@ -124,16 +123,16 @@
   }
 
   .input {
-    @apply rounded-md border border-accent-200 border-opacity-20 bg-secondary-600 px-3 py-2 text-white shadow-sm 
+    @apply rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm 
     focus:border-primary-400 focus:outline-none focus:ring-1 focus:ring-primary-400;
   }
 
   .sidebar-link {
-    @apply flex items-center gap-2 rounded-md px-3 py-2 text-accent-200 transition-all duration-200 
-    hover:bg-[rgba(var(--primary-400-rgb),0.1)] hover:text-primary-400;
+    @apply flex items-center gap-2 rounded-md px-3 py-2 text-gray-600 transition-all duration-200 
+    hover:bg-gray-100 hover:text-primary-600;
   }
 
   .sidebar-link.active {
-    @apply bg-primary-400 bg-opacity-10 text-primary-400 font-medium;
+    @apply bg-primary-50 text-primary-600 font-medium;
   }
 }
