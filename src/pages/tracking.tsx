@@ -207,7 +207,7 @@ export default function TrackingPage() {
             {result.history.map((event: any, index: number) => (
               <div key={index} className="relative pb-8">
                 {index < result.history.length - 1 && (
-                  <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></div>
+                  <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200\" aria-hidden="true"></div>
                 )}
                 <div className="relative flex items-start space-x-3">
                   <div>
