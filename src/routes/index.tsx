@@ -2,9 +2,18 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 
+// Providers
+import { ShopProvider } from '../contexts/ShopContext';
+import { UserProvider } from '../contexts/UserContext';
+import { LanguageProvider } from '../contexts/LanguageContext';
+
 // Layouts
 import Layout from '../components/layout/Layout';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
+
+// Components
+import ChatbotWidget from '../components/ChatbotWidget';
+import SubscriptionBanner from '../components/stripe/SubscriptionBanner';
 
 // Pages publiques
 import Home from '../pages/Home';
@@ -51,78 +60,82 @@ import MarketingHub from '../pages/MarketingHub';
 import GlobalMarketplaces from '../pages/GlobalMarketplaces';
 import AdvancedSuppliers from '../pages/AdvancedSuppliers';
 
-// Composant ChatbotWidget
-import ChatbotWidget from '../components/ChatbotWidget';
-
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Pages publiques */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Cancel />} />
-        <Route path="/documentation" element={<Documentation />} />
-        <Route path="/documentation/:category/:article" element={<Documentation />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/help-center" element={<HelpCenterPage />} />
+    <LanguageProvider>
+      <UserProvider>
+        <ShopProvider>
+          <BrowserRouter>
+            <SubscriptionBanner />
+            <Routes>
+              {/* Pages publiques */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/cancel" element={<Cancel />} />
+              <Route path="/documentation" element={<Documentation />} />
+              <Route path="/documentation/:category/:article" element={<Documentation />} />
+              <Route path="/faq" element={<FaqPage />} />
+              <Route path="/help-center" element={<HelpCenterPage />} />
 
-        {/* Pages IA et outils accessibles sans connexion */}
-        <Route path="/blog-ai" element={<BlogAIPage />} />
-        <Route path="/seo-ai" element={<SEOAIPage />} />
-        <Route path="/tracking" element={<TrackingPage />} />
-        <Route path="/generate-invoice" element={<GenerateInvoice />} />
-        <Route path="/automations" element={<AutomationsPage />} />
-        <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
+              {/* Pages IA et outils accessibles sans connexion */}
+              <Route path="/blog-ai" element={<BlogAIPage />} />
+              <Route path="/seo-ai" element={<SEOAIPage />} />
+              <Route path="/tracking" element={<TrackingPage />} />
+              <Route path="/generate-invoice" element={<GenerateInvoice />} />
+              <Route path="/automations" element={<AutomationsPage />} />
+              <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
 
-        {/* Pages protégées (nécessitent une connexion) */}
-        <Route
-          path="/app"
-          element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="/app/dashboard\" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="products" element={<Products />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="import-products" element={<ImportProducts />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="suppliers" element={<Suppliers />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="support" element={<Support />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="subscription" element={<Subscription />} />
-          
-          {/* Modules avancés */}
-          <Route path="seo-audit" element={<SeoAuditPage />} />
-          <Route path="seo-competitor" element={<SeoCompetitorScore />} />
-          <Route path="dropshipping" element={<Dropshipping />} />
-          <Route path="multi-channel" element={<MultiChannel />} />
-          <Route path="ai-hub" element={<AiHub />} />
-          <Route path="advanced-analytics" element={<AdvancedAnalytics />} />
-          <Route path="integrations" element={<Integrations />} />
-          <Route path="webhooks" element={<Webhooks />} />
-          <Route path="international-selling" element={<InternationalSelling />} />
-          <Route path="custom-reports" element={<CustomReports />} />
-          <Route path="marketing-hub" element={<MarketingHub />} />
-          <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
-          <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
-        </Route>
-        
-        {/* Redirection par défaut */}
-        <Route path="*" element={<Navigate to="/\" replace />} />
-      </Routes>
-      
-      <Toaster position="top-right" expand={true} richColors />
-      <ChatbotWidget />
-    </BrowserRouter>
+              {/* Pages protégées (nécessitent une connexion) */}
+              <Route
+                path="/app"
+                element={
+                  <ProtectedRoute>
+                    <Layout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate to="/app/dashboard" replace />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="products" element={<Products />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="import-products" element={<ImportProducts />} />
+                <Route path="analytics" element={<Analytics />} />
+                <Route path="reviews" element={<Reviews />} />
+                <Route path="suppliers" element={<Suppliers />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="support" element={<Support />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="subscription" element={<Subscription />} />
+                
+                {/* Modules avancés */}
+                <Route path="seo-audit" element={<SeoAuditPage />} />
+                <Route path="seo-competitor" element={<SeoCompetitorScore />} />
+                <Route path="dropshipping" element={<Dropshipping />} />
+                <Route path="multi-channel" element={<MultiChannel />} />
+                <Route path="ai-hub" element={<AiHub />} />
+                <Route path="advanced-analytics" element={<AdvancedAnalytics />} />
+                <Route path="integrations" element={<Integrations />} />
+                <Route path="webhooks" element={<Webhooks />} />
+                <Route path="international-selling" element={<InternationalSelling />} />
+                <Route path="custom-reports" element={<CustomReports />} />
+                <Route path="marketing-hub" element={<MarketingHub />} />
+                <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
+                <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
+              </Route>
+              
+              {/* Redirection par défaut */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            
+            <Toaster position="top-right" expand={true} richColors />
+            <ChatbotWidget />
+          </BrowserRouter>
+        </ShopProvider>
+      </UserProvider>
+    </LanguageProvider>
   );
 };
 
