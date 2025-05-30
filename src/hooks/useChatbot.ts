@@ -5,6 +5,7 @@ export function useChatbot() {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -13,6 +14,7 @@ export function useChatbot() {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setLoading(true);
+    setError(null);
 
     try {
       const prompt = `
@@ -32,14 +34,17 @@ Question du client : "${input}"
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error: any) {
       console.error('Error getting response:', error);
+      setError(error.message);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: error.message || "Je suis désolé, je rencontre actuellement des difficultés techniques. Veuillez réessayer dans quelques instants ou contacter notre équipe support à support@shopopti.com."
+        content: error.message || 
+          "Je suis désolé, je rencontre actuellement des difficultés techniques. " +
+          "Veuillez réessayer dans quelques instants ou contacter notre équipe support à support@shopopti.com."
       }]);
     } finally {
       setLoading(false);
     }
   };
 
-  return { messages, input, setInput, sendMessage, loading };
+  return { messages, input, setInput, sendMessage, loading, error };
 }
