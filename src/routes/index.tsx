@@ -47,7 +47,7 @@ import GenerateInvoice from '../pages/generateInvoice';
 import AutomationsPage from '../pages/automations';
 import MarketplaceB2B from '../pages/marketplace-b2b';
 import SeoAuditPage from '../pages/SeoAudit';
-import SeoCompetitorScore from '../pages/seo-competitor';
+import SeoCompetitorPage from '../pages/seo-competitor';
 import Dropshipping from '../pages/Dropshipping';
 import MultiChannel from '../pages/MultiChannel';
 import AiHub from '../pages/AiHub';
@@ -97,8 +97,8 @@ const AppRoutes = () => {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate to="/app/dashboard\" replace />} />
-                <Route path="dashboard\" element={<Dashboard />} />
+                <Route index element={<Navigate to="/app/dashboard" replace />} />
+                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="import-products" element={<ImportProducts />} />
@@ -112,7 +112,7 @@ const AppRoutes = () => {
                 
                 {/* Modules avancés */}
                 <Route path="seo-audit" element={<SeoAuditPage />} />
-                <Route path="seo-competitor" element={<SeoCompetitorScore />} />
+                <Route path="seo-competitor" element={<SeoCompetitorPage />} />
                 <Route path="dropshipping" element={<Dropshipping />} />
                 <Route path="multi-channel" element={<MultiChannel />} />
                 <Route path="ai-hub" element={<AiHub />} />
@@ -127,7 +127,7 @@ const AppRoutes = () => {
               </Route>
               
               {/* Redirection par défaut */}
-              <Route path="*" element={<Navigate to="/\" replace />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             
             <Toaster position="top-right" expand={true} richColors />

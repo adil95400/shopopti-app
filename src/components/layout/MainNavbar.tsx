@@ -24,10 +24,11 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import Logo from './Logo';
-import LanguageSelector from '../LanguageSelector';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 
 const MainNavbar: React.FC = () => {
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -97,68 +98,68 @@ const MainNavbar: React.FC = () => {
 
   const navItems = [
     {
-      label: 'Produits',
+      label: t('nav.products'),
       href: '#',
       items: [
-        { label: 'Recherche de produits', href: '/app/products', icon: <Search size={18} /> },
-        { label: 'Importation', href: '/app/import-products', icon: <Package size={18} /> },
-        { label: 'Produits gagnants', href: '/app/winning-products', icon: <Zap size={18} /> },
-        { label: 'Optimisation IA', href: '/app/ai-hub', icon: <ShoppingBag size={18} /> }
+        { label: t('nav.findProducts'), href: '/app/products', icon: <Search size={18} /> },
+        { label: t('nav.import'), href: '/app/import-products', icon: <Package size={18} /> },
+        { label: t('nav.winningProducts'), href: '/app/winning-products', icon: <Zap size={18} /> },
+        { label: t('nav.aiOptimization'), href: '/app/ai-hub', icon: <ShoppingBag size={18} /> }
       ]
     },
     {
-      label: 'Ventes',
+      label: t('nav.sales'),
       href: '#',
       items: [
-        { label: 'Commandes', href: '/app/orders', icon: <ShoppingCart size={18} /> },
-        { label: 'Suivi de livraison', href: '/tracking', icon: <Truck size={18} /> },
-        { label: 'Factures', href: '/generate-invoice', icon: <CreditCard size={18} /> },
-        { label: 'Avis clients', href: '/app/reviews', icon: <MessageSquare size={18} /> }
+        { label: t('nav.orders'), href: '/app/orders', icon: <ShoppingCart size={18} /> },
+        { label: t('nav.tracking'), href: '/tracking', icon: <Truck size={18} /> },
+        { label: t('nav.invoices'), href: '/generate-invoice', icon: <CreditCard size={18} /> },
+        { label: t('nav.reviews'), href: '/app/reviews', icon: <MessageSquare size={18} /> }
       ]
     },
     {
-      label: 'Marketing',
+      label: t('nav.marketing'),
       href: '#',
       items: [
-        { label: 'Analyses', href: '/app/analytics', icon: <BarChart3 size={18} /> },
-        { label: 'Blog IA', href: '/blog-ai', icon: <Zap size={18} /> },
-        { label: 'SEO IA', href: '/seo-ai', icon: <Globe size={18} /> },
-        { label: 'Campagnes', href: '/app/marketing-hub', icon: <Bell size={18} /> }
+        { label: t('nav.analytics'), href: '/app/analytics', icon: <BarChart3 size={18} /> },
+        { label: t('nav.blogAI'), href: '/blog-ai', icon: <Zap size={18} /> },
+        { label: t('nav.seoAI'), href: '/seo-ai', icon: <Globe size={18} /> },
+        { label: t('nav.campaigns'), href: '/app/marketing-hub', icon: <Bell size={18} /> }
       ]
     },
     {
-      label: 'Fournisseurs',
+      label: t('nav.suppliers'),
       href: '#',
       items: [
-        { label: 'Annuaire fournisseurs', href: '/app/advanced-suppliers', icon: <Store size={18} /> },
-        { label: 'Dropshipping', href: '/app/dropshipping', icon: <Truck size={18} /> },
-        { label: 'Marketplace B2B', href: '/marketplace-b2b', icon: <ShoppingBag size={18} /> },
-        { label: 'Automatisation', href: '/automations', icon: <Zap size={18} /> }
+        { label: t('nav.supplierDirectory'), href: '/app/advanced-suppliers', icon: <Store size={18} /> },
+        { label: t('nav.dropshipping'), href: '/app/dropshipping', icon: <Truck size={18} /> },
+        { label: t('nav.b2bMarketplace'), href: '/marketplace-b2b', icon: <ShoppingBag size={18} /> },
+        { label: t('nav.automation'), href: '/automations', icon: <Zap size={18} /> }
       ]
     },
-    { label: 'Tarifs', href: '/pricing' }
+    { label: t('nav.pricing'), href: '/pricing' }
   ];
 
   const notifications = [
     {
       id: 1,
-      title: 'Nouvelle commande reçue',
+      title: t('common.newOrder'),
       message: 'Commande #2345 - 129.99€',
-      time: '10 minutes',
+      time: '10 ' + t('common.minutes'),
       read: false
     },
     {
       id: 2,
-      title: 'Stock faible',
+      title: t('common.lowStock'),
       message: 'Le produit "Écouteurs sans fil" a un stock faible (3 restants)',
-      time: '1 heure',
+      time: '1 ' + t('common.hours'),
       read: true
     },
     {
       id: 3,
       title: 'Mise à jour disponible',
       message: 'Une nouvelle version de Shopopti+ est disponible',
-      time: '3 heures',
+      time: '3 ' + t('common.hours'),
       read: true
     }
   ];
@@ -226,12 +227,10 @@ const MainNavbar: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Rechercher..."
+                placeholder={t('common.search')}
                 className="pl-10 pr-4 py-2 w-40 lg:w-64 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
-            
-            <LanguageSelector />
             
             {isAuthenticated ? (
               <>
@@ -267,7 +266,7 @@ const MainNavbar: React.FC = () => {
                         className="absolute right-0 top-full mt-1 w-80 rounded-md border border-gray-200 bg-white shadow-lg z-20"
                       >
                         <div className="border-b border-gray-200 px-4 py-3">
-                          <h3 className="font-medium">Notifications</h3>
+                          <h3 className="font-medium">{t('common.notifications')}</h3>
                         </div>
                         <div className="max-h-96 overflow-y-auto p-2">
                           {notifications.map((notification) => (
@@ -277,7 +276,7 @@ const MainNavbar: React.FC = () => {
                             >
                               <p className="text-sm font-medium">{notification.title}</p>
                               <p className="text-xs text-gray-500">{notification.message}</p>
-                              <p className="text-xs text-gray-400 mt-1">Il y a {notification.time}</p>
+                              <p className="text-xs text-gray-400 mt-1">{t('common.ago')} {notification.time}</p>
                             </div>
                           ))}
                         </div>
@@ -331,7 +330,7 @@ const MainNavbar: React.FC = () => {
                             className="flex w-full items-center rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             <BarChart3 size={16} className="mr-2" />
-                            Tableau de bord
+                            {t('nav.dashboard')}
                           </button>
                           <button 
                             onClick={() => {
@@ -351,7 +350,7 @@ const MainNavbar: React.FC = () => {
                             className="flex w-full items-center rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             <Settings size={16} className="mr-2" />
-                            Paramètres
+                            {t('common.settings')}
                           </button>
                           <button 
                             onClick={() => {
@@ -368,7 +367,7 @@ const MainNavbar: React.FC = () => {
                             className="flex w-full items-center rounded-md px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                           >
                             <LogOut size={16} className="mr-2" />
-                            Déconnexion
+                            {t('common.signOut')}
                           </button>
                         </div>
                       </motion.div>
@@ -379,13 +378,13 @@ const MainNavbar: React.FC = () => {
             ) : (
               <>
                 <Link to="/login" className="text-gray-700 hover:text-primary font-medium">
-                  Se connecter
+                  {t('common.signIn')}
                 </Link>
                 <Link
                   to="/register"
                   className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-600"
                 >
-                  Essai gratuit
+                  {t('common.getStarted')}
                 </Link>
               </>
             )}
@@ -482,7 +481,7 @@ const MainNavbar: React.FC = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <BarChart3 size={18} className="mr-3" />
-                      Tableau de bord
+                      {t('nav.dashboard')}
                     </Link>
                     <button
                       onClick={() => {
@@ -492,7 +491,7 @@ const MainNavbar: React.FC = () => {
                       className="flex w-full items-center px-3 py-2 text-red-600 hover:text-red-700 font-medium"
                     >
                       <LogOut size={18} className="mr-3" />
-                      Déconnexion
+                      {t('common.signOut')}
                     </button>
                   </>
                 ) : (
@@ -502,14 +501,14 @@ const MainNavbar: React.FC = () => {
                       className="block py-2 text-gray-700 hover:text-primary font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Se connecter
+                      {t('common.signIn')}
                     </Link>
                     <Link
                       to="/register"
                       className="flex justify-center items-center py-2 bg-primary text-white rounded-md font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Essai gratuit
+                      {t('common.getStarted')}
                     </Link>
                   </div>
                 )}
@@ -528,7 +527,7 @@ const MainNavbar: React.FC = () => {
             className="fixed top-16 right-0 w-full md:w-80 md:right-4 rounded-md border border-gray-200 bg-white shadow-lg z-20 md:hidden"
           >
             <div className="border-b border-gray-200 px-4 py-3">
-              <h3 className="font-medium">Notifications</h3>
+              <h3 className="font-medium">{t('common.notifications')}</h3>
             </div>
             <div className="max-h-96 overflow-y-auto p-2">
               {notifications.map((notification) => (
@@ -538,7 +537,7 @@ const MainNavbar: React.FC = () => {
                 >
                   <p className="text-sm font-medium">{notification.title}</p>
                   <p className="text-xs text-gray-500">{notification.message}</p>
-                  <p className="text-xs text-gray-400 mt-1">Il y a {notification.time}</p>
+                  <p className="text-xs text-gray-400 mt-1">{t('common.ago')} {notification.time}</p>
                 </div>
               ))}
             </div>
