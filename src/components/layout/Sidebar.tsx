@@ -1,125 +1,148 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, ShoppingBag, PackageCheck, BarChart3, Sparkles, Store, Import, MessageSquare, Bot,
   Truck, Share2, Settings, Building, Users, CreditCard, FileText, HelpCircle, Book, Palette, Globe,
-  Mail, Bell
+  Mail, Bell, ChevronLeft, ChevronRight, Search
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Logo from './Logo';
 
+interface SidebarProps {
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
+}
+
 const mainNavItems = [
-  { to: '/app/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
-  { to: '/app/products', icon: <ShoppingBag size={20} />, label: 'Products' },
-  { to: '/app/import-products', icon: <Import size={20} />, label: 'Import' },
-  { to: '/app/orders', icon: <PackageCheck size={20} />, label: 'Orders' },
-  { to: '/app/winning-products', icon: <Sparkles size={20} />, label: 'Winning Products' },
-  { to: '/app/analytics', icon: <BarChart3 size={20} />, label: 'Analytics' },
-  { to: '/app/store-connection', icon: <Store size={20} />, label: 'Store Connection' },
-  { to: '/app/reviews', icon: <MessageSquare size={20} />, label: 'Reviews' },
-  { to: '/app/automation', icon: <Bot size={20} />, label: 'AI Automation' }
+  { to: '/app/dashboard', icon: <LayoutDashboard size={20} />, label: 'Tableau de bord' },
+  { to: '/app/products', icon: <ShoppingBag size={20} />, label: 'Produits' },
+  { to: '/app/import-products', icon: <Import size={20} />, label: 'Importer' },
+  { to: '/app/orders', icon: <PackageCheck size={20} />, label: 'Commandes' },
+  { to: '/app/analytics', icon: <BarChart3 size={20} />, label: 'Analyses' },
+  { to: '/app/reviews', icon: <MessageSquare size={20} />, label: 'Avis' },
+  { to: '/app/ai-hub', icon: <Bot size={20} />, label: 'IA Hub' }
 ];
 
 const businessNavItems = [
-  { to: '/app/logistics', icon: <Truck size={20} />, label: 'Logistics' },
-  { to: '/app/suppliers', icon: <Building size={20} />, label: 'Suppliers' },
-  { to: '/app/channels', icon: <Share2 size={20} />, label: 'Sales Channels' },
-  { to: '/app/customers', icon: <Users size={20} />, label: 'Customers' },
-  { to: '/app/payments', icon: <CreditCard size={20} />, label: 'Payments' }
+  { to: '/app/dropshipping', icon: <Truck size={20} />, label: 'Dropshipping' },
+  { to: '/app/advanced-suppliers', icon: <Building size={20} />, label: 'Fournisseurs' },
+  { to: '/app/multi-channel', icon: <Share2 size={20} />, label: 'Multi-canal' },
+  { to: '/app/global-marketplaces', icon: <Globe size={20} />, label: 'Marketplaces' },
+  { to: '/app/marketing-hub', icon: <Mail size={20} />, label: 'Marketing' }
 ];
 
 const systemNavItems = [
-  { to: '/app/settings', icon: <Settings size={20} />, label: 'Settings' },
-  { to: '/app/notifications', icon: <Bell size={20} />, label: 'Notifications' },
-  { to: '/app/appearance', icon: <Palette size={20} />, label: 'Appearance' },
-  { to: '/app/language', icon: <Globe size={20} />, label: 'Language' }
+  { to: '/app/settings', icon: <Settings size={20} />, label: 'Paramètres' },
+  { to: '/app/subscription', icon: <CreditCard size={20} />, label: 'Abonnement' },
+  { to: '/app/support', icon: <HelpCircle size={20} />, label: 'Support' }
 ];
 
-const helpNavItems = [
-  { to: '/app/documentation', icon: <FileText size={20} />, label: 'Documentation' },
-  { to: '/app/support', icon: <HelpCircle size={20} />, label: 'Support' },
-  { to: '/app/tutorials', icon: <Book size={20} />, label: 'Tutorials' },
-  { to: '/app/contact', icon: <Mail size={20} />, label: 'Contact' }
-];
-
-const aiModulesNav = [
-  { to: '/assistant', label: '🧠 Assistant IA' },
-  { to: '/ai-products', label: '🔥 Produit Gagnant' },
-  { to: '/chrome-extension', label: '🔗 Extension Chrome' },
-  { to: '/multichannel-publish', label: '🌍 Multicanal' },
-  { to: '/mobile-app', label: '📱 Appli Mobile' },
-  { to: '/blog-generator', label: '✍️ Blog AI' },
-  { to: '/onboarding', label: '🚀 Onboarding' },
-  { to: '/help', label: '❓ Aide & FAQ' }
-];
-
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
   return (
-    <motion.aside
-      initial={{ x: -280 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="hidden md:flex w-64 flex-col bg-secondary-500 shadow-md z-10"
-    >
-      <div className="flex h-16 items-center justify-center border-b border-accent-200/10">
-        <Logo />
-      </div>
+    <>
+      <motion.aside
+        initial={{ width: collapsed ? 80 : 280 }}
+        animate={{ width: collapsed ? 80 : 280 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="hidden md:flex flex-col bg-white border-r border-gray-200 shadow-sm z-10 h-screen"
+      >
+        <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4">
+          {!collapsed && <Logo />}
+          {collapsed && (
+            <div className="mx-auto">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white">
+                <ShoppingBag size={20} />
+              </div>
+            </div>
+          )}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          </button>
+        </div>
 
-      <nav className="flex-1 overflow-y-auto p-4">
-        <div className="space-y-8">
-          <Section title="Principal" items={mainNavItems} />
-          <Section title="Business" items={businessNavItems} />
-          <Section title="Système" items={systemNavItems} />
-          <Section title="Aide" items={helpNavItems} />
+        <div className="flex-1 overflow-y-auto p-4">
+          {!collapsed && (
+            <div className="relative mb-6">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Rechercher..."
+                className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+          )}
 
-          <div>
-            <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-              Modules IA
-            </h3>
-            <ul className="mt-3 space-y-2">
-              {aiModulesNav.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) =>
-                      `sidebar-link ${isActive ? 'active' : ''}`
-                    }
-                  >
-                    <span>{item.label}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+          <div className="space-y-8">
+            <Section title="Principal" items={mainNavItems} collapsed={collapsed} />
+            <Section title="Business" items={businessNavItems} collapsed={collapsed} />
+            <Section title="Système" items={systemNavItems} collapsed={collapsed} />
           </div>
         </div>
-      </nav>
-    </motion.aside>
+
+        <div className="border-t border-gray-200 p-4">
+          <div className={`flex ${collapsed ? 'justify-center' : 'justify-between'} items-center`}>
+            {!collapsed && (
+              <div className="text-xs text-gray-500">
+                <p>Shopopti+ v6.8</p>
+              </div>
+            )}
+            <div className="flex space-x-1">
+              <button className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <HelpCircle size={collapsed ? 20 : 16} />
+              </button>
+              {!collapsed && (
+                <button className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                  <Bell size={16} />
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </motion.aside>
+
+      {/* Sidebar mobile */}
+      <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" style={{ display: 'none' }}>
+        <div className="w-64 h-full bg-white">
+          {/* Contenu sidebar mobile */}
+        </div>
+      </div>
+    </>
   );
 };
 
 const Section = ({
   title,
-  items
+  items,
+  collapsed
 }: {
   title: string;
   items: { to: string; icon: React.ReactNode; label: string }[];
+  collapsed: boolean;
 }) => (
   <div>
-    <h3 className="px-3 text-xs font-semibold text-accent-200 uppercase tracking-wider">
-      {title}
-    </h3>
-    <ul className="mt-3 space-y-2">
+    {!collapsed && (
+      <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+        {title}
+      </h3>
+    )}
+    <ul className="space-y-1">
       {items.map((item) => (
         <li key={item.to}>
           <NavLink
             to={item.to}
             className={({ isActive }) =>
-              `sidebar-link ${isActive ? 'active' : ''}`
+              `flex items-center ${collapsed ? 'justify-center' : ''} px-3 py-2 rounded-md transition-colors ${
+                isActive
+                  ? 'bg-primary text-white'
+                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              }`
             }
           >
             {item.icon}
-            <span>{item.label}</span>
+            {!collapsed && <span className="ml-3">{item.label}</span>}
           </NavLink>
         </li>
       ))}

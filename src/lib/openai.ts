@@ -13,11 +13,11 @@ export async function askChatGPT(prompt: string): Promise<string> {
       temperature: 0.7,
     });
 
-    return response.choices[0].message.content || "No response generated";
+    return response.choices[0].message.content || "Aucune réponse générée";
   } catch (error: any) {
     console.error('OpenAI API Error:', error);
     
-    // Handle quota exceeded error specifically
+    // Gérer spécifiquement l'erreur de quota dépassé
     if (error?.status === 429) {
       throw new Error('Le service est temporairement indisponible en raison d\'une utilisation élevée. Veuillez réessayer dans quelques minutes ou contacter le support si le problème persiste.');
     }

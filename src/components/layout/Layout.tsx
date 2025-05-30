@@ -1,25 +1,18 @@
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { motion } from 'framer-motion';
-import { useShop } from '../../contexts/ShopContext';
+import ChatbotWidget from '../ChatbotWidget';
 
 const Layout: React.FC = () => {
-  const { isConnected } = useShop();
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!isConnected) {
-      navigate('/app/store-connection');
-    }
-  }, [isConnected, navigate]);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-secondary-400">
-      <Sidebar />
+    <div className="flex h-screen overflow-hidden bg-gray-50">
+      <Sidebar collapsed={sidebarCollapsed} setCollapsed={setSidebarCollapsed} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Header />
+        <Header toggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)} />
         <main className="flex-1 overflow-y-auto p-6">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -31,6 +24,7 @@ const Layout: React.FC = () => {
           </motion.div>
         </main>
       </div>
+      <ChatbotWidget />
     </div>
   );
 };

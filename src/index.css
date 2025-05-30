@@ -4,6 +4,7 @@
 
 :root {
   /* Primary colors - Orange */
+  --primary: #f97316;
   --primary-50: #fff7ed;
   --primary-100: #ffedd5;
   --primary-200: #fed7aa;
@@ -58,33 +59,6 @@
   --neutral-900: #171717;
 }
 
-/* Dark mode variables */
-.dark {
-  --primary-50: #7c2d12;
-  --primary-100: #9a3412;
-  --primary-200: #c2410c;
-  --primary-300: #ea580c;
-  --primary-400: #f97316;
-  --primary-500: #fb923c;
-  --primary-600: #fdba74;
-  --primary-700: #fed7aa;
-  --primary-800: #ffedd5;
-  --primary-900: #fff7ed;
-
-  --neutral-50: #171717;
-  --neutral-100: #262626;
-  --neutral-200: #404040;
-  --neutral-300: #525252;
-  --neutral-400: #737373;
-  --neutral-500: #a3a3a3;
-  --neutral-600: #d4d4d4;
-  --neutral-700: #e5e5e5;
-  --neutral-800: #f5f5f5;
-  --neutral-900: #fafafa;
-
-  color-scheme: dark;
-}
-
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
@@ -92,7 +66,7 @@
   }
 
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    @apply bg-gray-50 text-gray-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -126,7 +100,7 @@
   }
 
   .btn-primary {
-    @apply bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 dark:bg-orange-600 dark:hover:bg-orange-700;
+    @apply bg-primary text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2;
   }
 
   .btn-secondary {
@@ -138,11 +112,11 @@
   }
 
   .btn-outline {
-    @apply border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800;
+    @apply border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
   }
 
   .card {
-    @apply rounded-lg bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700;
+    @apply rounded-lg bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md border border-gray-200;
   }
 
   .metric-card {
@@ -151,15 +125,15 @@
 
   .input {
     @apply rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm 
-    focus:border-orange-400 focus:outline-none focus:ring-1 focus:ring-orange-400 dark:border-gray-600 dark:bg-gray-700 dark:text-white;
+    focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
   }
 
   .sidebar-link {
     @apply flex items-center gap-2 rounded-md px-3 py-2 text-gray-600 transition-all duration-200 
-    hover:bg-gray-100 hover:text-orange-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400;
+    hover:bg-gray-100 hover:text-primary;
   }
 
   .sidebar-link.active {
-    @apply bg-orange-50 text-orange-600 font-medium dark:bg-orange-900/20 dark:text-orange-400;
+    @apply bg-primary-50 text-primary font-medium;
   }
 }

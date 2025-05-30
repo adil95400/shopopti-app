@@ -136,5 +136,257 @@ export const aiService = {
       console.error('Error optimizing product:', error);
       throw error;
     }
+  },
+
+  async optimizeForSEO({
+    title,
+    description,
+    category
+  }: {
+    title: string;
+    description: string;
+    category: string;
+  }): Promise<{
+    title: string;
+    description: string;
+    keywords: string[];
+    metaTitle: string;
+    metaDescription: string;
+  }> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are an SEO expert specializing in e-commerce."
+          },
+          {
+            role: "user",
+            content: `Optimize this product for SEO:
+                     Title: ${title}
+                     Description: ${description}
+                     Category: ${category}
+                     
+                     Return a JSON with:
+                     - optimized title
+                     - optimized description
+                     - keywords array
+                     - meta title (max 60 chars)
+                     - meta description (max 160 chars)`
+          }
+        ]
+      });
+
+      const content = completion.choices[0].message.content || "{}";
+      return JSON.parse(content);
+    } catch (error) {
+      console.error('Error optimizing for SEO:', error);
+      throw new Error('Failed to optimize for SEO');
+    }
+  },
+
+  async generateBlogContent({
+    title,
+    keywords,
+    type,
+    targetAudience,
+    tone,
+    wordCount,
+    structure
+  }: {
+    title: string;
+    keywords: string[];
+    type: string;
+    targetAudience: string;
+    tone: string;
+    wordCount: number;
+    structure: string[];
+  }): Promise<string> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: `You are a professional content writer specializing in ${type} articles with a ${tone} tone.`
+          },
+          {
+            role: "user",
+            content: `Write a blog post about: ${title}
+                     Keywords: ${keywords.join(', ')}
+                     Target audience: ${targetAudience}
+                     Structure: ${structure.join(', ')}
+                     Approximate word count: ${wordCount}
+                     Make it engaging, informative, and SEO-friendly.`
+          }
+        ]
+      });
+
+      return completion.choices[0].message.content || '';
+    } catch (error) {
+      console.error('Error generating blog content:', error);
+      throw new Error('Failed to generate blog content');
+    }
+  },
+
+  async generateHashtags({
+    product,
+    platform,
+    count
+  }: {
+    product: string;
+    platform: string;
+    count: number;
+  }): Promise<string[]> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: `You are a social media expert specializing in ${platform} marketing.`
+          },
+          {
+            role: "user",
+            content: `Generate ${count} effective hashtags for this product: ${product}
+                     Platform: ${platform}
+                     Return only the hashtags as a comma-separated list without the # symbol.`
+          }
+        ]
+      });
+
+      const content = completion.choices[0].message.content || '';
+      return content.split(',').map(tag => tag.trim());
+    } catch (error) {
+      console.error('Error generating hashtags:', error);
+      return [];
+    }
+  },
+
+  async analyzeSentiment(text: string): Promise<'positive' | 'negative' | 'neutral'> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "Analyze the sentiment of the following text and respond with only 'positive', 'negative', or 'neutral'."
+          },
+          {
+            role: "user",
+            content: text
+          }
+        ]
+      });
+
+      const sentiment = completion.choices[0].message.content?.toLowerCase().trim() || 'neutral';
+      
+      if (sentiment.includes('positive')) return 'positive';
+      if (sentiment.includes('negative')) return 'negative';
+      return 'neutral';
+    } catch (error) {
+      console.error('Error analyzing sentiment:', error);
+      return 'neutral';
+    }
+  },
+
+  async generateResponse({
+    review,
+    rating,
+    sentiment,
+    verified
+  }: {
+    review: string;
+    rating: number;
+    sentiment?: 'positive' | 'negative' | 'neutral';
+    verified?: boolean;
+  }): Promise<string> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are a professional customer service representative. Generate a response to this customer review."
+          },
+          {
+            role: "user",
+            content: `Customer review: "${review}"
+                     Rating: ${rating}/5
+                     Sentiment: ${sentiment || 'unknown'}
+                     Verified purchase: ${verified ? 'Yes' : 'No'}
+                     
+                     Write a professional, empathetic response that addresses the customer's feedback.
+                     If positive, express gratitude.
+                     If negative, apologize and offer a solution.
+                     Keep it concise and authentic.`
+          }
+        ]
+      });
+
+      return completion.choices[0].message.content || '';
+    } catch (error) {
+      console.error('Error generating response:', error);
+      return 'Merci pour votre avis. Nous apprécions vos commentaires.';
+    }
+  },
+
+  async analyzeCampaignPerformance({
+    campaign,
+    metrics,
+    goals
+  }: {
+    campaign: any;
+    metrics: {
+      reach: number;
+      engagement: number;
+      conversions: number;
+      revenue: number;
+    };
+    goals: any;
+  }): Promise<{
+    metrics: {
+      reach: number;
+      engagement: number;
+      conversions: number;
+      revenue: number;
+    };
+    insights: string[];
+    recommendations: string[];
+  }> {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are a marketing analytics expert. Analyze this campaign performance data."
+          },
+          {
+            role: "user",
+            content: `Campaign: ${JSON.stringify(campaign)}
+                     Metrics: ${JSON.stringify(metrics)}
+                     Goals: ${JSON.stringify(goals)}
+                     
+                     Provide insights and recommendations based on this data.
+                     Return a JSON with:
+                     - metrics (the same metrics passed in)
+                     - insights (array of strings)
+                     - recommendations (array of strings)`
+          }
+        ]
+      });
+
+      const content = completion.choices[0].message.content || "{}";
+      return JSON.parse(content);
+    } catch (error) {
+      console.error('Error analyzing campaign performance:', error);
+      return {
+        metrics,
+        insights: ['Analyse non disponible en ce moment.'],
+        recommendations: ['Réessayez plus tard.']
+      };
+    }
   }
 };
