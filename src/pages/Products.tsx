@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
-import { optimizeProductAI } from '../lib/openai';
+import { aiService } from '../services/aiService';
 
 const Products = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -28,7 +28,7 @@ const Products = () => {
   const optimizeAndImportToShopify = async (p: any) => {
     alert(`🤖 Optimisation AI en cours pour "${p.name}"...`);
     try {
-      const optimized = await optimizeProductAI({
+      const optimized = await aiService.optimizeProduct({
         name: p.name,
         description: p.description,
         category: p.category

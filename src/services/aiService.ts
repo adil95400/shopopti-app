@@ -73,5 +73,68 @@ export const aiService = {
       console.error('Error optimizing title:', error);
       throw error;
     }
+  },
+
+  async optimizeProduct(product: {
+    name: string;
+    description: string;
+    category: string;
+  }): Promise<{
+    title: string;
+    description_html: string;
+    tags: string[];
+  }> {
+    try {
+      // Optimize the title
+      const optimizedTitle = await this.optimizeProductTitle(product.name, {
+        category: product.category
+      });
+
+      // Generate enhanced description with HTML formatting
+      const descriptionCompletion = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an e-commerce content expert. Format the description in HTML with proper tags for structure and emphasis."
+          },
+          {
+            role: "user",
+            content: `Enhance this product description with HTML formatting:
+                     Product: ${product.name}
+                     Category: ${product.category}
+                     Current description: ${product.description}`
+          }
+        ]
+      });
+
+      // Generate relevant tags
+      const tagsCompletion = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "Generate relevant SEO tags for this product. Return only comma-separated tags."
+          },
+          {
+            role: "user",
+            content: `Product: ${product.name}
+                     Category: ${product.category}
+                     Description: ${product.description}`
+          }
+        ]
+      });
+
+      const tags = tagsCompletion.choices[0].message.content?.split(',').map(tag => tag.trim()) || [];
+
+      return {
+        title: optimizedTitle,
+        description_html: descriptionCompletion.choices[0].message.content || product.description,
+        tags
+      };
+    } catch (error) {
+      console.error('Error optimizing product:', error);
+      throw error;
+    }
   }
 };
