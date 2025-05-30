@@ -11,7 +11,7 @@ import {
   DollarSign 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 
 // Mock trending products data
 const mockTrendingProducts = [
@@ -78,7 +78,7 @@ const mockTrendingProducts = [
 ];
 
 const WinningProducts: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [products] = useState(mockTrendingProducts);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 import { ShoppingBag, ArrowRight, Store, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const StoreConnection: React.FC = () => {
-  const { isConnected, store, connectShopify, connectWooCommerce } = useShopContext();
+  const { isConnected, store, connectShopify, connectWooCommerce } = useShop();
   const [activeTab, setActiveTab] = useState<'shopify' | 'woocommerce'>('shopify');
   const [shopifyUrl, setShopifyUrl] = useState('');
   const [shopifyApiKey, setShopifyApiKey] = useState('');
