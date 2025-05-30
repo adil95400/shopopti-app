@@ -62,10 +62,10 @@ import AdvancedSuppliers from '../pages/AdvancedSuppliers';
 
 const AppRoutes = () => {
   return (
-    <LanguageProvider>
-      <UserProvider>
-        <ShopProvider>
-          <BrowserRouter>
+    <BrowserRouter>
+      <LanguageProvider>
+        <UserProvider>
+          <ShopProvider>
             <SubscriptionBanner />
             <Routes>
               {/* Pages publiques */}
@@ -132,10 +132,10 @@ const AppRoutes = () => {
             
             <Toaster position="top-right" expand={true} richColors />
             <ChatbotWidget />
-          </BrowserRouter>
-        </ShopProvider>
-      </UserProvider>
-    </LanguageProvider>
+          </ShopProvider>
+        </UserProvider>
+      </LanguageProvider>
+    </BrowserRouter>
   );
 };
 

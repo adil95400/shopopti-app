@@ -1,9 +1,9 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import i18n from '@/i18n';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const availableLanguages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
@@ -20,13 +20,24 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [currentLanguage, setCurrentLanguage] = useState(availableLanguages[0]);
+  const { i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(
+    availableLanguages.find(lang => lang.code === i18n.language) || availableLanguages[0]
+  );
+
+  useEffect(() => {
+    // Mettre à jour la langue actuelle lorsque i18n.language change
+    const language = availableLanguages.find(lang => lang.code === i18n.language);
+    if (language) {
+      setCurrentLanguage(language);
+    }
+  }, [i18n.language]);
 
   const setLanguage = (code: string) => {
     const language = availableLanguages.find(lang => lang.code === code);
     if (language) {
-      setCurrentLanguage(language);
       i18n.changeLanguage(code);
+      setCurrentLanguage(language);
     }
   };
 

@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
+import LanguageSelector from '../LanguageSelector';
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -87,6 +88,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
         </div>
 
         <div className="flex items-center space-x-4">
+          <LanguageSelector />
+          
           <motion.div 
             className="relative"
             initial="rest"

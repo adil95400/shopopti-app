@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { Globe } from 'lucide-react';
-import { useLanguage, availableLanguages } from '../contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
+
+export const availableLanguages = [
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
+];
 
 const LanguageSelector: React.FC = () => {
-  const { currentLanguage, setLanguage } = useLanguage();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const currentLanguage = availableLanguages.find(lang => lang.code === i18n.language) || availableLanguages[0];
+
+  const changeLanguage = (code: string) => {
+    i18n.changeLanguage(code);
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
       <button
-        className="flex items-center space-x-2 px-3 py-2 text-neutral-600 hover:text-neutral-900"
+        className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-gray-900 rounded-md hover:bg-gray-100"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Globe size={16} />
@@ -18,19 +36,16 @@ const LanguageSelector: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+        <div className="absolute right-0 mt-2 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
           {availableLanguages.map((language) => (
             <button
               key={language.code}
               className={`flex w-full items-center px-4 py-2 text-sm ${
                 language.code === currentLanguage.code
-                  ? 'bg-primary-50 text-primary-600'
-                  : 'text-neutral-700 hover:bg-neutral-50'
+                  ? 'bg-gray-100 text-primary'
+                  : 'text-gray-700 hover:bg-gray-50'
               }`}
-              onClick={() => {
-                setLanguage(language.code);
-                setIsOpen(false);
-              }}
+              onClick={() => changeLanguage(language.code)}
             >
               <span className="mr-2">{language.flag}</span>
               {language.name}
