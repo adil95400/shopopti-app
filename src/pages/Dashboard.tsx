@@ -1,17 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { BarChart3, ShoppingBag, TrendingUp, Users, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { BarChart3, ShoppingBag, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Package, Calendar, Bell, Settings } from 'lucide-react';
 import SubscriptionOverview from '../components/dashboard/SubscriptionOverview';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
-    revenue: { value: 0, change: 0 },
-    orders: { value: 0, change: 0 },
-    visitors: { value: 0, change: 0 },
-    conversion: { value: 0, change: 0 }
+    revenue: { value: 1060, change: 25 },
+    orders: { value: 98, change: 12 },
+    visitors: { value: 4521, change: 15.3 },
+    conversion: { value: 3.2, change: -0.5 }
   });
   const [loading, setLoading] = useState(true);
+  const [recentActivity, setRecentActivity] = useState([
+    {
+      id: 1,
+      type: 'order',
+      title: 'Nouvelle commande reçue',
+      description: 'Commande #2345 - 129.99€',
+      time: '2 heures',
+      icon: ShoppingBag
+    },
+    {
+      id: 2,
+      type: 'customer',
+      title: 'Nouveau client inscrit',
+      description: 'Jean Dupont (jean@exemple.com)',
+      time: '5 heures',
+      icon: Users
+    },
+    {
+      id: 3,
+      type: 'report',
+      title: 'Rapport mensuel disponible',
+      description: 'Votre rapport de performance Mai 2025 est prêt',
+      time: '1 jour',
+      icon: BarChart3
+    }
+  ]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -20,20 +46,20 @@ export default function Dashboard() {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      // In a real app, fetch actual data from Supabase
-      // For now, we'll use mock data
+      // Dans une application réelle, récupérez les données depuis Supabase
+      // Pour l'instant, nous utilisons des données statiques
       
-      // Simulate API delay
+      // Simuler un délai API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setStats({
-        revenue: { value: 12458.99, change: 12.5 },
-        orders: { value: 143, change: 8.2 },
+        revenue: { value: 1060, change: 25 },
+        orders: { value: 98, change: 12 },
         visitors: { value: 4521, change: 15.3 },
         conversion: { value: 3.2, change: -0.5 }
       });
     } catch (error) {
-      console.error('Error fetching dashboard data:', error);
+      console.error('Erreur lors de la récupération des données du tableau de bord:', error);
     } finally {
       setLoading(false);
     }
@@ -41,17 +67,17 @@ export default function Dashboard() {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <h1 className="text-2xl font-bold">Tableau de bord</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-sm font-medium text-gray-500">Revenue</h3>
+            <h3 className="text-sm font-medium text-gray-500">Chiffre d'affaires</h3>
             <div className="p-2 bg-blue-50 rounded-full">
               <DollarSign className="h-5 w-5 text-blue-500" />
             </div>
           </div>
-          <p className="text-2xl font-bold">${stats.revenue.value.toLocaleString()}</p>
+          <p className="text-2xl font-bold">{stats.revenue.value.toLocaleString()}€</p>
           <div className="flex items-center mt-2">
             <span className={`flex items-center text-sm ${stats.revenue.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
               {stats.revenue.change >= 0 ? (
@@ -61,13 +87,13 @@ export default function Dashboard() {
               )}
               {Math.abs(stats.revenue.change)}%
             </span>
-            <span className="text-xs text-gray-500 ml-2">vs last period</span>
+            <span className="text-xs text-gray-500 ml-2">vs période précédente</span>
           </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-sm font-medium text-gray-500">Orders</h3>
+            <h3 className="text-sm font-medium text-gray-500">Commandes</h3>
             <div className="p-2 bg-purple-50 rounded-full">
               <ShoppingBag className="h-5 w-5 text-purple-500" />
             </div>
@@ -82,13 +108,13 @@ export default function Dashboard() {
               )}
               {Math.abs(stats.orders.change)}%
             </span>
-            <span className="text-xs text-gray-500 ml-2">vs last period</span>
+            <span className="text-xs text-gray-500 ml-2">vs période précédente</span>
           </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-sm font-medium text-gray-500">Visitors</h3>
+            <h3 className="text-sm font-medium text-gray-500">Visiteurs</h3>
             <div className="p-2 bg-green-50 rounded-full">
               <Users className="h-5 w-5 text-green-500" />
             </div>
@@ -103,13 +129,13 @@ export default function Dashboard() {
               )}
               {Math.abs(stats.visitors.change)}%
             </span>
-            <span className="text-xs text-gray-500 ml-2">vs last period</span>
+            <span className="text-xs text-gray-500 ml-2">vs période précédente</span>
           </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-sm font-medium text-gray-500">Conversion</h3>
+            <h3 className="text-sm font-medium text-gray-500">Taux de conversion</h3>
             <div className="p-2 bg-orange-50 rounded-full">
               <TrendingUp className="h-5 w-5 text-orange-500" />
             </div>
@@ -124,14 +150,14 @@ export default function Dashboard() {
               )}
               {Math.abs(stats.conversion.change)}%
             </span>
-            <span className="text-xs text-gray-500 ml-2">vs last period</span>
+            <span className="text-xs text-gray-500 ml-2">vs période précédente</span>
           </div>
         </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-lg font-medium mb-4">Recent Activity</h2>
+          <h2 className="text-lg font-medium mb-4">Activité récente</h2>
           <div className="space-y-4">
             {loading ? (
               Array(3).fill(0).map((_, i) => (
@@ -144,43 +170,29 @@ export default function Dashboard() {
                 </div>
               ))
             ) : (
-              <>
-                <div className="flex items-start">
-                  <div className="p-2 bg-blue-50 rounded-full mr-3">
-                    <ShoppingBag className="h-5 w-5 text-blue-500" />
+              recentActivity.map((activity) => (
+                <div key={activity.id} className="flex items-start">
+                  <div className={`p-2 rounded-full mr-3 ${
+                    activity.type === 'order' ? 'bg-blue-50' : 
+                    activity.type === 'customer' ? 'bg-green-50' : 'bg-purple-50'
+                  }`}>
+                    <activity.icon className={`h-5 w-5 ${
+                      activity.type === 'order' ? 'text-blue-500' : 
+                      activity.type === 'customer' ? 'text-green-500' : 'text-purple-500'
+                    }`} />
                   </div>
                   <div>
-                    <p className="font-medium">New order received</p>
-                    <p className="text-sm text-gray-500">Order #2345 - $129.99</p>
-                    <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
+                    <p className="font-medium">{activity.title}</p>
+                    <p className="text-sm text-gray-500">{activity.description}</p>
+                    <p className="text-xs text-gray-400 mt-1">Il y a {activity.time}</p>
                   </div>
                 </div>
-                <div className="flex items-start">
-                  <div className="p-2 bg-green-50 rounded-full mr-3">
-                    <Users className="h-5 w-5 text-green-500" />
-                  </div>
-                  <div>
-                    <p className="font-medium">New customer registered</p>
-                    <p className="text-sm text-gray-500">John Doe (john@example.com)</p>
-                    <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="p-2 bg-purple-50 rounded-full mr-3">
-                    <BarChart3 className="h-5 w-5 text-purple-500" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Monthly report available</p>
-                    <p className="text-sm text-gray-500">Your May 2025 performance report is ready</p>
-                    <p className="text-xs text-gray-400 mt-1">1 day ago</p>
-                  </div>
-                </div>
-              </>
+              ))
             )}
           </div>
           <div className="mt-4 pt-4 border-t border-gray-100">
             <Link to="/app/analytics" className="text-sm font-medium text-blue-600 hover:text-blue-800">
-              View all activity →
+              Voir toute l'activité →
             </Link>
           </div>
         </div>
@@ -192,17 +204,46 @@ export default function Dashboard() {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link to="/tracking" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <h2 className="text-lg font-semibold">📦 Suivi colis</h2>
-          <p className="text-gray-500">Suivre vos envois</p>
+          <h2 className="text-lg font-semibold flex items-center">
+            <Package className="h-5 w-5 mr-2 text-blue-500" />
+            Suivi colis
+          </h2>
+          <p className="text-gray-500 mt-1">Suivez vos envois en temps réel</p>
         </Link>
         <Link to="/generate-invoice" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <h2 className="text-lg font-semibold">🧾 Générer facture</h2>
-          <p className="text-gray-500">PDF automatisé client</p>
+          <h2 className="text-lg font-semibold flex items-center">
+            <FileText className="h-5 w-5 mr-2 text-green-500" />
+            Générer facture
+          </h2>
+          <p className="text-gray-500 mt-1">Créez des factures PDF automatisées</p>
         </Link>
         <Link to="/blog-ai" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <h2 className="text-lg font-semibold">📝 Blog IA</h2>
-          <p className="text-gray-500">Créer des articles optimisés</p>
+          <h2 className="text-lg font-semibold flex items-center">
+            <Bot className="h-5 w-5 mr-2 text-purple-500" />
+            Blog IA
+          </h2>
+          <p className="text-gray-500 mt-1">Générez du contenu optimisé SEO</p>
         </Link>
+      </div>
+      
+      <div className="bg-blue-50 p-6 rounded-lg">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <Calendar className="h-6 w-6 text-blue-500 mr-3" />
+            <div>
+              <h3 className="font-medium">Aujourd'hui</h3>
+              <p className="text-sm text-gray-600">{new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            </div>
+          </div>
+          <div className="flex space-x-2">
+            <button className="p-2 bg-white rounded-full text-gray-500 hover:text-gray-700">
+              <Bell className="h-5 w-5" />
+            </button>
+            <button className="p-2 bg-white rounded-full text-gray-500 hover:text-gray-700">
+              <Settings className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -224,6 +265,53 @@ function DollarSign(props: any) {
     >
       <line x1="12" x2="12" y1="2" y2="22"></line>
       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    </svg>
+  );
+}
+
+function Bot(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 8V4H8"></path>
+      <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+      <path d="M2 14h2"></path>
+      <path d="M20 14h2"></path>
+      <path d="M15 13v2"></path>
+      <path d="M9 13v2"></path>
+    </svg>
+  );
+}
+
+function FileText(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" x2="8" y1="13" y2="13"></line>
+      <line x1="16" x2="8" y1="17" y2="17"></line>
+      <line x1="10" x2="8" y1="9" y2="9"></line>
     </svg>
   );
 }
