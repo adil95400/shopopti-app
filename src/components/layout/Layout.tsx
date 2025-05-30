@@ -3,10 +3,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../../contexts/ShopContext';
+import { useShop } from '../../contexts/ShopContext';
 
 const Layout: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const navigate = useNavigate();
 
   React.useEffect(() => {
