@@ -1,7 +1,7 @@
 import React from 'react';
 import { Truck, Package, Search, Filter, SlidersHorizontal, MapPin, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 
 // Mock shipments data
 const mockShipments = [
@@ -47,7 +47,7 @@ const mockShipments = [
 ];
 
 const Logistics: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [searchQuery, setSearchQuery] = React.useState('');
 
   // Filter shipments based on search query

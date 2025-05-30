@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageSquare, Search, Filter, SlidersHorizontal, Star, ThumbsUp } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 
 // Mock reviews data
 const mockReviews = [
@@ -44,7 +44,7 @@ const mockReviews = [
 ];
 
 const Reviews: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [searchQuery, setSearchQuery] = React.useState('');
 
   // Filter reviews based on search query

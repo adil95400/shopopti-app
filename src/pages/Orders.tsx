@@ -10,7 +10,7 @@ import {
   Truck
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 
 // Mock order data
 const mockOrders = [
@@ -62,7 +62,7 @@ const mockOrders = [
 ];
 
 const Orders: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [orders] = useState(mockOrders);
   const [searchQuery, setSearchQuery] = useState('');
 

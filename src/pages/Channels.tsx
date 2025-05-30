@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Share2, Plus, Globe, ShoppingBag, Facebook as BrandFacebook, GitBranch as BrandTiktok, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 
 interface Channel {
   id: string;
@@ -48,7 +48,7 @@ const mockChannels: Channel[] = [
 ];
 
 const Channels: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [channels] = useState<Channel[]>(mockChannels);
   const [showAddChannel, setShowAddChannel] = useState(false);
 

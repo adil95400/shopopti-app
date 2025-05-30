@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useShopContext } from '../contexts/ShopContext';
+import { useShop } from '../contexts/ShopContext';
 import { Tab } from '@headlessui/react';
 import { 
   FileSpreadsheet, 
@@ -83,7 +83,7 @@ const importMethods = [
 ];
 
 const ImportProducts: React.FC = () => {
-  const { isConnected } = useShopContext();
+  const { isConnected } = useShop();
   const [selectedMethod, setSelectedMethod] = useState(importMethods[0]);
 
   if (!isConnected) {
