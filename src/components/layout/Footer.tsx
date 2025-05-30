@@ -40,12 +40,12 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-secondary-500 border-t border-accent-200/10">
+    <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2">
             <Logo />
-            <p className="mt-4 text-accent-200 max-w-md">
+            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-md">
               Shopopti+ est la plateforme leader de dropshipping alimentée par l'IA, 
               aidant les entrepreneurs à développer leur activité e-commerce.
             </p>
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className="text-accent-200 hover:text-primary-400 transition-colors"
+                  className="text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
                 >
                   <social.icon size={20} />
                 </a>
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
 
           {Object.entries(footerLinks).map(([category, links], index) => (
             <div key={category}>
-              <h3 className="text-white font-medium mb-4 capitalize">
+              <h3 className="text-gray-900 dark:text-white font-medium mb-4 capitalize">
                 {category}
               </h3>
               <ul className="space-y-2">
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
                   <li key={linkIndex}>
                     <Link
                       to={link.href}
-                      className="text-accent-200 hover:text-primary-400 transition-colors"
+                      className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -83,16 +83,16 @@ const Footer: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-accent-200/10">
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-accent-200 text-sm">
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
               © {new Date().getFullYear()} Shopopti+. Tous droits réservés.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-4">
-              <Link to="/privacy" className="text-accent-200 hover:text-primary-400 text-sm">
+              <Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 text-sm">
                 Politique de confidentialité
               </Link>
-              <Link to="/terms" className="text-accent-200 hover:text-primary-400 text-sm">
+              <Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 text-sm">
                 Conditions d'utilisation
               </Link>
             </div>
