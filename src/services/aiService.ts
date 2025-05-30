@@ -15,7 +15,7 @@ export const aiService = {
   }): Promise<string> {
     try {
       const completion = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
@@ -50,7 +50,7 @@ export const aiService = {
   }): Promise<string> {
     try {
       const completion = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
@@ -92,7 +92,7 @@ export const aiService = {
 
       // Generate enhanced description with HTML formatting
       const descriptionCompletion = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
@@ -110,7 +110,7 @@ export const aiService = {
 
       // Generate relevant tags
       const tagsCompletion = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",

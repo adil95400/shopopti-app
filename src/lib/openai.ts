@@ -8,7 +8,7 @@ const openai = new OpenAI({
 export async function askChatGPT(prompt: string): Promise<string> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
     });

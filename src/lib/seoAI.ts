@@ -32,7 +32,7 @@ Retourne un JSON avec :
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "Tu es un expert en SEO e-commerce." },
         { role: "user", content: prompt }
