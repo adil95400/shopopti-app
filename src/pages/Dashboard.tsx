@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { BarChart3, ShoppingBag, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Package, Calendar, Bell, Settings, FileText } from 'lucide-react';
 import SubscriptionOverview from '../components/dashboard/SubscriptionOverview';
+import TrackingWidget from '../components/tracking/TrackingWidget';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -197,8 +198,9 @@ export default function Dashboard() {
           </div>
         </div>
         
-        <div>
+        <div className="space-y-6">
           <SubscriptionOverview />
+          <TrackingWidget />
         </div>
       </div>
       

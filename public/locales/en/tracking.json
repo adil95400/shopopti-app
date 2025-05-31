@@ -1,0 +1,46 @@
+{
+  "title": "Package Tracking",
+  "subtitle": "Multi-carrier tracking",
+  "form": {
+    "trackingNumber": "Tracking Number",
+    "trackingNumberPlaceholder": "Enter your tracking number",
+    "carrier": "Carrier (optional)",
+    "autoDetect": "Auto-detect",
+    "track": "Track",
+    "searching": "Searching..."
+  },
+  "result": {
+    "package": "Package",
+    "carrier": "Carrier",
+    "estimatedDelivery": "Estimated delivery",
+    "print": "Print",
+    "contactCarrier": "Contact carrier"
+  },
+  "status": {
+    "delivered": "Delivered",
+    "inTransit": "In transit",
+    "outForDelivery": "Out for delivery",
+    "pending": "Pending",
+    "exception": "Delivery issue"
+  },
+  "error": {
+    "title": "Tracking error",
+    "invalidNumber": "Invalid tracking number",
+    "notFound": "Tracking information not found",
+    "generic": "An error occurred while tracking the package"
+  },
+  "info": {
+    "title": "Multi-carrier tracking",
+    "description": "Our system supports package tracking for over 600 carriers worldwide, including FedEx, UPS, DHL, USPS, and many more."
+  },
+  "bulk": {
+    "title": "Bulk tracking",
+    "description": "Enter multiple tracking numbers (one per line or separated by commas)",
+    "limit": "You can track up to 10 packages at once",
+    "process": "Process"
+  },
+  "recent": {
+    "title": "Recent trackings",
+    "lastChecked": "Last checked"
+  }
+}

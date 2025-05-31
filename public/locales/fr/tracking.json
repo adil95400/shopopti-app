@@ -1,0 +1,46 @@
+{
+  "title": "Suivi de livraison",
+  "subtitle": "Suivi multi-transporteurs",
+  "form": {
+    "trackingNumber": "Numéro de suivi",
+    "trackingNumberPlaceholder": "Entrez votre numéro de suivi",
+    "carrier": "Transporteur (optionnel)",
+    "autoDetect": "Détection automatique",
+    "track": "Suivre",
+    "searching": "Recherche..."
+  },
+  "result": {
+    "package": "Colis",
+    "carrier": "Transporteur",
+    "estimatedDelivery": "Livraison estimée",
+    "print": "Imprimer",
+    "contactCarrier": "Contacter le transporteur"
+  },
+  "status": {
+    "delivered": "Livré",
+    "inTransit": "En transit",
+    "outForDelivery": "En cours de livraison",
+    "pending": "En attente",
+    "exception": "Problème de livraison"
+  },
+  "error": {
+    "title": "Erreur de suivi",
+    "invalidNumber": "Numéro de suivi invalide",
+    "notFound": "Informations de suivi introuvables",
+    "generic": "Une erreur est survenue lors du suivi du colis"
+  },
+  "info": {
+    "title": "Suivi multi-transporteurs",
+    "description": "Notre système prend en charge le suivi de colis pour plus de 600 transporteurs dans le monde entier, dont FedEx, UPS, DHL, La Poste, Colissimo, et bien d'autres."
+  },
+  "bulk": {
+    "title": "Suivi en masse",
+    "description": "Entrez plusieurs numéros de suivi (un par ligne ou séparés par des virgules)",
+    "limit": "Vous pouvez suivre jusqu'à 10 colis à la fois",
+    "process": "Traiter"
+  },
+  "recent": {
+    "title": "Suivis récents",
+    "lastChecked": "Dernière vérification"
+  }
+}
