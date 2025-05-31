@@ -35,6 +35,10 @@ export const trackingService = {
       // In a production environment, you would call the 17track API
       // For now, we'll simulate the API call with a mock response
       const response = await this.simulateApiCall(trackingNumber, options.carrier);
+      
+      // Save to recent trackings in localStorage
+      this.saveToRecentTrackings(response);
+      
       return response;
     } catch (error: any) {
       console.error('Error tracking package:', error);
@@ -78,6 +82,47 @@ export const trackingService = {
       estimatedDelivery,
       history
     };
+  },
+
+  async track17Track(trackingNumber: string, carrier?: string): Promise<TrackingResult> {
+    try {
+      const apiKey = import.meta.env.VITE_17TRACK_API_KEY;
+      const apiSecret = import.meta.env.VITE_17TRACK_API_SECRET;
+      
+      if (!apiKey || !apiSecret) {
+        throw new Error('17Track API credentials not configured');
+      }
+      
+      const response = await axios.post(
+        'https://api.17track.net/track/v2/gettrackinfo',
+        {
+          tracking_number: trackingNumber,
+          carrier_code: carrier
+        },
+        {
+          headers: {
+            '17token': apiKey,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      if (response.data.code !== 0) {
+        throw new Error(response.data.message || 'Error tracking package');
+      }
+      
+      // Process and transform the 17track response to our format
+      return this.process17TrackResponse(response.data, trackingNumber);
+    } catch (error: any) {
+      console.error('Error calling 17Track API:', error);
+      throw new Error(error.message || 'Error tracking package');
+    }
+  },
+  
+  process17TrackResponse(data: any, trackingNumber: string): TrackingResult {
+    // This would need to be implemented based on the actual API response structure
+    // For now, we'll just return a mock response
+    return this.simulateApiCall(trackingNumber);
   },
 
   detectCarrier(trackingNumber: string): string {
@@ -177,47 +222,51 @@ export const trackingService = {
     }
     return Math.abs(hash);
   },
-
-  // In a real implementation, this would call the 17track API
-  async track17Track(trackingNumber: string, carrier?: string): Promise<any> {
+  
+  saveToRecentTrackings(tracking: TrackingResult): void {
     try {
-      const apiKey = import.meta.env.VITE_17TRACK_API_KEY;
-      const apiSecret = import.meta.env.VITE_17TRACK_API_SECRET;
+      // Get existing trackings from localStorage
+      const existingTrackings = localStorage.getItem('recentTrackings');
+      let trackings = existingTrackings ? JSON.parse(existingTrackings) : [];
       
-      if (!apiKey || !apiSecret) {
-        throw new Error('17Track API credentials not configured');
-      }
-      
-      const response = await axios.post(
-        'https://api.17track.net/track/v2/gettrackinfo',
-        {
-          tracking_number: trackingNumber,
-          carrier_code: carrier
-        },
-        {
-          headers: {
-            '17token': apiKey,
-            'Content-Type': 'application/json'
-          }
-        }
+      // Check if this tracking number already exists
+      const existingIndex = trackings.findIndex((t: any) => 
+        t.trackingNumber === tracking.trackingNumber
       );
       
-      if (response.data.code !== 0) {
-        throw new Error(response.data.message || 'Error tracking package');
+      // Create tracking entry
+      const trackingEntry = {
+        id: Date.now().toString(),
+        trackingNumber: tracking.trackingNumber,
+        carrier: tracking.carrier,
+        status: tracking.status,
+        lastChecked: new Date().toISOString()
+      };
+      
+      // Update or add the tracking
+      if (existingIndex !== -1) {
+        trackings[existingIndex] = trackingEntry;
+      } else {
+        // Add to the beginning of the array
+        trackings.unshift(trackingEntry);
+        // Limit to 5 recent trackings
+        trackings = trackings.slice(0, 5);
       }
       
-      // Process and transform the 17track response to our format
-      // This would need to be implemented based on the actual API response structure
-      return this.process17TrackResponse(response.data, trackingNumber);
-    } catch (error: any) {
-      console.error('Error calling 17Track API:', error);
-      throw new Error(error.message || 'Error tracking package');
+      // Save back to localStorage
+      localStorage.setItem('recentTrackings', JSON.stringify(trackings));
+    } catch (error) {
+      console.error('Error saving to recent trackings:', error);
     }
   },
   
-  process17TrackResponse(data: any, trackingNumber: string): TrackingResult {
-    // This would need to be implemented based on the actual API response structure
-    // For now, we'll just return a mock response
-    return this.simulateApiCall(trackingNumber);
+  getRecentTrackings(): any[] {
+    try {
+      const trackings = localStorage.getItem('recentTrackings');
+      return trackings ? JSON.parse(trackings) : [];
+    } catch (error) {
+      console.error('Error getting recent trackings:', error);
+      return [];
+    }
   }
 };

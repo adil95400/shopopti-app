@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Upload } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface BulkTrackingFormProps {
   onSubmit: (trackingNumbers: string[]) => void;
@@ -9,6 +10,7 @@ interface BulkTrackingFormProps {
 }
 
 const BulkTrackingForm: React.FC<BulkTrackingFormProps> = ({ onSubmit, loading }) => {
+  const { t } = useTranslation('tracking');
   const [trackingNumbers, setTrackingNumbers] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,16 +32,16 @@ const BulkTrackingForm: React.FC<BulkTrackingFormProps> = ({ onSubmit, loading }
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Suivi en masse
+          {t('bulk.title')}
         </label>
         <Textarea
-          placeholder="Entrez plusieurs numéros de suivi (un par ligne ou séparés par des virgules)"
+          placeholder={t('bulk.description')}
           value={trackingNumbers}
           onChange={(e) => setTrackingNumbers(e.target.value)}
           rows={5}
         />
         <p className="mt-1 text-xs text-gray-500">
-          Vous pouvez suivre jusqu'à 10 colis à la fois
+          {t('bulk.limit')}
         </p>
       </div>
       
@@ -47,12 +49,12 @@ const BulkTrackingForm: React.FC<BulkTrackingFormProps> = ({ onSubmit, loading }
         {loading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Traitement...
+            {t('form.searching')}
           </>
         ) : (
           <>
             <Upload className="mr-2 h-4 w-4" />
-            Suivre en masse
+            {t('bulk.process')}
           </>
         )}
       </Button>

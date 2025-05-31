@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Package, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PackageStatusBadge from './PackageStatusBadge';
+import { trackingService } from '../../services/trackingService';
+import { useTranslation } from 'react-i18next';
 
 interface RecentTracking {
   id: string;
@@ -16,14 +18,13 @@ interface RecentTracking {
 }
 
 const RecentTrackings: React.FC = () => {
+  const { t } = useTranslation('tracking');
   const [recentTrackings, setRecentTrackings] = useState<RecentTracking[]>([]);
 
   useEffect(() => {
-    // In a real app, this would fetch from localStorage or a database
-    const storedTrackings = localStorage.getItem('recentTrackings');
-    if (storedTrackings) {
-      setRecentTrackings(JSON.parse(storedTrackings));
-    }
+    // Get recent trackings from service
+    const trackings = trackingService.getRecentTrackings();
+    setRecentTrackings(trackings);
   }, []);
 
   if (recentTrackings.length === 0) {
@@ -32,7 +33,7 @@ const RecentTrackings: React.FC = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-6">
-      <h2 className="text-lg font-medium mb-4">Suivis récents</h2>
+      <h2 className="text-lg font-medium mb-4">{t('recent.title')}</h2>
       <div className="space-y-3">
         {recentTrackings.map((tracking) => (
           <div key={tracking.id} className="flex items-center justify-between p-3 border border-gray-100 rounded-lg hover:bg-gray-50">
@@ -47,7 +48,7 @@ const RecentTrackings: React.FC = () => {
                 <div className="flex items-center mt-1">
                   <PackageStatusBadge status={tracking.status} />
                   <span className="ml-2 text-xs text-gray-500">
-                    Dernière vérification: {new Date(tracking.lastChecked).toLocaleString()}
+                    {t('recent.lastChecked')}: {new Date(tracking.lastChecked).toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -55,7 +56,7 @@ const RecentTrackings: React.FC = () => {
             <Button variant="outline" size="sm" asChild>
               <a href={`/tracking?number=${tracking.trackingNumber}`}>
                 <ExternalLink className="h-4 w-4 mr-1" />
-                Suivre
+                {t('form.track')}
               </a>
             </Button>
           </div>

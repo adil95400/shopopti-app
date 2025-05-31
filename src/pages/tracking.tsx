@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2, Package, Truck, MapPin, Calendar, AlertTriangle, CheckCircle, Search } from 'lucide-react';
 import { trackingService, TrackingResult } from '../services/trackingService';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
+import TrackingForm from '../components/tracking/TrackingForm';
+import TrackingResult from '../components/tracking/TrackingResult';
+import RecentTrackings from '../components/tracking/RecentTrackings';
+import BulkTrackingForm from '../components/tracking/BulkTrackingForm';
 
 export default function TrackingPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('tracking');
+  const [searchParams] = useSearchParams();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('auto');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<TrackingResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [bulkResults, setBulkResults] = useState<TrackingResult[]>([]);
+  const [bulkLoading, setBulkLoading] = useState(false);
 
-  const handleSearch = async () => {
-    if (!trackingNumber.trim()) {
-      setError("Veuillez entrer un numéro de suivi");
+  // Check for tracking number in URL params
+  useEffect(() => {
+    const number = searchParams.get('number');
+    if (number) {
+      setTrackingNumber(number);
+      handleSearch(number);
+    }
+  }, [searchParams]);
+
+  const handleSearch = async (number?: string) => {
+    const trackingToUse = number || trackingNumber;
+    
+    if (!trackingToUse.trim()) {
+      setError(t('error.invalidNumber'));
       return;
     }
 
@@ -25,7 +44,7 @@ export default function TrackingPage() {
     
     try {
       const trackingResult = await trackingService.trackPackage(
-        trackingNumber, 
+        trackingToUse, 
         { carrier: carrier !== 'auto' ? carrier : undefined }
       );
       
@@ -33,72 +52,67 @@ export default function TrackingPage() {
       toast.success('Informations de suivi récupérées avec succès');
     } catch (err: any) {
       console.error('Erreur de suivi:', err);
-      setError(err.message || "Une erreur est survenue lors du suivi du colis");
+      setError(err.message || t('error.generic'));
       setResult(null);
-      toast.error(err.message || "Une erreur est survenue lors du suivi du colis");
+      toast.error(err.message || t('error.generic'));
     } finally {
       setLoading(false);
     }
   };
 
+  const handleBulkTracking = async (trackingNumbers: string[]) => {
+    if (trackingNumbers.length === 0) return;
+    
+    // Limit to 10 tracking numbers
+    const limitedNumbers = trackingNumbers.slice(0, 10);
+    
+    setBulkLoading(true);
+    setBulkResults([]);
+    
+    try {
+      const results = await Promise.all(
+        limitedNumbers.map(number => 
+          trackingService.trackPackage(number)
+            .catch(error => {
+              console.error(`Error tracking ${number}:`, error);
+              return null;
+            })
+        )
+      );
+      
+      // Filter out failed results
+      const successfulResults = results.filter(Boolean) as TrackingResult[];
+      setBulkResults(successfulResults);
+      
+      if (successfulResults.length > 0) {
+        toast.success(`${successfulResults.length} colis suivis avec succès`);
+      } else {
+        toast.error('Aucun colis n\'a pu être suivi');
+      }
+    } catch (error) {
+      console.error('Error in bulk tracking:', error);
+      toast.error('Une erreur est survenue lors du suivi en masse');
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6">
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Suivi de livraison</h1>
-        <div className="text-sm text-gray-500">Suivi multi-transporteurs</div>
+        <h1 className="text-2xl font-bold">{t('title')}</h1>
+        <div className="text-sm text-gray-500">{t('subtitle')}</div>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Numéro de suivi
-            </label>
-            <div className="flex space-x-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                  placeholder="Entrez votre numéro de suivi"
-                  value={trackingNumber}
-                  onChange={(e) => setTrackingNumber(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              <Button onClick={handleSearch} disabled={loading || !trackingNumber.trim()}>
-                {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Recherche...
-                  </>
-                ) : (
-                  'Suivre'
-                )}
-              </Button>
-            </div>
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Transporteur (optionnel)
-            </label>
-            <select
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              value={carrier}
-              onChange={(e) => setCarrier(e.target.value)}
-            >
-              <option value="auto">Détection automatique</option>
-              <option value="fedex">FedEx</option>
-              <option value="ups">UPS</option>
-              <option value="dhl">DHL</option>
-              <option value="laposte">La Poste</option>
-              <option value="colissimo">Colissimo</option>
-              <option value="chronopost">Chronopost</option>
-              <option value="dpd">DPD</option>
-              <option value="gls">GLS</option>
-              <option value="tnt">TNT</option>
-            </select>
-          </div>
-        </div>
+        <TrackingForm 
+          onSubmit={(number, selectedCarrier) => {
+            setTrackingNumber(number);
+            setCarrier(selectedCarrier);
+            handleSearch(number);
+          }}
+          loading={loading}
+        />
       </div>
 
       {error && (
@@ -108,7 +122,7 @@ export default function TrackingPage() {
               <AlertTriangle className="h-5 w-5 text-red-400" />
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">Erreur de suivi</h3>
+              <h3 className="text-sm font-medium text-red-800">{t('error.title')}</h3>
               <div className="mt-2 text-sm text-red-700">
                 <p>{error}</p>
               </div>
@@ -118,93 +132,25 @@ export default function TrackingPage() {
       )}
 
       {result && (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <div className="flex items-center">
-                <h2 className="text-lg font-medium">Colis {result.trackingNumber}</h2>
-                <span className={`ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                  result.status.color === 'success' ? 'bg-green-100 text-green-800' :
-                  result.status.color === 'error' ? 'bg-red-100 text-red-800' :
-                  result.status.color === 'warning' ? 'bg-yellow-100 text-yellow-800' :
-                  'bg-blue-100 text-blue-800'
-                }`}>
-                  {result.status.label}
-                </span>
-              </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Transporteur: {result.carrier}
-              </p>
-            </div>
-            
-            {result.estimatedDelivery && (
-              <div className="text-right">
-                <p className="text-sm text-gray-500">Livraison estimée</p>
-                <p className="font-medium">{result.estimatedDelivery}</p>
-              </div>
-            )}
-          </div>
-          
-          <div className="relative pb-12">
-            {result.history.map((event, index) => (
-              <div key={index} className="relative pb-8">
-                {index < result.history.length - 1 && (
-                  <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200\" aria-hidden="true"></div>
-                )}
-                <div className="relative flex items-start space-x-3">
-                  <div>
-                    <div className={`relative px-1 ${
-                      index === result.history.length - 1 ? 
-                        result.status.code === 'delivered' ? 'bg-green-500' : 
-                        result.status.code === 'exception' ? 'bg-red-500' : 
-                        'bg-blue-500' 
-                      : 'bg-gray-300'
-                    } h-10 w-10 rounded-full flex items-center justify-center`}>
-                      {index === result.history.length - 1 ? (
-                        result.status.code === 'delivered' ? (
-                          <CheckCircle className="h-6 w-6 text-white" />
-                        ) : result.status.code === 'exception' ? (
-                          <AlertTriangle className="h-6 w-6 text-white" />
-                        ) : (
-                          <Truck className="h-6 w-6 text-white" />
-                        )
-                      ) : (
-                        <Package className="h-6 w-6 text-white" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div>
-                      <div className="text-sm font-medium text-gray-900">
-                        {event.status}
-                      </div>
-                      <p className="mt-0.5 text-sm text-gray-500">
-                        {event.date}
-                      </p>
-                    </div>
-                    <div className="mt-2 text-sm text-gray-700">
-                      <div className="flex items-start">
-                        <MapPin className="h-4 w-4 text-gray-400 mt-0.5 mr-2" />
-                        <span>{event.location}</span>
-                      </div>
-                      <p className="mt-1">{event.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-6 border-t border-gray-200 pt-6">
-            <div className="flex justify-between">
-              <Button variant="outline">
-                Imprimer
-              </Button>
-              <Button>
-                Contacter le transporteur
-              </Button>
-            </div>
-          </div>
+        <TrackingResult result={result} />
+      )}
+
+      <RecentTrackings />
+
+      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <h2 className="text-lg font-medium mb-4">{t('bulk.title')}</h2>
+        <BulkTrackingForm 
+          onSubmit={handleBulkTracking}
+          loading={bulkLoading}
+        />
+      </div>
+
+      {bulkResults.length > 0 && (
+        <div className="space-y-6">
+          <h2 className="text-lg font-medium">Résultats du suivi en masse</h2>
+          {bulkResults.map((result, index) => (
+            <TrackingResult key={index} result={result} />
+          ))}
         </div>
       )}
 
@@ -214,9 +160,9 @@ export default function TrackingPage() {
             <Package className="h-5 w-5 text-blue-400" />
           </div>
           <div className="ml-3">
-            <h3 className="text-sm font-medium text-blue-800">Suivi multi-transporteurs</h3>
+            <h3 className="text-sm font-medium text-blue-800">{t('info.title')}</h3>
             <div className="mt-2 text-sm text-blue-700">
-              <p>Notre système prend en charge le suivi de colis pour plus de 600 transporteurs dans le monde entier, dont FedEx, UPS, DHL, La Poste, Colissimo, et bien d'autres.</p>
+              <p>{t('info.description')}</p>
             </div>
           </div>
         </div>
