@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import { getCustomerPortalLink } from '../../lib/stripe';
-import { Loader2, CreditCard, Calendar, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Loader2, CreditCard, Calendar, AlertTriangle, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
+import { Button } from '../../components/ui/button';
+import { Badge } from '../../components/ui/badge';
 
 const SubscriptionStatus: React.FC = () => {
   const [subscription, setSubscription] = useState<any>(null);
@@ -18,19 +18,17 @@ const SubscriptionStatus: React.FC = () => {
   const fetchSubscription = async () => {
     try {
       setLoading(true);
-      const { data: { session } } = await supabase.auth.getSession();
       
-      if (!session?.user) {
+      // Get the user's subscription from the view
+      const { data, error } = await supabase
+        .from('stripe_user_subscriptions')
+        .select('*')
+        .maybeSingle();
+      
+      if (error) {
+        console.error('Error fetching subscription:', error);
         return;
       }
-      
-      const { data } = await supabase
-        .from('subscriptions')
-        .select('*')
-        .eq('user_id', session.user.id)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
       
       setSubscription(data);
     } catch (error) {
@@ -44,13 +42,31 @@ const SubscriptionStatus: React.FC = () => {
     try {
       setManagingSubscription(true);
       
-      if (!subscription?.stripe_customer_id) {
+      if (!subscription?.customer_id) {
         toast.error('No subscription found');
         return;
       }
       
-      const portalUrl = await getCustomerPortalLink(subscription.stripe_customer_id);
-      window.location.href = portalUrl;
+      // Redirect to Stripe Customer Portal
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-customer-portal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`,
+        },
+        body: JSON.stringify({
+          customer_id: subscription.customer_id,
+          return_url: `${window.location.origin}/app/subscription`,
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      window.location.href = data.url;
     } catch (error) {
       console.error('Error opening customer portal:', error);
       toast.error('Failed to open customer portal');
@@ -59,113 +75,190 @@ const SubscriptionStatus: React.FC = () => {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (timestamp: number) => {
+    if (!timestamp) return 'N/A';
+    return new Date(timestamp * 1000).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
   };
 
-  const getPlanName = (plan: string) => {
-    const planNames: Record<string, string> = {
-      'freemium': 'Free Plan',
-      'pro': 'Pro Plan',
-      'agency': 'Agency Plan'
-    };
+  const getPlanName = (priceId: string | null) => {
+    if (!priceId) return 'Free Plan';
     
-    return planNames[plan] || plan;
+    // This should match your price ID in Stripe
+    if (priceId === import.meta.env.VITE_STRIPE_PRICE_PRO) {
+      return 'Shopopti+';
+    }
+    
+    return 'Unknown Plan';
+  };
+
+  const getPlanFeatures = (priceId: string | null) => {
+    if (!priceId) {
+      return [
+        '10 products max',
+        'Limited AI access',
+        'Basic analytics',
+        'Community support'
+      ];
+    }
+    
+    // This should match your price ID in Stripe
+    if (priceId === import.meta.env.VITE_STRIPE_PRICE_PRO) {
+      return [
+        'Unlimited products',
+        'Full SEO + AI optimization',
+        'Shopify import',
+        'Advanced analytics',
+        'Priority support',
+        'Multi-channel publishing'
+      ];
+    }
+    
+    return ['Standard features'];
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-4">
-        <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
-
-  if (!subscription) {
-    return (
-      <div className="flex flex-col items-center justify-center p-6 text-center border rounded-lg bg-muted/30">
-        <div className="mb-4 p-3 rounded-full bg-muted">
-          <CreditCard className="h-6 w-6 text-muted-foreground" />
-        </div>
-        <h3 className="text-lg font-medium mb-2">No Active Subscription</h3>
-        <p className="text-muted-foreground mb-4">You're currently on the free plan with limited features.</p>
-        <Button asChild>
-          <a href="/pricing">View Pricing Plans</a>
-        </Button>
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin text-primary-600" />
       </div>
     );
   }
 
   return (
     <div className="border rounded-lg p-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-200">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-lg font-medium">{getPlanName(subscription.plan)}</h3>
-            <Badge variant={subscription.status === 'active' ? 'success' : 'warning'}>
-              {subscription.status.charAt(0).toUpperCase() + subscription.status.slice(1)}
-            </Badge>
+            <h3 className="text-lg font-medium text-gray-900">
+              {subscription && subscription.subscription_id ? getPlanName(subscription.price_id) : 'Free Plan'}
+            </h3>
+            {subscription && subscription.subscription_id && (
+              <Badge variant={subscription.subscription_status === 'active' ? 'success' : 'warning'}>
+                {subscription.subscription_status.charAt(0).toUpperCase() + subscription.subscription_status.slice(1)}
+              </Badge>
+            )}
           </div>
-          {subscription.cancel_at_period_end && (
-            <p className="text-sm text-muted-foreground mt-1">
-              Cancels at period end
+          {subscription && subscription.cancel_at_period_end && (
+            <p className="mt-1 text-sm text-gray-500">
+              Your subscription will cancel at the end of the current period
             </p>
           )}
         </div>
-        <Button onClick={handleManageSubscription} disabled={managingSubscription}>
-          {managingSubscription ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Loading...
-            </>
-          ) : (
-            <>
-              <CreditCard className="mr-2 h-4 w-4" />
-              Manage Subscription
-            </>
-          )}
-        </Button>
+        {subscription && subscription.subscription_id && (
+          <Button
+            onClick={handleManageSubscription}
+            disabled={managingSubscription}
+          >
+            {managingSubscription ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              <>
+                <CreditCard className="mr-2 h-4 w-4" />
+                Manage Billing
+              </>
+            )}
+          </Button>
+        )}
       </div>
       
-      <div className="mt-4 space-y-4">
-        <div className="flex items-center">
-          <Calendar className="h-5 w-5 text-muted-foreground mr-2" />
-          <div>
-            <p className="text-sm text-muted-foreground">Current period</p>
-            <p className="text-sm font-medium">
-              {formatDate(subscription.current_period_start)} - {formatDate(subscription.current_period_end)}
-            </p>
+      {subscription && subscription.subscription_id ? (
+        <div className="mt-4 space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="text-sm font-medium text-gray-700 mb-3">Subscription Details</h4>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <Calendar className="h-5 w-5 text-gray-400 mr-2" />
+                  <div>
+                    <p className="text-sm text-gray-500">Current period</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {formatDate(subscription.current_period_start)} - {formatDate(subscription.current_period_end)}
+                    </p>
+                  </div>
+                </div>
+                
+                {subscription.subscription_status === 'active' && (
+                  <div className="flex items-start p-4 bg-green-50 rounded-md">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-2" />
+                    <div>
+                      <h4 className="text-sm font-medium text-green-800">Active Subscription</h4>
+                      <p className="text-sm text-green-700 mt-1">
+                        Your subscription is active and you have access to all features.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+                {subscription.subscription_status === 'past_due' && (
+                  <div className="flex items-start p-4 bg-yellow-50 rounded-md">
+                    <AlertTriangle className="h-5 w-5 text-yellow-500 mt-0.5 mr-2" />
+                    <div>
+                      <h4 className="text-sm font-medium text-yellow-800">Payment Issue</h4>
+                      <p className="text-sm text-yellow-700 mt-1">
+                        We're having trouble processing your payment. Please update your payment method to avoid service interruption.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-sm font-medium text-gray-700 mb-3">Plan Features</h4>
+              <div className="space-y-2">
+                {getPlanFeatures(subscription.price_id).map((feature, index) => (
+                  <div key={index} className="flex items-start">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 mr-2" />
+                    <span className="text-sm text-gray-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6">
+                <Button asChild variant="outline">
+                  <Link to="/pricing">Compare Plans</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          {subscription.payment_method_brand && subscription.payment_method_last4 && (
+            <div className="pt-6 border-t border-gray-200">
+              <h4 className="text-sm font-medium text-gray-700 mb-3">Payment Method</h4>
+              <div className="flex items-center">
+                <CreditCard className="h-5 w-5 text-gray-400 mr-2" />
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    {subscription.payment_method_brand.charAt(0).toUpperCase() + subscription.payment_method_brand.slice(1)} •••• {subscription.payment_method_last4}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="text-center py-6">
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-100">
+            <CreditCard className="h-8 w-8 text-gray-400" />
+          </div>
+          <h3 className="mt-4 text-lg font-medium text-gray-900">No Active Subscription</h3>
+          <p className="mt-2 text-gray-500 max-w-md mx-auto">
+            You're currently on the free plan with limited features. Upgrade to unlock all the powerful tools Shopopti+ has to offer.
+          </p>
+          <div className="mt-6">
+            <Button asChild>
+              <Link to="/pricing">View Pricing Plans</Link>
+            </Button>
           </div>
         </div>
-        
-        {subscription.status === 'active' && (
-          <div className="flex items-start p-4 bg-green-50 rounded-md">
-            <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-2" />
-            <div>
-              <h4 className="text-sm font-medium text-green-800">Active Subscription</h4>
-              <p className="text-sm text-green-700 mt-1">
-                Your subscription is active and you have access to all {subscription.plan} features.
-              </p>
-            </div>
-          </div>
-        )}
-        
-        {subscription.status === 'past_due' && (
-          <div className="flex items-start p-4 bg-yellow-50 rounded-md">
-            <AlertTriangle className="h-5 w-5 text-yellow-500 mt-0.5 mr-2" />
-            <div>
-              <h4 className="text-sm font-medium text-yellow-800">Payment Issue</h4>
-              <p className="text-sm text-yellow-700 mt-1">
-                We're having trouble processing your payment. Please update your payment method to avoid service interruption.
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };

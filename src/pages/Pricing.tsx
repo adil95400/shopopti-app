@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import PricingCard from '../components/stripe/PricingCard';
 import { motion } from 'framer-motion';
+import { stripeProducts } from '../stripe-config';
 
 const Pricing: React.FC = () => {
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
@@ -18,16 +19,12 @@ const Pricing: React.FC = () => {
         }
         
         const { data } = await supabase
-          .from('subscriptions')
-          .select('plan, status')
-          .eq('user_id', session.user.id)
-          .eq('status', 'active')
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
+          .from('stripe_user_subscriptions')
+          .select('*')
+          .maybeSingle();
         
-        if (data) {
-          setCurrentPlan(data.plan);
+        if (data?.subscription_status === 'active' && data?.price_id) {
+          setCurrentPlan(data.price_id);
         }
       } catch (error) {
         console.error('Error fetching subscription:', error);
@@ -54,11 +51,11 @@ const Pricing: React.FC = () => {
       priceId: null
     },
     {
-      title: "Pro",
-      price: "29€/month",
-      description: "Perfect for growing stores",
+      title: "Shopopti+",
+      price: "69€/month",
+      description: "AI-powered e-commerce optimization platform",
       features: [
-        "1000 products",
+        "Unlimited products",
         "Full SEO + AI optimization",
         "Shopify import",
         "Advanced analytics",
@@ -67,20 +64,6 @@ const Pricing: React.FC = () => {
       ],
       priceId: import.meta.env.VITE_STRIPE_PRICE_PRO,
       popular: true
-    },
-    {
-      title: "Agency",
-      price: "99€/month",
-      description: "For multi-store management",
-      features: [
-        "Unlimited products",
-        "Multi-store management",
-        "Advanced AI features",
-        "White-label reports",
-        "Dedicated support",
-        "API access"
-      ],
-      priceId: import.meta.env.VITE_STRIPE_PRICE_AGENCY
     }
   ];
 
@@ -103,7 +86,7 @@ const Pricing: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 grid gap-8 md:grid-cols-3"
+          className="mt-16 grid gap-8 md:grid-cols-2"
         >
           {plans.map((plan, index) => (
             <PricingCard
@@ -112,9 +95,9 @@ const Pricing: React.FC = () => {
               price={plan.price}
               description={plan.description}
               features={plan.features}
-              priceId={currentPlan === plan.title.toLowerCase() ? null : plan.priceId}
+              priceId={currentPlan === plan.priceId ? null : plan.priceId}
               popular={plan.popular}
-              buttonText={currentPlan === plan.title.toLowerCase() ? 'Current Plan' : 'Subscribe'}
+              buttonText={currentPlan === plan.priceId ? 'Current Plan' : 'Subscribe'}
             />
           ))}
         </motion.div>

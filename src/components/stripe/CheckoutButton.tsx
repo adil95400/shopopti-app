@@ -35,7 +35,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({ priceId, children, clas
       
       // Redirect to Stripe Checkout
       window.location.href = url;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error during checkout:', error);
       toast.error('Failed to start checkout process. Please try again.');
     } finally {

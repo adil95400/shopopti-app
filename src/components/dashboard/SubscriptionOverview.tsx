@@ -3,7 +3,8 @@ import { supabase } from '../../lib/supabase';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
-import { CreditCard, Zap, Calendar, CheckCircle } from 'lucide-react';
+import { Zap, Calendar, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SubscriptionOverview: React.FC = () => {
   const [subscription, setSubscription] = useState<any>(null);
@@ -22,51 +23,68 @@ const SubscriptionOverview: React.FC = () => {
         return;
       }
       
-      // Dans une application réelle, récupérez les données depuis Supabase
-      // Pour l'instant, nous utilisons des données statiques
+      // Get the user's subscription from the view
+      const { data, error } = await supabase
+        .from('stripe_user_subscriptions')
+        .select('*')
+        .maybeSingle();
       
-      // Simuler un délai API
-      await new Promise(resolve => setTimeout(resolve, 800));
+      if (error) {
+        console.error('Error fetching subscription:', error);
+        return;
+      }
       
-      setSubscription({
-        plan: 'pro',
-        status: 'active',
-        current_period_start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-        current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-      });
+      setSubscription(data);
     } catch (error) {
-      console.error('Erreur lors de la récupération de l\'abonnement:', error);
+      console.error('Error fetching subscription:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('fr-FR', {
-      day: 'numeric',
+  const formatDate = (timestamp: number) => {
+    if (!timestamp) return 'N/A';
+    return new Date(timestamp * 1000).toLocaleDateString('fr-FR', {
+      year: 'numeric',
       month: 'long',
-      year: 'numeric'
+      day: 'numeric'
     });
   };
 
-  const getPlanName = (plan: string) => {
-    const planNames: Record<string, string> = {
-      'freemium': 'Forfait Gratuit',
-      'pro': 'Forfait Pro',
-      'agency': 'Forfait Agence'
-    };
+  const getPlanName = (priceId: string | null) => {
+    if (!priceId) return 'Free Plan';
     
-    return planNames[plan] || plan;
+    // This should match your price ID in Stripe
+    if (priceId === import.meta.env.VITE_STRIPE_PRICE_PRO) {
+      return 'Shopopti+';
+    }
+    
+    return 'Unknown Plan';
   };
 
-  const getPlanFeatures = (plan: string) => {
-    const planFeatures: Record<string, string[]> = {
-      'freemium': ['10 produits max', 'Accès IA limité', 'Analyses basiques'],
-      'pro': ['1000 produits', 'Optimisation IA complète', 'Analyses avancées', 'Support prioritaire'],
-      'agency': ['Produits illimités', 'Gestion multi-boutiques', 'Fonctionnalités IA avancées', 'Support dédié']
-    };
+  const getPlanFeatures = (priceId: string | null) => {
+    if (!priceId) {
+      return [
+        '10 products max',
+        'Limited AI access',
+        'Basic analytics',
+        'Community support'
+      ];
+    }
     
-    return planFeatures[plan] || [];
+    // This should match your price ID in Stripe
+    if (priceId === import.meta.env.VITE_STRIPE_PRICE_PRO) {
+      return [
+        'Unlimited products',
+        'Full SEO + AI optimization',
+        'Shopify import',
+        'Advanced analytics',
+        'Priority support',
+        'Multi-channel publishing'
+      ];
+    }
+    
+    return ['Standard features'];
   };
 
   if (loading) {
@@ -77,7 +95,7 @@ const SubscriptionOverview: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="h-24 flex items-center justify-center">
-            <div className="animate-pulse h-4 w-32 bg-gray-200 rounded"></div>
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         </CardContent>
       </Card>
@@ -89,18 +107,18 @@ const SubscriptionOverview: React.FC = () => {
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-lg">Abonnement</CardTitle>
         {subscription && (
-          <Badge variant={subscription.status === 'active' ? 'success' : 'warning'}>
-            {subscription.status === 'active' ? 'Actif' : 'En attente'}
+          <Badge variant={subscription.subscription_status === 'active' ? 'success' : 'warning'}>
+            {subscription.subscription_status === 'active' ? 'Actif' : 'En attente'}
           </Badge>
         )}
       </CardHeader>
       <CardContent>
-        {subscription ? (
+        {subscription && subscription.subscription_id ? (
           <div className="space-y-4">
             <div className="flex items-center">
               <Zap className="h-5 w-5 text-primary-500 mr-2" />
               <div>
-                <h3 className="font-medium">{getPlanName(subscription.plan)}</h3>
+                <h3 className="font-medium">{getPlanName(subscription.price_id)}</h3>
                 {subscription.current_period_end && (
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Calendar className="h-3 w-3 mr-1" />
@@ -111,9 +129,9 @@ const SubscriptionOverview: React.FC = () => {
             </div>
             
             <div className="space-y-2">
-              {getPlanFeatures(subscription.plan).map((feature, index) => (
+              {getPlanFeatures(subscription.price_id).map((feature, index) => (
                 <div key={index} className="flex items-start">
-                  <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 mr-2" />
+                  <div className="h-5 w-5 text-green-500 mr-2">✓</div>
                   <span className="text-sm">{feature}</span>
                 </div>
               ))}
@@ -121,10 +139,10 @@ const SubscriptionOverview: React.FC = () => {
             
             <div className="pt-4">
               <Button asChild variant="outline" size="sm" className="w-full">
-                <a href="/app/subscription">
-                  <CreditCard className="h-4 w-4 mr-2" />
+                <Link to="/app/subscription">
+                  <span className="mr-2">💳</span>
                   Gérer l'abonnement
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
@@ -132,7 +150,7 @@ const SubscriptionOverview: React.FC = () => {
           <div className="space-y-4">
             <p className="text-muted-foreground">Vous utilisez actuellement le forfait gratuit avec des fonctionnalités limitées.</p>
             <Button asChild className="w-full">
-              <a href="/pricing">Passer à un forfait supérieur</a>
+              <Link to="/pricing">Passer à un forfait supérieur</Link>
             </Button>
           </div>
         )}

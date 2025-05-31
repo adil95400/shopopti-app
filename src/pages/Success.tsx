@@ -19,22 +19,14 @@ const Success: React.FC = () => {
           return;
         }
 
-        // In a real implementation, you would verify the session with Stripe
-        // For now, we'll just fetch the user's subscription
-        const { data: { session } } = await supabase.auth.getSession();
+        // Wait a moment to allow the webhook to process
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
-        if (!session?.user) {
-          setLoading(false);
-          return;
-        }
-        
+        // Fetch the user's subscription
         const { data } = await supabase
-          .from('subscriptions')
+          .from('stripe_user_subscriptions')
           .select('*')
-          .eq('user_id', session.user.id)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
+          .maybeSingle();
         
         setSubscription(data);
         
@@ -52,14 +44,15 @@ const Success: React.FC = () => {
     verifySession();
   }, [sessionId, navigate]);
 
-  const getPlanName = (plan: string) => {
-    const planNames: Record<string, string> = {
-      'freemium': 'Free Plan',
-      'pro': 'Pro Plan',
-      'agency': 'Agency Plan'
-    };
+  const getPlanName = (priceId: string | null) => {
+    if (!priceId) return 'Free Plan';
     
-    return planNames[plan] || plan;
+    // This should match your price ID in Stripe
+    if (priceId === import.meta.env.VITE_STRIPE_PRICE_PRO) {
+      return 'Shopopti+';
+    }
+    
+    return 'Unknown Plan';
   };
 
   return (
@@ -86,7 +79,7 @@ const Success: React.FC = () => {
             {subscription ? (
               <>
                 <p className="mt-2 text-gray-600">
-                  Thank you for subscribing to {getPlanName(subscription.plan)}!
+                  Thank you for subscribing to {getPlanName(subscription.price_id)}!
                 </p>
                 <p className="mt-4 text-sm text-gray-500">
                   Your subscription is now active. You'll be redirected to your dashboard in a few seconds.

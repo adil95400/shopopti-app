@@ -8,14 +8,22 @@ export const getStripe = () => stripePromise;
 
 export const createCheckoutSession = async (priceId: string, userId: string) => {
   try {
-    const response = await fetch('/api/stripe/checkout-session', {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('User not authenticated');
+    }
+
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({
         price_id: priceId,
-        user_id: userId
+        success_url: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${window.location.origin}/cancel`,
+        mode: 'subscription'
       }),
     });
 
@@ -25,7 +33,7 @@ export const createCheckoutSession = async (priceId: string, userId: string) => 
       throw new Error(data.error);
     }
 
-    return data;
+    return { url: data.url };
   } catch (error) {
     console.error('Error creating checkout session:', error);
     throw error;
@@ -34,13 +42,20 @@ export const createCheckoutSession = async (priceId: string, userId: string) => 
 
 export const getCustomerPortalLink = async (customerId: string) => {
   try {
-    const response = await fetch('/api/stripe/customer-portal', {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('User not authenticated');
+    }
+
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-customer-portal`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({
-        customer_id: customerId
+        customer_id: customerId,
+        return_url: `${window.location.origin}/app/subscription`,
       }),
     });
 
@@ -56,3 +71,5 @@ export const getCustomerPortalLink = async (customerId: string) => {
     throw error;
   }
 };
+
+import { supabase } from './supabase';
