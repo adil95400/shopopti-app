@@ -15,7 +15,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     const { data } = await supabase
       .from('products')
-      .select('*, suppliers:supplier_id(name, country)')
+      .select('*, supplier:supplier_id(name, country)')
       .eq('id', id)
       .single();
     setProduct(data);
@@ -39,9 +39,9 @@ const ProductDetail = () => {
           )}
           <p className="text-xl text-blue-700 font-semibold mb-4">{product.price} €</p>
           <p className="mb-4">{product.description}</p>
-          {product.suppliers && (
+          {product.supplier && (
             <p className="text-sm text-gray-700 mb-4">
-              Fournisseur : <strong>{product.suppliers.name}</strong> ({product.suppliers.country})
+              Fournisseur : <strong>{product.supplier.name}</strong> ({product.supplier.country})
             </p>
           )}
           <button className="bg-green-600 text-white px-4 py-2 rounded">📥 Importer ce produit</button>

@@ -16,13 +16,13 @@ const Products = () => {
   const fetchAllProducts = async () => {
     const { data } = await supabase
       .from('products')
-      .select('*, suppliers:supplier_id(name, country)');
+      .select('*, supplier:supplier_id(name, country)');
     if (data) setProducts(data);
   };
 
   const filtered = products.filter(p =>
     (!category || (p.category && p.category.toLowerCase().includes(category.toLowerCase()))) &&
-    (!supplierName || (p.suppliers?.name && p.suppliers.name.toLowerCase().includes(supplierName.toLowerCase())))
+    (!supplierName || (p.supplier?.name && p.supplier.name.toLowerCase().includes(supplierName.toLowerCase())))
   );
 
   const optimizeAndImportToShopify = async (p: any) => {
@@ -75,8 +75,8 @@ const Products = () => {
             <h3 className="text-lg font-bold">{p.name}</h3>
             <p className="text-sm text-gray-600 mb-2">{p.description}</p>
             <p className="font-semibold text-blue-700 mb-1">{p.price} €</p>
-            {p.suppliers && (
-              <p className="text-sm text-gray-500 mb-2">👤 {p.suppliers.name} ({p.suppliers.country})</p>
+            {p.supplier && (
+              <p className="text-sm text-gray-500 mb-2">👤 {p.supplier.name} ({p.supplier.country})</p>
             )}
             <div className="flex gap-2">
               <button

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2, Search } from 'lucide-react';
@@ -13,11 +13,14 @@ const TrackingForm: React.FC<TrackingFormProps> = ({ onSubmit, loading }) => {
   const { t } = useTranslation('tracking');
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('auto');
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (trackingNumber.trim()) {
-      onSubmit(trackingNumber, carrier);
+      startTransition(() => {
+        onSubmit(trackingNumber, carrier);
+      });
     }
   };
 
@@ -38,8 +41,8 @@ const TrackingForm: React.FC<TrackingFormProps> = ({ onSubmit, loading }) => {
               required
             />
           </div>
-          <Button type="submit" disabled={loading || !trackingNumber.trim()}>
-            {loading ? (
+          <Button type="submit" disabled={loading || isPending || !trackingNumber.trim()}>
+            {loading || isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 {t('form.searching')}

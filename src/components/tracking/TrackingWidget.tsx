@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { useTracking } from '../../hooks/useTracking';
 import { Package, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,11 +14,14 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
   const { t } = useTranslation('tracking');
   const [number, setNumber] = useState('');
   const { trackPackage, loading } = useTracking();
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (number.trim()) {
-      trackPackage(number);
+      startTransition(() => {
+        trackPackage(number);
+      });
     }
   };
 
@@ -34,7 +37,7 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
             className="pl-8 py-1 h-9 text-sm"
           />
         </div>
-        <Button type="submit" size="sm" disabled={loading || !number.trim()}>
+        <Button type="submit" size="sm" disabled={loading || isPending || !number.trim()}>
           {t('form.track')}
         </Button>
       </form>
@@ -59,8 +62,8 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
           />
         </div>
         
-        <Button type="submit" className="w-full" disabled={loading || !number.trim()}>
-          {loading ? t('form.searching') : t('form.track')}
+        <Button type="submit" className="w-full" disabled={loading || isPending || !number.trim()}>
+          {loading || isPending ? t('form.searching') : t('form.track')}
         </Button>
       </form>
       
