@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { trackingService, TrackingResult } from '../services/trackingService';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import TrackingForm from '../components/tracking/TrackingForm';
-import TrackingResult from '../components/tracking/TrackingResult';
+import TrackingResultComponent from '../components/tracking/TrackingResult';
 import RecentTrackings from '../components/tracking/RecentTrackings';
 import BulkTrackingForm from '../components/tracking/BulkTrackingForm';
 import { Package } from 'lucide-react';
@@ -20,7 +21,6 @@ export default function TrackingPage() {
   const [bulkResults, setBulkResults] = useState<TrackingResult[]>([]);
   const [bulkLoading, setBulkLoading] = useState(false);
 
-  // Check for tracking number in URL params
   useEffect(() => {
     const number = searchParams.get('number');
     if (number) {
@@ -31,7 +31,7 @@ export default function TrackingPage() {
 
   const handleSearch = async (number?: string) => {
     const trackingToUse = number || trackingNumber;
-    
+
     if (!trackingToUse.trim()) {
       setError(t('error.invalidNumber'));
       return;
@@ -39,13 +39,13 @@ export default function TrackingPage() {
 
     setLoading(true);
     setError(null);
-    
+
     try {
       const trackingResult = await trackingService.trackPackage(
-        trackingToUse, 
+        trackingToUse,
         { carrier: carrier !== 'auto' ? carrier : undefined }
       );
-      
+
       setResult(trackingResult);
       toast.success('Informations de suivi récupérées avec succès');
     } catch (err: any) {
@@ -60,32 +60,29 @@ export default function TrackingPage() {
 
   const handleBulkTracking = async (trackingNumbers: string[]) => {
     if (trackingNumbers.length === 0) return;
-    
-    // Limit to 10 tracking numbers
+
     const limitedNumbers = trackingNumbers.slice(0, 10);
-    
+
     setBulkLoading(true);
     setBulkResults([]);
-    
+
     try {
       const results = await Promise.all(
-        limitedNumbers.map(number => 
-          trackingService.trackPackage(number)
-            .catch(error => {
-              console.error(`Error tracking ${number}:`, error);
-              return null;
-            })
+        limitedNumbers.map(number =>
+          trackingService.trackPackage(number).catch(error => {
+            console.error(`Error tracking ${number}:`, error);
+            return null;
+          })
         )
       );
-      
-      // Filter out failed results
+
       const successfulResults = results.filter(Boolean) as TrackingResult[];
       setBulkResults(successfulResults);
-      
+
       if (successfulResults.length > 0) {
         toast.success(`${successfulResults.length} colis suivis avec succès`);
       } else {
-        toast.error('Aucun colis n\'a pu être suivi');
+        toast.error("Aucun colis n'a pu être suivi");
       }
     } catch (error) {
       console.error('Error in bulk tracking:', error);
@@ -127,7 +124,7 @@ export default function TrackingPage() {
       )}
 
       {result && (
-        <TrackingResult result={result} />
+        <TrackingResultComponent result={result} />
       )}
 
       <RecentTrackings />
@@ -144,7 +141,7 @@ export default function TrackingPage() {
         <div className="space-y-6">
           <h2 className="text-lg font-medium">Résultats du suivi en masse</h2>
           {bulkResults.map((result, index) => (
-            <TrackingResult key={index} result={result} />
+            <TrackingResultComponent key={index} result={result} />
           ))}
         </div>
       )}
