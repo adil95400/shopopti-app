@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Loader2, Package, Truck, MapPin, Calendar, AlertTriangle, CheckCircle, Search } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import { trackingService, TrackingResult } from '../services/trackingService';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
 import TrackingForm from '../components/tracking/TrackingForm';
 import TrackingResult from '../components/tracking/TrackingResult';
 import RecentTrackings from '../components/tracking/RecentTrackings';
 import BulkTrackingForm from '../components/tracking/BulkTrackingForm';
+import { Package } from 'lucide-react';
 
 export default function TrackingPage() {
   const { t } = useTranslation('tracking');
@@ -118,9 +116,6 @@ export default function TrackingPage() {
       {error && (
         <div className="bg-red-50 p-4 rounded-lg border border-red-200">
           <div className="flex">
-            <div className="flex-shrink-0">
-              <AlertTriangle className="h-5 w-5 text-red-400" />
-            </div>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-red-800">{t('error.title')}</h3>
               <div className="mt-2 text-sm text-red-700">
