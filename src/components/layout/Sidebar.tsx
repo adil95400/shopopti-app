@@ -1,153 +1,151 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  LayoutDashboard, ShoppingBag, PackageCheck, BarChart3, Sparkles, Store, Import, MessageSquare, Bot,
-  Truck, Share2, Settings, Building, Users, CreditCard, FileText, HelpCircle, Book, Palette, Globe,
-  Mail, Bell, ChevronLeft, ChevronRight, Search
+  Menu, X, LayoutDashboard, FileText, Bot, Truck,
+  Sparkles, Globe, Zap, Import, Search, CreditCard,
+  ShoppingBag, BarChart3, Share2, Settings, Code,
+  Webhook, Languages, FileBarChart2, Building, Megaphone,
+  DollarSign, Package, MessageSquare, RefreshCw, ArrowDownUp,
+  GitBranch, FileCode, SplitSquareVertical
 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Logo from './Logo';
 
-interface SidebarProps {
-  collapsed: boolean;
-  setCollapsed: (collapsed: boolean) => void;
-}
-
-const mainNavItems = [
-  { to: '/app/dashboard', icon: <LayoutDashboard size={20} />, label: 'Tableau de bord' },
-  { to: '/app/products', icon: <ShoppingBag size={20} />, label: 'Produits' },
-  { to: '/app/import-products', icon: <Import size={20} />, label: 'Importer' },
-  { to: '/app/orders', icon: <PackageCheck size={20} />, label: 'Commandes' },
-  { to: '/app/analytics', icon: <BarChart3 size={20} />, label: 'Analyses' },
-  { to: '/app/reviews', icon: <MessageSquare size={20} />, label: 'Avis' },
-  { to: '/app/ai-hub', icon: <Bot size={20} />, label: 'IA Hub' }
+const sections = [
+  {
+    title: "Tableau de bord",
+    links: [
+      { path: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
+      { path: "/app/import-products", label: "Import produits", icon: <Import size={18} /> },
+    ]
+  },
+  {
+    title: "Outils IA",
+    links: [
+      { path: "/blog-ai", label: "Blog IA", icon: <Bot size={18} /> },
+      { path: "/seo-ai", label: "SEO IA", icon: <Sparkles size={18} /> },
+      { path: "/app/seo-audit", label: "Audit SEO", icon: <Sparkles size={18} /> },
+      { path: "/app/seo-competitor", label: "Analyse concurrente", icon: <Search size={18} /> },
+      { path: "/ai-hub", label: "AI Hub", icon: <Bot size={18} /> },
+    ]
+  },
+  {
+    title: "Dropshipping",
+    links: [
+      { path: "/dropshipping", label: "Dropshipping", icon: <ShoppingBag size={18} /> },
+      { path: "/advanced-suppliers", label: "Fournisseurs Avancés", icon: <Building size={18} /> },
+      { path: "/multi-channel", label: "Multi-Channel", icon: <Share2 size={18} /> },
+      { path: "/global-marketplaces", label: "Marketplaces Mondiales", icon: <Globe size={18} /> },
+      { path: "/automation", label: "Automations", icon: <Zap size={18} /> },
+      { path: "/advanced-analytics", label: "Advanced Analytics", icon: <BarChart3 size={18} /> },
+    ]
+  },
+  {
+    title: "Marketing",
+    links: [
+      { path: "/marketing-hub", label: "Marketing Hub", icon: <Megaphone size={18} /> },
+    ]
+  },
+  {
+    title: "Intégrations",
+    links: [
+      { path: "/integrations", label: "Intégrations", icon: <Code size={18} /> },
+      { path: "/webhooks", label: "Webhooks", icon: <Webhook size={18} /> },
+      { path: "/international-selling", label: "International", icon: <Languages size={18} /> },
+      { path: "/custom-reports", label: "Rapports personnalisés", icon: <FileBarChart2 size={18} /> },
+    ]
+  },
+  {
+    title: "Modules Avancés",
+    links: [
+      { path: "/app/repricing", label: "Optimisation des prix", icon: <DollarSign size={18} /> },
+      { path: "/app/inventory", label: "Gestion des stocks", icon: <Package size={18} /> },
+      { path: "/app/chat-support", label: "Support client IA", icon: <MessageSquare size={18} /> },
+      { path: "/app/returns", label: "Gestion des retours", icon: <RefreshCw size={18} /> },
+      { path: "/app/accounting", label: "Centre fiscal", icon: <FileText size={18} /> },
+      { path: "/app/funnels", label: "Tunnels de vente", icon: <GitBranch size={18} /> },
+      { path: "/app/templates", label: "Template Builder", icon: <FileCode size={18} /> },
+      { path: "/app/ab-testing", label: "A/B Testing", icon: <SplitSquareVertical size={18} /> },
+    ]
+  },
+  {
+    title: "Utilitaires",
+    links: [
+      { path: "/tracking", label: "Suivi de livraison", icon: <Truck size={18} /> },
+      { path: "/generate-invoice", label: "Factures PDF", icon: <FileText size={18} /> },
+      { path: "/app/subscription", label: "Abonnement", icon: <CreditCard size={18} /> },
+    ]
+  },
+  {
+    title: "Business",
+    links: [
+      { path: "/marketplace-b2b", label: "Marketplace B2B", icon: <Globe size={18} /> },
+      { path: "/automations", label: "Automations CRM", icon: <Zap size={18} /> },
+    ]
+  }
 ];
 
-const businessNavItems = [
-  { to: '/app/dropshipping', icon: <Truck size={20} />, label: 'Dropshipping' },
-  { to: '/app/advanced-suppliers', icon: <Building size={20} />, label: 'Fournisseurs' },
-  { to: '/app/multi-channel', icon: <Share2 size={20} />, label: 'Multi-canal' },
-  { to: '/app/global-marketplaces', icon: <Globe size={20} />, label: 'Marketplaces' },
-  { to: '/app/marketing-hub', icon: <Mail size={20} />, label: 'Marketing' }
-];
+export default function Sidebar() {
+  const [open, setOpen] = useState(false);
 
-const systemNavItems = [
-  { to: '/app/settings', icon: <Settings size={20} />, label: 'Paramètres' },
-  { to: '/app/subscription', icon: <CreditCard size={20} />, label: 'Abonnement' },
-  { to: '/app/support', icon: <HelpCircle size={20} />, label: 'Support' }
-];
-
-const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
   return (
     <>
-      <motion.aside
-        initial={{ width: collapsed ? 80 : 280 }}
-        animate={{ width: collapsed ? 80 : 280 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="hidden md:flex flex-col bg-white border-r border-gray-200 shadow-sm z-10 h-screen"
-      >
-        <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4">
-          {!collapsed && <Logo />}
-          {collapsed && (
-            <div className="mx-auto">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white">
-                <ShoppingBag size={20} />
-              </div>
-            </div>
-          )}
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-4">
-          {!collapsed && (
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Rechercher..."
-                className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-            </div>
-          )}
-
-          <div className="space-y-8">
-            <Section title="Principal" items={mainNavItems} collapsed={collapsed} />
-            <Section title="Business" items={businessNavItems} collapsed={collapsed} />
-            <Section title="Système" items={systemNavItems} collapsed={collapsed} />
-          </div>
-        </div>
-
-        <div className="border-t border-gray-200 p-4">
-          <div className={`flex ${collapsed ? 'justify-center' : 'justify-between'} items-center`}>
-            {!collapsed && (
-              <div className="text-xs text-gray-500">
-                <p>Shopopti+ v6.8</p>
-              </div>
-            )}
-            <div className="flex space-x-1">
-              <button className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                <HelpCircle size={collapsed ? 20 : 16} />
-              </button>
-              {!collapsed && (
-                <button className="rounded-md p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                  <Bell size={16} />
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </motion.aside>
-
-      {/* Sidebar mobile */}
-      <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" style={{ display: 'none' }}>
-        <div className="w-64 h-full bg-white">
-          {/* Contenu sidebar mobile */}
-        </div>
+      {/* Mobile topbar */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b sticky top-0 bg-muted z-40">
+        <h1 className="font-bold text-lg">Shopopti+</h1>
+        <button onClick={() => setOpen(true)}><Menu size={22} /></button>
       </div>
+
+      {/* Drawer menu */}
+      {open && (
+        <div className="fixed inset-0 bg-black/40 z-50" onClick={() => setOpen(false)}>
+          <div className="bg-white w-64 h-full p-4" onClick={e => e.stopPropagation()}>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-bold text-xl">Navigation</h2>
+              <button onClick={() => setOpen(false)}><X size={20} /></button>
+            </div>
+            {sections.map((section, i) => (
+              <div key={i} className="mb-4">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
+                <div className="flex flex-col gap-1">
+                  {section.links.map(link => (
+                    <NavLink
+                      key={link.path}
+                      to={link.path}
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-3 py-2 rounded hover:bg-muted/50 ${isActive ? 'bg-muted font-semibold' : ''}`
+                      }
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.icon} {link.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Desktop sidebar */}
+      <aside className="w-64 hidden md:block bg-muted p-4 border-r min-h-screen">
+        {sections.map((section, i) => (
+          <div key={i} className="mb-4">
+            <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
+            <div className="flex flex-col gap-1">
+              {section.links.map(link => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-3 py-2 rounded hover:bg-primary/10 ${isActive ? 'bg-primary/20 font-semibold' : ''}`
+                  }
+                >
+                  {link.icon} {link.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        ))}
+      </aside>
     </>
   );
-};
-
-const Section = ({
-  title,
-  items,
-  collapsed
-}: {
-  title: string;
-  items: { to: string; icon: React.ReactNode; label: string }[];
-  collapsed: boolean;
-}) => (
-  <div>
-    {!collapsed && (
-      <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-        {title}
-      </h3>
-    )}
-    <ul className="space-y-1">
-      {items.map((item) => (
-        <li key={item.to}>
-          <NavLink
-            to={item.to}
-            className={({ isActive }) =>
-              `flex items-center ${collapsed ? 'justify-center' : ''} px-3 py-2 rounded-md transition-colors ${
-                isActive
-                  ? 'bg-primary text-white'
-                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-              }`
-            }
-          >
-            {item.icon}
-            {!collapsed && <span className="ml-3">{item.label}</span>}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-export default Sidebar;
+}

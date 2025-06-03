@@ -66,6 +66,16 @@ import MarketingHub from './pages/MarketingHub';
 import GlobalMarketplaces from './pages/GlobalMarketplaces';
 import AdvancedSuppliers from './pages/AdvancedSuppliers';
 
+// Missing modules pages
+import RepricingPage from './pages/repricing';
+import InventoryPage from './pages/inventory';
+import ChatSupportPage from './pages/chat-support';
+import ReturnsPage from './pages/returns';
+import AccountingPage from './pages/accounting';
+import FunnelsPage from './pages/funnels';
+import TemplatesPage from './pages/templates';
+import ABTestingPage from './pages/ab-testing';
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -132,6 +142,16 @@ const AppRoutes = () => {
                   <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
                   <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
                   
+                  {/* Missing modules */}
+                  <Route path="repricing" element={<RepricingPage />} />
+                  <Route path="inventory" element={<InventoryPage />} />
+                  <Route path="chat-support" element={<ChatSupportPage />} />
+                  <Route path="returns" element={<ReturnsPage />} />
+                  <Route path="accounting" element={<AccountingPage />} />
+                  <Route path="funnels" element={<FunnelsPage />} />
+                  <Route path="templates" element={<TemplatesPage />} />
+                  <Route path="ab-testing" element={<ABTestingPage />} />
+                  
                   {/* Admin routes */}
                   <Route path="admin">
                     <Route index element={<AdminDashboard />} />
@@ -166,7 +186,15 @@ export const routes = [
   { path: "/app/seo-competitor", element: <SeoCompetitorPage /> },
   { path: "/app/admin/dashboard", element: <AdminDashboard /> },
   { path: "/app/admin/users", element: <UsersAdmin /> },
-  { path: "/app/admin/analytics", element: <AdminAnalytics /> }
+  { path: "/app/admin/analytics", element: <AdminAnalytics /> },
+  { path: "/app/repricing", element: <RepricingPage /> },
+  { path: "/app/inventory", element: <InventoryPage /> },
+  { path: "/app/chat-support", element: <ChatSupportPage /> },
+  { path: "/app/returns", element: <ReturnsPage /> },
+  { path: "/app/accounting", element: <AccountingPage /> },
+  { path: "/app/funnels", element: <FunnelsPage /> },
+  { path: "/app/templates", element: <TemplatesPage /> },
+  { path: "/app/ab-testing", element: <ABTestingPage /> }
 ];
 
 export default AppRoutes;
