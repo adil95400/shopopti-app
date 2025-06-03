@@ -295,7 +295,7 @@ const ABTestingPage: React.FC = () => {
                 </div>
                 <div className="flex space-x-2">
                   {selectedTest.status === 'draft' && (
-                    <Button size="sm" onClick={() => handleStartTest(selectedTest.id!)}>
+                    <Button size="sm\" onClick={() => handleStartTest(selectedTest.id!)}>
                       <Play className="h-4 w-4 mr-2" />
                       Start Test
                     </Button>
