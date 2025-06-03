@@ -25,7 +25,7 @@ const SubscriptionStatus: React.FC = () => {
         .select('*')
         .maybeSingle();
       
-      if (error) {
+      if (error && error.code !== 'PGRST116') {
         console.error('Error fetching subscription:', error);
         return;
       }
