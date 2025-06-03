@@ -34,7 +34,7 @@ const Products = () => {
         category: p.category
       });
 
-      const response = await fetch(`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN}/admin/api/2023-10/products.json`, {
+      const response = await fetch(`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN}/admin/api/2024-01/products.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

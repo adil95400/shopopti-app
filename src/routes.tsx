@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { ShopProvider } from './contexts/ShopContext';
 import { UserProvider } from './contexts/UserContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { RoleProvider } from './context/RoleContext';
 
 // Layouts
 import Layout from './components/layout/Layout';
@@ -15,7 +16,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import ChatbotWidget from './components/ChatbotWidget';
 import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 
-// Pages publiques
+// Public pages
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -26,7 +27,7 @@ import Documentation from './pages/Documentation';
 import FaqPage from './pages/faq';
 import HelpCenterPage from './pages/help-center';
 
-// Pages du tableau de bord
+// Dashboard pages
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
@@ -39,7 +40,12 @@ import Support from './pages/Support';
 import Contact from './pages/Contact';
 import Subscription from './pages/Account/Subscription';
 
-// Pages IA et outils
+// Admin pages
+import AdminDashboard from './pages/admin/Dashboard';
+import UsersAdmin from './pages/admin/Users';
+import AdminAnalytics from './pages/admin/Analytics';
+
+// AI and tools pages
 import BlogAIPage from './pages/blog-ai';
 import SEOAIPage from './pages/seo-ai';
 import TrackingPage from './pages/tracking';
@@ -65,74 +71,84 @@ const AppRoutes = () => {
     <BrowserRouter>
       <LanguageProvider>
         <UserProvider>
-          <ShopProvider>
-            <SubscriptionBanner />
-            <Routes>
-              {/* Pages publiques */}
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/cancel" element={<Cancel />} />
-              <Route path="/documentation" element={<Documentation />} />
-              <Route path="/documentation/:category/:article" element={<Documentation />} />
-              <Route path="/faq" element={<FaqPage />} />
-              <Route path="/help-center" element={<HelpCenterPage />} />
+          <RoleProvider>
+            <ShopProvider>
+              <SubscriptionBanner />
+              <Routes>
+                {/* Public pages */}
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/success" element={<Success />} />
+                <Route path="/cancel" element={<Cancel />} />
+                <Route path="/documentation" element={<Documentation />} />
+                <Route path="/documentation/:category/:article" element={<Documentation />} />
+                <Route path="/faq" element={<FaqPage />} />
+                <Route path="/help-center" element={<HelpCenterPage />} />
 
-              {/* Pages IA et outils accessibles sans connexion */}
-              <Route path="/blog-ai" element={<BlogAIPage />} />
-              <Route path="/seo-ai" element={<SEOAIPage />} />
-              <Route path="/tracking" element={<TrackingPage />} />
-              <Route path="/generate-invoice" element={<GenerateInvoice />} />
-              <Route path="/automations" element={<AutomationsPage />} />
-              <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
+                {/* AI and tools pages accessible without login */}
+                <Route path="/blog-ai" element={<BlogAIPage />} />
+                <Route path="/seo-ai" element={<SEOAIPage />} />
+                <Route path="/tracking" element={<TrackingPage />} />
+                <Route path="/generate-invoice" element={<GenerateInvoice />} />
+                <Route path="/automations" element={<AutomationsPage />} />
+                <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
 
-              {/* Pages protégées (nécessitent une connexion) */}
-              <Route
-                path="/app"
-                element={
-                  <ProtectedRoute>
-                    <Layout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate to="/app/dashboard\" replace />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="products" element={<Products />} />
-                <Route path="orders" element={<Orders />} />
-                <Route path="import-products" element={<ImportProducts />} />
-                <Route path="analytics" element={<Analytics />} />
-                <Route path="reviews" element={<Reviews />} />
-                <Route path="suppliers" element={<Suppliers />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="support" element={<Support />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="subscription" element={<Subscription />} />
+                {/* Protected pages (require login) */}
+                <Route
+                  path="/app"
+                  element={
+                    <ProtectedRoute>
+                      <Layout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="products" element={<Products />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="import-products" element={<ImportProducts />} />
+                  <Route path="analytics" element={<Analytics />} />
+                  <Route path="reviews" element={<Reviews />} />
+                  <Route path="suppliers" element={<Suppliers />} />
+                  <Route path="settings" element={<Settings />} />
+                  <Route path="support" element={<Support />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="subscription" element={<Subscription />} />
+                  
+                  {/* Advanced modules */}
+                  <Route path="seo-audit" element={<SeoAuditPage />} />
+                  <Route path="seo-competitor" element={<SeoCompetitorPage />} />
+                  <Route path="dropshipping" element={<Dropshipping />} />
+                  <Route path="multi-channel" element={<MultiChannel />} />
+                  <Route path="ai-hub" element={<AiHub />} />
+                  <Route path="advanced-analytics" element={<AdvancedAnalytics />} />
+                  <Route path="integrations" element={<Integrations />} />
+                  <Route path="webhooks" element={<Webhooks />} />
+                  <Route path="international-selling" element={<InternationalSelling />} />
+                  <Route path="custom-reports" element={<CustomReports />} />
+                  <Route path="marketing-hub" element={<MarketingHub />} />
+                  <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
+                  <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
+                  
+                  {/* Admin routes */}
+                  <Route path="admin">
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                    <Route path="users" element={<UsersAdmin />} />
+                    <Route path="analytics" element={<AdminAnalytics />} />
+                  </Route>
+                </Route>
                 
-                {/* Modules avancés */}
-                <Route path="seo-audit" element={<SeoAuditPage />} />
-                <Route path="seo-competitor" element={<SeoCompetitorPage />} />
-                <Route path="dropshipping" element={<Dropshipping />} />
-                <Route path="multi-channel" element={<MultiChannel />} />
-                <Route path="ai-hub" element={<AiHub />} />
-                <Route path="advanced-analytics" element={<AdvancedAnalytics />} />
-                <Route path="integrations" element={<Integrations />} />
-                <Route path="webhooks" element={<Webhooks />} />
-                <Route path="international-selling" element={<InternationalSelling />} />
-                <Route path="custom-reports" element={<CustomReports />} />
-                <Route path="marketing-hub" element={<MarketingHub />} />
-                <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
-                <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
-              </Route>
+                {/* Default redirect */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
               
-              {/* Redirection par défaut */}
-              <Route path="*" element={<Navigate to="/\" replace />} />
-            </Routes>
-            
-            <Toaster position="top-right" expand={true} richColors />
-            <ChatbotWidget />
-          </ShopProvider>
+              <Toaster position="top-right" expand={true} richColors />
+              <ChatbotWidget />
+            </ShopProvider>
+          </RoleProvider>
         </UserProvider>
       </LanguageProvider>
     </BrowserRouter>
@@ -147,7 +163,10 @@ export const routes = [
   { path: "/marketplace-b2b", element: <MarketplaceB2B /> },
   { path: "/automations", element: <AutomationsPage /> },
   { path: "/app/seo-audit", element: <SeoAuditPage /> },
-  { path: "/app/seo-competitor", element: <SeoCompetitorPage /> }
+  { path: "/app/seo-competitor", element: <SeoCompetitorPage /> },
+  { path: "/app/admin/dashboard", element: <AdminDashboard /> },
+  { path: "/app/admin/users", element: <UsersAdmin /> },
+  { path: "/app/admin/analytics", element: <AdminAnalytics /> }
 ];
 
 export default AppRoutes;

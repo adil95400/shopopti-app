@@ -1,5 +1,5 @@
 import React from 'react';
-import { Package, Truck, MapPin, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Package, Truck, CheckCircle, AlertTriangle } from 'lucide-react';
 import { TrackingEvent, TrackingResult } from '../../services/trackingService';
 
 interface TrackingHistoryProps {
@@ -12,7 +12,7 @@ const TrackingHistory: React.FC<TrackingHistoryProps> = ({ result }) => {
       {result.history.map((event, index) => (
         <div key={index} className="relative pb-8">
           {index < result.history.length - 1 && (
-            <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200\" aria-hidden="true"></div>
+            <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></div>
           )}
           <div className="relative flex items-start space-x-3">
             <div>
@@ -61,5 +61,26 @@ const TrackingHistory: React.FC<TrackingHistoryProps> = ({ result }) => {
     </div>
   );
 };
+
+function MapPin({ className, ...props }: React.SVGProps<SVGSVGElement> & { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+  );
+}
 
 export default TrackingHistory;
