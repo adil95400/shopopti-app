@@ -114,7 +114,7 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
@@ -162,7 +162,7 @@ const AppRoutes = () => {
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
@@ -174,27 +174,5 @@ const AppRoutes = () => {
     </BrowserRouter>
   );
 };
-
-export const routes = [
-  { path: "/tracking", element: <TrackingPage /> },
-  { path: "/generate-invoice", element: <GenerateInvoice /> },
-  { path: "/blog-ai", element: <BlogAIPage /> },
-  { path: "/seo-ai", element: <SEOAIPage /> },
-  { path: "/marketplace-b2b", element: <MarketplaceB2B /> },
-  { path: "/automations", element: <AutomationsPage /> },
-  { path: "/app/seo-audit", element: <SeoAuditPage /> },
-  { path: "/app/seo-competitor", element: <SeoCompetitorPage /> },
-  { path: "/app/admin/dashboard", element: <AdminDashboard /> },
-  { path: "/app/admin/users", element: <UsersAdmin /> },
-  { path: "/app/admin/analytics", element: <AdminAnalytics /> },
-  { path: "/app/repricing", element: <RepricingPage /> },
-  { path: "/app/inventory", element: <InventoryPage /> },
-  { path: "/app/chat-support", element: <ChatSupportPage /> },
-  { path: "/app/returns", element: <ReturnsPage /> },
-  { path: "/app/accounting", element: <AccountingPage /> },
-  { path: "/app/funnels", element: <FunnelsPage /> },
-  { path: "/app/templates", element: <TemplatesPage /> },
-  { path: "/app/ab-testing", element: <ABTestingPage /> }
-];
 
 export default AppRoutes;
