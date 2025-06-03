@@ -11,9 +11,9 @@ export const SubscriptionGate = ({ children }: { children: React.ReactNode }) =>
       const uid = data?.session?.user?.id;
       if (!uid) return;
       supabase
-        .from('subscriptions')
+        .from('stripe_subscriptions')
         .select('status')
-        .eq('user_id', uid)
+        .eq('customer_id', uid)
         .order('created_at', { ascending: false })
         .limit(1)
         .single()

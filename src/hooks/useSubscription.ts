@@ -10,14 +10,14 @@ export function useSubscription() {
       const uid = data?.session?.user?.id;
       if (!uid) return;
       supabase
-        .from('subscriptions')
-        .select('plan')
-        .eq('user_id', uid)
+        .from('stripe_subscriptions')
+        .select('price_id')
+        .eq('customer_id', uid)
         .order('created_at', { ascending: false })
         .limit(1)
         .single()
         .then(({ data }) => {
-          if (data?.plan) setPlan(data.plan);
+          if (data?.price_id) setPlan(data.price_id);
           setLoading(false);
         });
     });

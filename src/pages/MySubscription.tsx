@@ -9,9 +9,9 @@ const MySubscription = () => {
       const uid = data?.session?.user?.id;
       if (!uid) return;
       supabase
-        .from('subscriptions')
+        .from('stripe_subscriptions')
         .select('*')
-        .eq('user_id', uid)
+        .eq('customer_id', uid)
         .order('created_at', { ascending: false })
         .limit(1)
         .single()
@@ -24,7 +24,7 @@ const MySubscription = () => {
       <h1 className="text-2xl font-bold mb-4">Mon abonnement</h1>
       {sub ? (
         <div className="border p-4 rounded bg-white shadow">
-          <p><strong>Plan :</strong> {sub.plan}</p>
+          <p><strong>Plan :</strong> {sub.price_id}</p>
           <p><strong>Statut :</strong> {sub.status}</p>
           <p><strong>Date de souscription :</strong> {new Date(sub.created_at).toLocaleDateString()}</p>
           {sub.status === "active" && (
