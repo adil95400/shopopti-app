@@ -23,11 +23,11 @@ const SubscriptionOverview: React.FC = () => {
         return;
       }
       
-      // Get the user's subscription from the view
+      // Get the user's subscription from the view, ordered by subscription period
       const { data, error } = await supabase
         .from('stripe_user_subscriptions')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('current_period_end', { ascending: false })
         .limit(1)
         .maybeSingle();
       

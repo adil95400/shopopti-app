@@ -13,16 +13,16 @@ interface TrackingWidgetProps {
 const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
   const { t } = useTranslation('tracking');
   const [number, setNumber] = useState('');
-  const { trackPackage, loading } = useTracking();
-  const [isPending, startTransition] = useTransition();
+  const { trackPackage, isPending } = useTracking();
+  const [, startTransition] = useTransition();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    startTransition(() => {
-      if (number.trim()) {
+    if (number.trim()) {
+      startTransition(() => {
         trackPackage(number.trim());
-      }
-    });
+      });
+    }
   };
 
   if (compact) {
@@ -37,7 +37,7 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
             className="pl-8 py-1 h-9 text-sm"
           />
         </div>
-        <Button type="submit" size="sm" disabled={loading || isPending || !number.trim()}>
+        <Button type="submit" size="sm" disabled={isPending || !number.trim()}>
           {t('form.track')}
         </Button>
       </form>
@@ -62,8 +62,8 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
           />
         </div>
         
-        <Button type="submit" className="w-full" disabled={loading || isPending || !number.trim()}>
-          {loading || isPending ? t('form.searching') : t('form.track')}
+        <Button type="submit" className="w-full" disabled={isPending || !number.trim()}>
+          {isPending ? t('form.searching') : t('form.track')}
         </Button>
       </form>
       

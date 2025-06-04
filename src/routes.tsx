@@ -102,7 +102,6 @@ const AppRoutes = () => {
                 <Route path="/seo-ai" element={<SEOAIPage />} />
                 <Route path="/tracking" element={<TrackingPage />} />
                 <Route path="/generate-invoice" element={<GenerateInvoice />} />
-                <Route path="/automations" element={<AutomationsPage />} />
                 <Route path="/marketplace-b2b" element={<MarketplaceB2B />} />
 
                 {/* Protected pages (require login) */}
@@ -114,7 +113,7 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
@@ -126,6 +125,7 @@ const AppRoutes = () => {
                   <Route path="support" element={<Support />} />
                   <Route path="contact" element={<Contact />} />
                   <Route path="subscription" element={<Subscription />} />
+                  <Route path="automations" element={<AutomationsPage />} />
                   
                   {/* Advanced modules */}
                   <Route path="seo-audit" element={<SeoAuditPage />} />
@@ -162,7 +162,7 @@ const AppRoutes = () => {
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
