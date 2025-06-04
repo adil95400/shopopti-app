@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { BarChart3, ShoppingBag, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Package, Calendar, Bell, Settings, FileText } from 'lucide-react';
+import { BarChart3, ShoppingBag, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Package, Calendar, Bell, Settings, FileText, Bot, Database, Code, Layers } from 'lucide-react';
 import SubscriptionOverview from '../components/dashboard/SubscriptionOverview';
 import TrackingWidget from '../components/tracking/TrackingWidget';
 
@@ -228,6 +228,30 @@ export default function Dashboard() {
         </Link>
       </div>
       
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Link to="/app/integrations" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h2 className="text-lg font-semibold flex items-center">
+            <Code className="h-5 w-5 mr-2 text-indigo-500" />
+            Intégrations
+          </h2>
+          <p className="text-gray-500 mt-1">Connectez vos plateformes préférées</p>
+        </Link>
+        <Link to="/app/webhooks" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h2 className="text-lg font-semibold flex items-center">
+            <Webhook className="h-5 w-5 mr-2 text-orange-500" />
+            Webhooks
+          </h2>
+          <p className="text-gray-500 mt-1">Automatisez vos flux de données</p>
+        </Link>
+        <Link to="/app/advanced-analytics" className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h2 className="text-lg font-semibold flex items-center">
+            <BarChart3 className="h-5 w-5 mr-2 text-red-500" />
+            Analytics avancé
+          </h2>
+          <p className="text-gray-500 mt-1">Analysez vos performances en détail</p>
+        </Link>
+      </div>
+      
       <div className="bg-blue-50 p-6 rounded-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -267,30 +291,6 @@ function DollarSign(props: any) {
     >
       <line x1="12" x2="12" y1="2" y2="22"></line>
       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-    </svg>
-  );
-}
-
-function Bot(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 8V4H8"></path>
-      <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-      <path d="M2 14h2"></path>
-      <path d="M20 14h2"></path>
-      <path d="M15 13v2"></path>
-      <path d="M9 13v2"></path>
     </svg>
   );
 }

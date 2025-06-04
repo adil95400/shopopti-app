@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import IntegrationCard from '../components/integrations/IntegrationCard';
 import ApiIntegration from '../components/integrations/ApiIntegration';
 import { 
   ShoppingBag, CreditCard, Truck, BarChart, Mail, 
-  Globe, Code, Zap, Search, MessageSquare, Database
+  Globe, Code, Zap, Search, MessageSquare, Database,
+  Layers, Webhook, Settings, Plus, Filter
 } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { toast } from 'sonner';
 
 const Integrations: React.FC = () => {
   const [activeTab, setActiveTab] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
   
   const integrations = [
     // Marketplaces
@@ -48,6 +53,24 @@ const Integrations: React.FC = () => {
       category: 'marketplace' as const,
       url: 'https://etsy.com'
     },
+    {
+      id: 'bigcommerce',
+      name: 'BigCommerce',
+      description: 'Integrate your BigCommerce store for seamless product and order management.',
+      icon: <ShoppingBag className="h-5 w-5 text-blue-600" />,
+      connected: false,
+      category: 'marketplace' as const,
+      url: 'https://bigcommerce.com'
+    },
+    {
+      id: 'squarespace',
+      name: 'Squarespace',
+      description: 'Connect your Squarespace store to manage products and orders.',
+      icon: <ShoppingBag className="h-5 w-5 text-black" />,
+      connected: false,
+      category: 'marketplace' as const,
+      url: 'https://squarespace.com'
+    },
     
     // Payment
     {
@@ -68,6 +91,15 @@ const Integrations: React.FC = () => {
       category: 'payment' as const,
       url: 'https://paypal.com'
     },
+    {
+      id: 'adyen',
+      name: 'Adyen',
+      description: 'Global payment platform supporting multiple payment methods.',
+      icon: <CreditCard className="h-5 w-5 text-green-600" />,
+      connected: false,
+      category: 'payment' as const,
+      url: 'https://adyen.com'
+    },
     
     // Shipping
     {
@@ -87,6 +119,15 @@ const Integrations: React.FC = () => {
       connected: true,
       category: 'shipping' as const,
       url: 'https://easyship.com'
+    },
+    {
+      id: 'dhl',
+      name: 'DHL Express',
+      description: 'Connect with DHL for international shipping and tracking.',
+      icon: <Truck className="h-5 w-5 text-yellow-600" />,
+      connected: false,
+      category: 'shipping' as const,
+      url: 'https://dhl.com'
     },
     
     // Marketing
@@ -117,6 +158,15 @@ const Integrations: React.FC = () => {
       category: 'marketing' as const,
       url: 'https://facebook.com/business'
     },
+    {
+      id: 'tiktok',
+      name: 'TikTok',
+      description: 'Integrate with TikTok for Business to reach new customers.',
+      icon: <Globe className="h-5 w-5 text-black" />,
+      connected: false,
+      category: 'marketing' as const,
+      url: 'https://tiktok.com/business'
+    },
     
     // Analytics
     {
@@ -136,41 +186,111 @@ const Integrations: React.FC = () => {
       connected: false,
       category: 'analytics' as const,
       url: 'https://hotjar.com'
+    },
+    {
+      id: 'segment',
+      name: 'Segment',
+      description: 'Collect, clean, and control your customer data with Segment.',
+      icon: <BarChart className="h-5 w-5 text-green-600" />,
+      connected: false,
+      category: 'analytics' as const,
+      url: 'https://segment.com'
     }
   ];
   
   const handleConnect = async (id: string) => {
-    // In a real app, you would connect to the integration
-    console.log(`Connecting to ${id}...`);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      setLoading(true);
+      // In a real app, you would connect to the integration
+      console.log(`Connecting to ${id}...`);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      toast.success(`Successfully connected to ${id}`);
+    } catch (error) {
+      console.error(`Error connecting to ${id}:`, error);
+      toast.error(`Failed to connect to ${id}`);
+    } finally {
+      setLoading(false);
+    }
   };
   
   const handleDisconnect = async (id: string) => {
-    // In a real app, you would disconnect from the integration
-    console.log(`Disconnecting from ${id}...`);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      setLoading(true);
+      // In a real app, you would disconnect from the integration
+      console.log(`Disconnecting from ${id}...`);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      toast.success(`Successfully disconnected from ${id}`);
+    } catch (error) {
+      console.error(`Error disconnecting from ${id}:`, error);
+      toast.error(`Failed to disconnect from ${id}`);
+    } finally {
+      setLoading(false);
+    }
   };
   
   const handleConfigure = (id: string) => {
     // In a real app, you would open configuration modal
     console.log(`Configuring ${id}...`);
+    toast.info(`Opening configuration for ${id}`);
   };
   
-  const filteredIntegrations = activeTab === 'all'
-    ? integrations
-    : integrations.filter(integration => integration.category === activeTab);
+  const filteredIntegrations = integrations.filter(integration => {
+    // Filter by category if not "all"
+    if (activeTab !== 'all' && integration.category !== activeTab) {
+      return false;
+    }
+    
+    // Filter by search term
+    if (searchTerm && !integration.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
+        !integration.description.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return false;
+    }
+    
+    return true;
+  });
   
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Integrations</h1>
-        <p className="text-gray-600">
-          Connect your store with other services and platforms to extend functionality.
-        </p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Integrations</h1>
+          <p className="text-gray-600">
+            Connect your store with other services and platforms to extend functionality.
+          </p>
+        </div>
+        <Button>
+          <Plus className="h-4 w-4 mr-2" />
+          Add Integration
+        </Button>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search integrations..."
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline">
+            <Filter className="h-4 w-4 mr-2" />
+            Filters
+          </Button>
+          <Button variant="outline">
+            <Settings className="h-4 w-4 mr-2" />
+            Settings
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
@@ -262,6 +382,35 @@ const Integrations: React.FC = () => {
           <Button className="w-full mt-6">
             Contact for Custom Integration
           </Button>
+        </div>
+      </div>
+
+      <div className="bg-blue-50 p-6 rounded-lg">
+        <div className="flex items-center">
+          <div className="flex-shrink-0">
+            <Layers className="h-6 w-6 text-blue-600" />
+          </div>
+          <div className="ml-3">
+            <h3 className="text-lg font-medium text-blue-800">Integration Ecosystem</h3>
+            <p className="mt-2 text-sm text-blue-700">
+              Shopopti+ integrates with over 50+ platforms and services to help you streamline your e-commerce operations.
+              Our open API and webhook system allows for custom integrations with virtually any service.
+            </p>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white p-3 rounded-md shadow-sm">
+                <h4 className="font-medium text-blue-800">API Documentation</h4>
+                <p className="text-sm text-blue-700 mt-1">Comprehensive API docs for developers</p>
+              </div>
+              <div className="bg-white p-3 rounded-md shadow-sm">
+                <h4 className="font-medium text-blue-800">Webhook System</h4>
+                <p className="text-sm text-blue-700 mt-1">Real-time event notifications</p>
+              </div>
+              <div className="bg-white p-3 rounded-md shadow-sm">
+                <h4 className="font-medium text-blue-800">Developer Support</h4>
+                <p className="text-sm text-blue-700 mt-1">Dedicated support for integration partners</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
