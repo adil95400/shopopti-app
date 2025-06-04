@@ -198,7 +198,7 @@ const ChatSupportPage: React.FC = () => {
             <>
               <div className="p-4 border-b border-gray-200 flex justify-between items-center">
                 <div className="flex items-center">
-                  <Button variant="ghost\" size="sm\" className="mr-2 md:hidden">
+                  <Button variant="ghost" size="sm" className="mr-2 md:hidden">
                     <ArrowLeft className="h-4 w-4" />
                   </Button>
                   <h3 className="font-medium">{activeSession.title}</h3>
