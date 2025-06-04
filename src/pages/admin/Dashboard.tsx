@@ -97,7 +97,7 @@ const AdminDashboard: React.FC = () => {
             <DollarSign className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.revenue.total.toLocaleString()}€</div>
+            <div className="text-2xl font-bold">${stats.revenue.total.toLocaleString()}</div>
             <div className="flex items-center pt-1 text-xs">
               {stats.revenue.growth > 0 ? (
                 <>

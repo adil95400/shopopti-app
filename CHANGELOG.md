@@ -7,7 +7,7 @@
 ### ✨ Nouveautés
 - Refactor complet de la structure du projet compatible Vercel
 - Ajout des pages manquantes (Analytics, AI, Stripe, etc.)
-- Ajout d’un `.env.example` pour faciliter la configuration
+- Ajout d'un `.env.example` pour faciliter la configuration
 - Suppression des fichiers et dépendances inutiles
 
 ### 🛠️ Corrections
@@ -17,7 +17,7 @@
 - Renommage propre de tous les fichiers doublons ou mal nommés
 
 ### 🔐 Sécurité & Optimisation
-- Ajout d’un `.gitignore` propre
+- Ajout d'un `.gitignore` propre
 - Isolation des fichiers secrets et non versionnés
 - Préparation au déploiement Vercel avec `fix-vercel.sh`
 - Préparation à la branche `v6.9` (Analytics avancé, assistant AI, Stripe Billing)

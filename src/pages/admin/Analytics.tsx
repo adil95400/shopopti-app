@@ -188,8 +188,8 @@ const AdminAnalytics: React.FC = () => {
                   <div className="flex items-center">
                     <div className="h-10 w-10 bg-gray-200 rounded-md mr-3"></div>
                     <div>
-                      <div className="font-medium">Produit {i + 1}</div>
-                      <div className="text-sm text-gray-500">{(99.99 - i * 10).toFixed(2)}€</div>
+                      <div className="font-medium text-gray-900">Produit {i + 1}</div>
+                      <div className="text-xs text-gray-500">{(99.99 - i * 10).toFixed(2)}€</div>
                     </div>
                   </div>
                   <div className="text-sm font-medium">{100 - i * 15} ventes</div>

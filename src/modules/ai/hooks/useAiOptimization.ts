@@ -69,7 +69,7 @@ export function useAiOptimization() {
       }
 
       return optimized;
-    } catch (error: any) {
+    } catch (error) {
       setError(error.message || 'Failed to optimize product');
       throw error;
     } finally {
