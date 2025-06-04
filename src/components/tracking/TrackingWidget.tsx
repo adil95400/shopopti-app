@@ -16,13 +16,13 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
   const { trackPackage, loading } = useTracking();
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (number.trim()) {
-      startTransition(() => {
-        trackPackage(number);
-      });
-    }
+    startTransition(() => {
+      if (number.trim()) {
+        trackPackage(number.trim());
+      }
+    });
   };
 
   if (compact) {
