@@ -8,6 +8,7 @@ import {
   DollarSign, Package, MessageSquare, RefreshCw, ArrowDownUp,
   GitBranch, FileCode, SplitSquareVertical, Database, Layers
 } from 'lucide-react';
+import Logo from './Logo';
 
 const sections = [
   {
@@ -91,7 +92,7 @@ export default function Sidebar() {
     <>
       {/* Mobile topbar */}
       <div className="md:hidden flex items-center justify-between p-4 border-b sticky top-0 bg-muted z-40">
-        <h1 className="font-bold text-lg">Shopopti+</h1>
+        <Logo />
         <button onClick={() => setOpen(true)}><Menu size={22} /></button>
       </div>
 
@@ -100,7 +101,7 @@ export default function Sidebar() {
         <div className="fixed inset-0 bg-black/40 z-50" onClick={() => setOpen(false)}>
           <div className="bg-white w-64 h-full p-4" onClick={e => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-bold text-xl">Navigation</h2>
+              <Logo />
               <button onClick={() => setOpen(false)}><X size={20} /></button>
             </div>
             {sections.map((section, i) => (
@@ -128,6 +129,9 @@ export default function Sidebar() {
 
       {/* Desktop sidebar */}
       <aside className="w-64 hidden md:block bg-muted p-4 border-r min-h-screen">
+        <div className="mb-6">
+          <Logo />
+        </div>
         {sections.map((section, i) => (
           <div key={i} className="mb-4">
             <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>

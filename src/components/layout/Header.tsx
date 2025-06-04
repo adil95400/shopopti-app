@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
 import LanguageSelector from '../LanguageSelector';
+import Logo from './Logo';
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -71,6 +72,10 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
           >
             <Menu size={24} />
           </button>
+          
+          <div className="hidden lg:block ml-4">
+            <Logo />
+          </div>
           
           <div className="hidden md:flex md:w-72 relative ml-4">
             <div className="relative w-full">

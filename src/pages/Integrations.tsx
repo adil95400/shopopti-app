@@ -24,7 +24,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-green-600" />,
       connected: true,
       category: 'marketplace' as const,
-      url: 'https://shopify.com'
+      url: 'https://shopify.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Shopify_logo_2018.svg/2560px-Shopify_logo_2018.svg.png'
     },
     {
       id: 'woocommerce',
@@ -33,7 +34,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-purple-600" />,
       connected: false,
       category: 'marketplace' as const,
-      url: 'https://woocommerce.com'
+      url: 'https://woocommerce.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Woocommerce_logo.svg/2560px-Woocommerce_logo.svg.png'
     },
     {
       id: 'amazon',
@@ -42,7 +44,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-orange-600" />,
       connected: false,
       category: 'marketplace' as const,
-      url: 'https://sellercentral.amazon.com'
+      url: 'https://sellercentral.amazon.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png'
     },
     {
       id: 'etsy',
@@ -51,7 +54,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-orange-500" />,
       connected: false,
       category: 'marketplace' as const,
-      url: 'https://etsy.com'
+      url: 'https://etsy.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Etsy_logo.svg/2560px-Etsy_logo.svg.png'
     },
     {
       id: 'bigcommerce',
@@ -60,7 +64,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-blue-600" />,
       connected: false,
       category: 'marketplace' as const,
-      url: 'https://bigcommerce.com'
+      url: 'https://bigcommerce.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bigcommerce_logo.svg/1280px-Bigcommerce_logo.svg.png'
     },
     {
       id: 'squarespace',
@@ -69,7 +74,8 @@ const Integrations: React.FC = () => {
       icon: <ShoppingBag className="h-5 w-5 text-black" />,
       connected: false,
       category: 'marketplace' as const,
-      url: 'https://squarespace.com'
+      url: 'https://squarespace.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Squarespace_logo.svg/1280px-Squarespace_logo.svg.png'
     },
     
     // Payment
@@ -80,7 +86,8 @@ const Integrations: React.FC = () => {
       icon: <CreditCard className="h-5 w-5 text-blue-600" />,
       connected: true,
       category: 'payment' as const,
-      url: 'https://stripe.com'
+      url: 'https://stripe.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png'
     },
     {
       id: 'paypal',
@@ -89,7 +96,8 @@ const Integrations: React.FC = () => {
       icon: <CreditCard className="h-5 w-5 text-blue-800" />,
       connected: false,
       category: 'payment' as const,
-      url: 'https://paypal.com'
+      url: 'https://paypal.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1280px-PayPal.svg.png'
     },
     {
       id: 'adyen',
@@ -98,7 +106,8 @@ const Integrations: React.FC = () => {
       icon: <CreditCard className="h-5 w-5 text-green-600" />,
       connected: false,
       category: 'payment' as const,
-      url: 'https://adyen.com'
+      url: 'https://adyen.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Adyen_Corporate_Logo.svg/2560px-Adyen_Corporate_Logo.svg.png'
     },
     
     // Shipping
@@ -109,7 +118,8 @@ const Integrations: React.FC = () => {
       icon: <Truck className="h-5 w-5 text-purple-600" />,
       connected: false,
       category: 'shipping' as const,
-      url: 'https://shipstation.com'
+      url: 'https://shipstation.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/ShipStation_logo.svg/1280px-ShipStation_logo.svg.png'
     },
     {
       id: 'easyship',
@@ -118,7 +128,8 @@ const Integrations: React.FC = () => {
       icon: <Truck className="h-5 w-5 text-blue-600" />,
       connected: true,
       category: 'shipping' as const,
-      url: 'https://easyship.com'
+      url: 'https://easyship.com',
+      logo: 'https://cdn.easyship.com/courier-logos/easyship-logo.png'
     },
     {
       id: 'dhl',
@@ -127,7 +138,8 @@ const Integrations: React.FC = () => {
       icon: <Truck className="h-5 w-5 text-yellow-600" />,
       connected: false,
       category: 'shipping' as const,
-      url: 'https://dhl.com'
+      url: 'https://dhl.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/DHL_Express_logo.svg/2560px-DHL_Express_logo.svg.png'
     },
     
     // Marketing
@@ -138,7 +150,8 @@ const Integrations: React.FC = () => {
       icon: <Mail className="h-5 w-5 text-yellow-600" />,
       connected: false,
       category: 'marketing' as const,
-      url: 'https://mailchimp.com'
+      url: 'https://mailchimp.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Mailchimp_Logo_Light_Background.svg/2560px-Mailchimp_Logo_Light_Background.svg.png'
     },
     {
       id: 'klaviyo',
@@ -147,7 +160,8 @@ const Integrations: React.FC = () => {
       icon: <Mail className="h-5 w-5 text-green-600" />,
       connected: false,
       category: 'marketing' as const,
-      url: 'https://klaviyo.com'
+      url: 'https://klaviyo.com',
+      logo: 'https://cdn.klaviyo.com/assets/klaviyo-logo-black.svg'
     },
     {
       id: 'facebook',
@@ -156,7 +170,8 @@ const Integrations: React.FC = () => {
       icon: <Globe className="h-5 w-5 text-blue-600" />,
       connected: true,
       category: 'marketing' as const,
-      url: 'https://facebook.com/business'
+      url: 'https://facebook.com/business',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png'
     },
     {
       id: 'tiktok',
@@ -165,7 +180,8 @@ const Integrations: React.FC = () => {
       icon: <Globe className="h-5 w-5 text-black" />,
       connected: false,
       category: 'marketing' as const,
-      url: 'https://tiktok.com/business'
+      url: 'https://tiktok.com/business',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/TikTok_logo.svg/2560px-TikTok_logo.svg.png'
     },
     
     // Analytics
@@ -176,7 +192,8 @@ const Integrations: React.FC = () => {
       icon: <BarChart className="h-5 w-5 text-blue-600" />,
       connected: true,
       category: 'analytics' as const,
-      url: 'https://analytics.google.com'
+      url: 'https://analytics.google.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Google_Analytics_logo.svg/1200px-Google_Analytics_logo.svg.png'
     },
     {
       id: 'hotjar',
@@ -185,7 +202,8 @@ const Integrations: React.FC = () => {
       icon: <BarChart className="h-5 w-5 text-red-600" />,
       connected: false,
       category: 'analytics' as const,
-      url: 'https://hotjar.com'
+      url: 'https://hotjar.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Hotjar_Logo.svg/1280px-Hotjar_Logo.svg.png'
     },
     {
       id: 'segment',
@@ -194,7 +212,8 @@ const Integrations: React.FC = () => {
       icon: <BarChart className="h-5 w-5 text-green-600" />,
       connected: false,
       category: 'analytics' as const,
-      url: 'https://segment.com'
+      url: 'https://segment.com',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Segment_logo.svg/2560px-Segment_logo.svg.png'
     }
   ];
   

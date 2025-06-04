@@ -4,13 +4,14 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import { motion } from 'framer-motion';
 import ChatbotWidget from '../ChatbotWidget';
+import Logo from './Logo';
 
 const Layout: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">
-      <Sidebar collapsed={sidebarCollapsed} setCollapsed={setSidebarCollapsed} />
+      <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header toggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)} />
         <main className="flex-1 overflow-y-auto p-6">

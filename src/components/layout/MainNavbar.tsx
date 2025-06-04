@@ -27,7 +27,11 @@ import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 
-const MainNavbar: React.FC = () => {
+interface MainNavbarProps {
+  // Add any props if needed
+}
+
+const MainNavbar: React.FC<MainNavbarProps> = () => {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -134,7 +138,7 @@ const MainNavbar: React.FC = () => {
         { label: t('nav.supplierDirectory'), href: '/app/advanced-suppliers', icon: <Store size={18} /> },
         { label: t('nav.dropshipping'), href: '/app/dropshipping', icon: <Truck size={18} /> },
         { label: t('nav.b2bMarketplace'), href: '/marketplace-b2b', icon: <ShoppingBag size={18} /> },
-        { label: t('nav.automation'), href: '/automations', icon: <Zap size={18} /> }
+        { label: t('nav.automation'), href: '/app/automations', icon: <Zap size={18} /> }
       ]
     },
     { label: t('nav.pricing'), href: '/pricing' }
@@ -316,7 +320,7 @@ const MainNavbar: React.FC = () => {
                             <div className="mt-1 flex items-center">
                               <span className="inline-flex items-center rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary">
                                 {userProfile.plan === 'pro' ? 'Forfait Pro' : 
-                                userProfile.plan === 'agency' ? 'Forfait Agence' : 'Forfait Gratuit'}
+                                 userProfile.plan === 'agency' ? 'Forfait Agence' : 'Forfait Gratuit'}
                               </span>
                             </div>
                           )}

@@ -11,6 +11,7 @@ interface IntegrationCardProps {
     connected: boolean;
     category: 'marketplace' | 'payment' | 'shipping' | 'marketing' | 'analytics';
     url?: string;
+    logo?: string;
   };
   onConnect: (id: string) => Promise<void>;
   onDisconnect: (id: string) => Promise<void>;
@@ -46,14 +47,22 @@ const IntegrationCard: React.FC<IntegrationCardProps> = ({
       setLoading(false);
     }
   };
-  
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <div className="p-2 bg-gray-100 rounded-lg mr-3">
-            {integration.icon}
-          </div>
+          {integration.logo ? (
+            <img 
+              src={integration.logo} 
+              alt={integration.name} 
+              className="h-10 w-10 object-contain mr-3"
+            />
+          ) : (
+            <div className="p-2 bg-gray-100 rounded-lg mr-3">
+              {integration.icon}
+            </div>
+          )}
           <div>
             <h3 className="font-medium text-gray-900">{integration.name}</h3>
             <p className="text-sm text-gray-500 capitalize">{integration.category}</p>

@@ -13,6 +13,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import MarketplaceCard from '../components/marketplace/MarketplaceCard';
 
 interface Marketplace {
   id: string;
@@ -26,6 +27,11 @@ interface Marketplace {
   language: string;
   commission: string;
   requirements: string[];
+  description: string;
+  pros: string[];
+  cons: string[];
+  monthly_fee: string;
+  setup_fee: string;
 }
 
 const GlobalMarketplaces: React.FC = () => {
@@ -38,79 +44,109 @@ const GlobalMarketplaces: React.FC = () => {
       id: 'amazon-eu',
       name: 'Amazon EU',
       region: 'Europe',
-      logo: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png',
       connected: true,
       products: 124,
       status: 'active',
       currency: 'EUR',
       language: 'Multi-language',
       commission: '8-15%',
-      requirements: ['VAT registration', 'EU compliance documentation', 'Local return address']
+      requirements: ['VAT registration', 'EU compliance documentation', 'Local return address'],
+      description: 'La plus grande marketplace en Europe avec une présence dans 8 pays européens.',
+      pros: ['Énorme base de clients', 'Logistique FBA disponible', 'Ventes multi-pays faciles'],
+      cons: ['Commissions élevées', 'Concurrence intense', 'Règles strictes'],
+      monthly_fee: '39.99€',
+      setup_fee: '0€'
     },
     {
       id: 'cdiscount',
       name: 'Cdiscount',
       region: 'France',
-      logo: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/fr/thumb/8/87/Logo_Cdiscount.svg/1280px-Logo_Cdiscount.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'EUR',
       language: 'French',
       commission: '5-12%',
-      requirements: ['French business registration', 'SIRET number', 'French customer service']
+      requirements: ['French business registration', 'SIRET number', 'French customer service'],
+      description: 'Deuxième plus grande marketplace en France avec plus de 10 millions de clients actifs.',
+      pros: ['Fort trafic en France', 'Commissions compétitives', 'Bonne visibilité pour les nouveaux vendeurs'],
+      cons: ['Limité principalement à la France', 'Interface moins intuitive', 'Support vendeur limité'],
+      monthly_fee: '39.99€',
+      setup_fee: '0€'
     },
     {
       id: 'allegro',
       name: 'Allegro',
       region: 'Poland',
-      logo: 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Allegro.pl_sklep_logo.svg/1280px-Allegro.pl_sklep_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'PLN',
       language: 'Polish',
       commission: '6-15%',
-      requirements: ['EU VAT number', 'Polish translations', 'Shipping to Poland']
+      requirements: ['EU VAT number', 'Polish translations', 'Shipping to Poland'],
+      description: 'La plus grande marketplace en Pologne avec plus de 20 millions d\'utilisateurs mensuels.',
+      pros: ['Domination du marché polonais', 'Pas de frais mensuels', 'Moins de concurrence internationale'],
+      cons: ['Barrière linguistique', 'Limité principalement à la Pologne', 'Attentes élevées en matière de livraison'],
+      monthly_fee: '0€',
+      setup_fee: '0€'
     },
     {
       id: 'bol',
       name: 'Bol.com',
       region: 'Netherlands/Belgium',
-      logo: 'https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bol.com_logo.svg/1280px-Bol.com_logo.svg.png',
       connected: true,
       products: 78,
       status: 'active',
       currency: 'EUR',
       language: 'Dutch',
       commission: '5-17%',
-      requirements: ['EU VAT number', 'Dutch/Flemish translations', 'Local return solution']
+      requirements: ['EU VAT number', 'Dutch/Flemish translations', 'Local return solution'],
+      description: 'La plus grande marketplace aux Pays-Bas et en Belgique avec plus de 12 millions de clients.',
+      pros: ['Leader du marché au Benelux', 'Clients à fort pouvoir d\'achat', 'Bonne infrastructure logistique'],
+      cons: ['Marché plus petit', 'Attentes élevées en matière de service', 'Nécessite du contenu en néerlandais'],
+      monthly_fee: '40€',
+      setup_fee: '0€'
     },
     {
       id: 'zalando',
       name: 'Zalando',
       region: 'Europe',
-      logo: 'https://images.pexels.com/photos/5632396/pexels-photo-5632396.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Zalando_logo.svg/1280px-Zalando_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'EUR',
       language: 'Multi-language',
       commission: '5-20%',
-      requirements: ['Brand approval', 'High-quality product images', 'EU compliance']
+      requirements: ['Brand approval', 'High-quality product images', 'EU compliance'],
+      description: 'La plus grande plateforme de mode en ligne d\'Europe, présente dans 16 pays.',
+      pros: ['Spécialisé dans la mode', 'Présence dans 16 pays européens', 'Clientèle fidèle'],
+      cons: ['Processus d\'approbation strict', 'Limité aux produits de mode', 'Exigences élevées en matière de qualité'],
+      monthly_fee: '0€',
+      setup_fee: '0€'
     },
     {
       id: 'otto',
       name: 'Otto',
       region: 'Germany',
-      logo: 'https://images.pexels.com/photos/5632395/pexels-photo-5632395.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Otto_GmbH.svg/1280px-Otto_GmbH.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'EUR',
       language: 'German',
       commission: '10-15%',
-      requirements: ['German business registration', 'German translations', 'Local customer service']
+      requirements: ['German business registration', 'German translations', 'Local customer service'],
+      description: 'Deuxième plus grande marketplace en Allemagne avec plus de 9 millions de clients actifs.',
+      pros: ['Fort trafic en Allemagne', 'Moins concurrentiel qu\'Amazon', 'Bonne réputation auprès des consommateurs'],
+      cons: ['Limité principalement à l\'Allemagne', 'Processus d\'intégration plus long', 'Interface moins moderne'],
+      monthly_fee: '39.90€',
+      setup_fee: '0€'
     }
   ];
   
@@ -119,53 +155,73 @@ const GlobalMarketplaces: React.FC = () => {
       id: 'amazon-us',
       name: 'Amazon US',
       region: 'United States',
-      logo: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png',
       connected: true,
       products: 156,
       status: 'active',
       currency: 'USD',
       language: 'English',
       commission: '8-15%',
-      requirements: ['US business entity', 'US bank account', 'US tax information']
+      requirements: ['US business entity', 'US bank account', 'US tax information'],
+      description: 'La plus grande marketplace aux États-Unis avec plus de 200 millions de clients.',
+      pros: ['Énorme base de clients', 'Logistique FBA disponible', 'Outils marketing avancés'],
+      cons: ['Commissions élevées', 'Concurrence intense', 'Règles strictes'],
+      monthly_fee: '$39.99',
+      setup_fee: '$0'
     },
     {
       id: 'walmart',
       name: 'Walmart Marketplace',
       region: 'United States',
-      logo: 'https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Walmart_logo.svg/1280px-Walmart_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'USD',
       language: 'English',
       commission: '6-15%',
-      requirements: ['US business entity', 'UPC codes', 'Fast shipping']
+      requirements: ['US business entity', 'UPC codes', 'Fast shipping'],
+      description: 'Deuxième plus grande marketplace aux États-Unis avec plus de 120 millions de visiteurs mensuels.',
+      pros: ['Pas de frais mensuels', 'Moins de concurrence qu\'Amazon', 'Intégration avec les magasins physiques'],
+      cons: ['Processus d\'approbation strict', 'Exigences de performance élevées', 'Limité aux États-Unis'],
+      monthly_fee: '$0',
+      setup_fee: '$0'
     },
     {
       id: 'ebay-us',
       name: 'eBay US',
       region: 'United States',
-      logo: 'https://images.pexels.com/photos/5632400/pexels-photo-5632400.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2560px-EBay_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'USD',
       language: 'English',
       commission: '10-12%',
-      requirements: ['PayPal account', 'US return address']
+      requirements: ['PayPal account', 'US return address'],
+      description: 'Marketplace établie avec plus de 159 millions d\'acheteurs actifs dans le monde.',
+      pros: ['Facile à démarrer', 'Options de vente aux enchères et à prix fixe', 'Présence mondiale'],
+      cons: ['Commissions élevées', 'Attentes élevées des acheteurs', 'Concurrence sur les prix'],
+      monthly_fee: '$0-$299.95',
+      setup_fee: '$0'
     },
     {
       id: 'etsy',
       name: 'Etsy',
       region: 'North America',
-      logo: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Etsy_logo.svg/2560px-Etsy_logo.svg.png',
       connected: true,
       products: 45,
       status: 'active',
       currency: 'USD',
       language: 'English',
       commission: '5% + $0.20 per listing',
-      requirements: ['Handmade, vintage, or craft supplies only', 'Original photos']
+      requirements: ['Handmade, vintage, or craft supplies only', 'Original photos'],
+      description: 'Marketplace spécialisée dans les produits faits main, vintage et fournitures créatives.',
+      pros: ['Clientèle ciblée et engagée', 'Communauté de vendeurs solidaire', 'Moins concurrentiel pour les produits de niche'],
+      cons: ['Limité aux produits artisanaux et vintage', 'Frais par annonce', 'Attentes élevées en matière de qualité'],
+      monthly_fee: '$0',
+      setup_fee: '$0'
     }
   ];
   
@@ -174,53 +230,73 @@ const GlobalMarketplaces: React.FC = () => {
       id: 'amazon-au',
       name: 'Amazon Australia',
       region: 'Australia',
-      logo: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'AUD',
       language: 'English',
       commission: '8-15%',
-      requirements: ['Australian business number (ABN)', 'GST registration', 'Local return solution']
+      requirements: ['Australian business number (ABN)', 'GST registration', 'Local return solution'],
+      description: 'La plus grande marketplace en Australie, en pleine croissance depuis son lancement en 2017.',
+      pros: ['Marché en croissance rapide', 'Moins concurrentiel que les marchés américain et européen', 'Logistique FBA disponible'],
+      cons: ['Base de clients plus petite', 'Coûts d\'expédition élevés', 'Exigences de conformité spécifiques à l\'Australie'],
+      monthly_fee: 'AUD 49.95',
+      setup_fee: 'AUD 0'
     },
     {
       id: 'rakuten',
       name: 'Rakuten',
       region: 'Japan',
-      logo: 'https://images.pexels.com/photos/5632394/pexels-photo-5632394.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Rakuten_Global_Brand_Logo.svg/1280px-Rakuten_Global_Brand_Logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'JPY',
       language: 'Japanese',
       commission: '8-12%',
-      requirements: ['Japanese business entity', 'Japanese translations', 'Local customer service']
+      requirements: ['Japanese business entity', 'Japanese translations', 'Local customer service'],
+      description: 'Deuxième plus grande marketplace au Japon avec plus de 50 millions d\'utilisateurs.',
+      pros: ['Programme de fidélité puissant', 'Moins concurrentiel qu\'Amazon Japon', 'Forte présence locale'],
+      cons: ['Frais d\'installation élevés', 'Barrière linguistique importante', 'Processus d\'intégration complexe'],
+      monthly_fee: 'JPY 0-50,000',
+      setup_fee: 'JPY 60,000'
     },
     {
       id: 'flipkart',
       name: 'Flipkart',
       region: 'India',
-      logo: 'https://images.pexels.com/photos/5632393/pexels-photo-5632393.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Flipkart_logo.svg/1280px-Flipkart_logo.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'INR',
       language: 'English/Hindi',
       commission: '5-15%',
-      requirements: ['Indian business entity', 'GST registration', 'Local warehouse']
+      requirements: ['Indian business entity', 'GST registration', 'Local warehouse'],
+      description: 'La plus grande marketplace en Inde avec plus de 300 millions d\'utilisateurs enregistrés.',
+      pros: ['Énorme marché en croissance', 'Moins concurrentiel pour les marques étrangères', 'Options logistiques intégrées'],
+      cons: ['Nécessite une présence locale', 'Concurrence sur les prix', 'Complexités réglementaires'],
+      monthly_fee: 'INR 0',
+      setup_fee: 'INR 0'
     },
     {
       id: 'lazada',
       name: 'Lazada',
       region: 'Southeast Asia',
-      logo: 'https://images.pexels.com/photos/5632392/pexels-photo-5632392.jpeg?auto=compress&cs=tinysrgb&w=300',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Lazada_2019.svg/1280px-Lazada_2019.svg.png',
       connected: false,
       products: 0,
       status: 'pending',
       currency: 'Multiple',
       language: 'Multiple',
       commission: '2-5%',
-      requirements: ['Business registration in one SEA country', 'Local return solution']
+      requirements: ['Business registration in one SEA country', 'Local return solution'],
+      description: 'Principale marketplace en Asie du Sud-Est, présente dans 6 pays.',
+      pros: ['Commissions basses', 'Marchés en forte croissance', 'Propriété d\'Alibaba (ressources importantes)'],
+      cons: ['Logistique complexe', 'Multiples langues et réglementations', 'Attentes en matière de prix bas'],
+      monthly_fee: 'USD 0',
+      setup_fee: 'USD 0'
     }
   ];
 
@@ -247,6 +323,11 @@ const GlobalMarketplaces: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 1500));
     setLoading(false);
     // In a real app, you would update the marketplace connection status
+  };
+
+  const handleViewDetails = (marketplaceId: string) => {
+    // In a real app, you would navigate to the marketplace details page
+    console.log(`Viewing details for ${marketplaceId}`);
   };
 
   return (
@@ -302,118 +383,12 @@ const GlobalMarketplaces: React.FC = () => {
         <TabsContent value={activeTab}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredMarketplaces.map((marketplace) => (
-              <div key={marketplace.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      <div className="h-12 w-12 rounded-lg overflow-hidden mr-3">
-                        <img 
-                          src={marketplace.logo} 
-                          alt={marketplace.name} 
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">{marketplace.name}</h3>
-                        <p className="text-sm text-gray-500">{marketplace.region}</p>
-                      </div>
-                    </div>
-                    {marketplace.connected && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        <Check className="h-3 w-3 mr-1" />
-                        Connecté
-                      </span>
-                    )}
-                  </div>
-                  
-                  {marketplace.connected ? (
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-gray-50 p-3 rounded-md">
-                          <p className="text-xs text-gray-500">Produits</p>
-                          <p className="font-medium">{marketplace.products}</p>
-                        </div>
-                        <div className="bg-gray-50 p-3 rounded-md">
-                          <p className="text-xs text-gray-500">Statut</p>
-                          <div className="flex items-center">
-                            {marketplace.status === 'active' && (
-                              <span className="flex items-center text-green-600">
-                                <Check className="h-4 w-4 mr-1" />
-                                Actif
-                              </span>
-                            )}
-                            {marketplace.status === 'pending' && (
-                              <span className="flex items-center text-yellow-600">
-                                <Loader2 className="h-4 w-4 mr-1 animate-spin" />
-                                En attente
-                              </span>
-                            )}
-                            {marketplace.status === 'error' && (
-                              <span className="flex items-center text-red-600">
-                                <AlertTriangle className="h-4 w-4 mr-1" />
-                                Erreur
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex space-x-2">
-                        <Button className="flex-1">
-                          <ShoppingBag className="h-4 w-4 mr-2" />
-                          Gérer les produits
-                        </Button>
-                        <Button variant="outline">
-                          <Settings className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="bg-gray-50 p-3 rounded-md">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium">Informations</p>
-                          <Button variant="outline" size="sm">
-                            Plus de détails
-                          </Button>
-                        </div>
-                        <div className="mt-2 space-y-1 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">Devise:</span>
-                            <span>{marketplace.currency}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">Langue:</span>
-                            <span>{marketplace.language}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">Commission:</span>
-                            <span>{marketplace.commission}</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <Button 
-                        className="w-full"
-                        onClick={() => handleConnect(marketplace.id)}
-                        disabled={loading}
-                      >
-                        {loading ? (
-                          <>
-                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                            Connexion...
-                          </>
-                        ) : (
-                          <>
-                            Connecter
-                            <ArrowRight className="h-4 w-4 ml-2" />
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </div>
+              <MarketplaceCard 
+                key={marketplace.id}
+                marketplace={marketplace}
+                onConnect={handleConnect}
+                onViewDetails={handleViewDetails}
+              />
             ))}
           </div>
         </TabsContent>
