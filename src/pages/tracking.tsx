@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useTransition } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { trackingService, TrackingResult } from '../services/trackingService';
 import { toast } from 'sonner';
@@ -19,12 +19,15 @@ export default function TrackingPage() {
   const [error, setError] = useState<string | null>(null);
   const [bulkResults, setBulkResults] = useState<TrackingResult[]>([]);
   const [bulkLoading, setBulkLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     const number = searchParams.get('number');
     if (number) {
       setTrackingNumber(number);
-      handleSearch(number);
+      startTransition(() => {
+        handleSearch(number);
+      });
     }
   }, [searchParams]);
 
@@ -103,9 +106,11 @@ export default function TrackingPage() {
           onSubmit={(number, selectedCarrier) => {
             setTrackingNumber(number);
             setCarrier(selectedCarrier);
-            handleSearch(number);
+            startTransition(() => {
+              handleSearch(number);
+            });
           }}
-          loading={loading}
+          loading={loading || isPending}
         />
       </div>
 
