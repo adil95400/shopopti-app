@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Upload } from 'lucide-react';
@@ -12,19 +13,22 @@ interface BulkTrackingFormProps {
 const BulkTrackingForm: React.FC<BulkTrackingFormProps> = ({ onSubmit, loading }) => {
   const { t } = useTranslation('tracking');
   const [trackingNumbers, setTrackingNumbers] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (trackingNumbers.trim()) {
-      // Split by newlines, commas, or spaces and filter out empty strings
-      const numbers = trackingNumbers
-        .split(/[\n,\s]+/)
-        .map(n => n.trim())
-        .filter(Boolean);
-      
-      if (numbers.length > 0) {
-        onSubmit(numbers);
-      }
+      startTransition(() => {
+        // Split by newlines, commas, or spaces and filter out empty strings
+        const numbers = trackingNumbers
+          .split(/[\n,\s]+/)
+          .map(n => n.trim())
+          .filter(Boolean);
+        
+        if (numbers.length > 0) {
+          onSubmit(numbers);
+        }
+      });
     }
   };
 
@@ -45,8 +49,8 @@ const BulkTrackingForm: React.FC<BulkTrackingFormProps> = ({ onSubmit, loading }
         </p>
       </div>
       
-      <Button type="submit" disabled={loading || !trackingNumbers.trim()}>
-        {loading ? (
+      <Button type="submit" disabled={loading || isPending || !trackingNumbers.trim()}>
+        {loading || isPending ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             {t('form.searching')}

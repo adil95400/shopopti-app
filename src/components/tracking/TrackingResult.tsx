@@ -4,6 +4,7 @@ import { TrackingResult as TrackingResultType } from '../../services/trackingSer
 import TrackingHistory from './TrackingHistory';
 import PackageStatusBadge from './PackageStatusBadge';
 import { useTranslation } from 'react-i18next';
+import { Printer, Phone } from 'lucide-react';
 
 interface TrackingResultProps {
   result: TrackingResultType;
@@ -40,9 +41,11 @@ const TrackingResult: React.FC<TrackingResultProps> = ({ result }) => {
       <div className="mt-6 border-t border-gray-200 pt-6">
         <div className="flex justify-between">
           <Button variant="outline">
+            <Printer className="h-4 w-4 mr-2" />
             {t('result.print')}
           </Button>
           <Button>
+            <Phone className="h-4 w-4 mr-2" />
             {t('result.contactCarrier')}
           </Button>
         </div>
