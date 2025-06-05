@@ -13,7 +13,10 @@ import {
   Users,
   Star,
   Layers,
-  Settings
+  Settings,
+  Bot,
+  Package,
+  Truck
 } from 'lucide-react';
 import MainNavbar from '../components/layout/MainNavbar';
 import Footer from '../components/layout/Footer';
