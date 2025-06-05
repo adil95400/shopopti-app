@@ -19,6 +19,7 @@ import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 // Public pages
 import Home from './pages/Home';
 import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import Pricing from './pages/Pricing';
 import Success from './pages/Success';
@@ -87,7 +88,8 @@ const AppRoutes = () => {
               <Routes>
                 {/* Public pages */}
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login-old" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/success" element={<Success />} />
