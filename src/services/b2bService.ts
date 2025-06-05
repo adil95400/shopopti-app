@@ -13,6 +13,8 @@ export interface B2BSupplier {
   contact_email: string;
   website: string;
   logo_url: string;
+  created_at: string;
+  updated_at?: string;
 }
 
 export interface B2BProduct {
