@@ -504,3 +504,5 @@ const NotificationSettings: React.FC<NotificationSettingsProps> = ({ onSaveSetti
 };
 
 export default NotificationSettings;
+
+export { NotificationSettings }

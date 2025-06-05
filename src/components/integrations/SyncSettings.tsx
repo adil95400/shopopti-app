@@ -343,3 +343,5 @@ const SyncSettings: React.FC<SyncSettingsProps> = ({
 };
 
 export default SyncSettings;
+
+export { SyncSettings }

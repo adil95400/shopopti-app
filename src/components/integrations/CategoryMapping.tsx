@@ -287,3 +287,5 @@ const CategoryMapping: React.FC<CategoryMappingProps> = ({
 };
 
 export default CategoryMapping;
+
+export { CategoryMapping }
