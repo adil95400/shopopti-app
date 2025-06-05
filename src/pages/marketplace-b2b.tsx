@@ -76,7 +76,7 @@ export default function MarketplaceB2B() {
           description: 'Swiss dropshipping provider with a wide range of products.',
           contact_email: 'info@shopcom.ch',
           website: 'https://shopcom.ch',
-          logo_url: 'https://example.com/shopcom-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/shopcom-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -92,7 +92,7 @@ export default function MarketplaceB2B() {
           description: 'Specialized in vape products and e-cigarettes.',
           contact_email: 'info@innocigs.de',
           website: 'https://innocigs.de',
-          logo_url: 'https://example.com/innocigs-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/innocigs-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -108,7 +108,7 @@ export default function MarketplaceB2B() {
           description: 'German electronics supplier with high-quality products.',
           contact_email: 'info@syntrox.de',
           website: 'https://syntrox.de',
-          logo_url: 'https://example.com/syntrox-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/syntrox-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -124,7 +124,7 @@ export default function MarketplaceB2B() {
           description: 'Specialized in home and garden products.',
           contact_email: 'info@kaysser.de',
           website: 'https://kaysser.de',
-          logo_url: 'https://example.com/kaysser-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/kaysser-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -140,7 +140,7 @@ export default function MarketplaceB2B() {
           description: 'Trendy fashion items at competitive prices.',
           contact_email: 'info@trends4cents.de',
           website: 'https://trends4cents.de',
-          logo_url: 'https://example.com/trends4cents-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/trends4cents-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -156,7 +156,7 @@ export default function MarketplaceB2B() {
           description: 'Large catalog of products across multiple categories.',
           contact_email: 'info@vidaxl.com',
           website: 'https://vidaxl.com',
-          logo_url: 'https://example.com/vidaxl-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/vidaxl-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -172,7 +172,7 @@ export default function MarketplaceB2B() {
           description: 'One of Europe\'s largest dropshipping suppliers with thousands of products.',
           contact_email: 'info@bigbuy.eu',
           website: 'https://bigbuy.eu',
-          logo_url: 'https://example.com/bigbuy-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/bigbuy-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -188,7 +188,7 @@ export default function MarketplaceB2B() {
           description: 'Specialized in computers, electronics and IT equipment.',
           contact_email: 'info@kosatec.de',
           website: 'https://kosatec.de',
-          logo_url: 'https://example.com/kosatec-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/kosatec-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -204,7 +204,7 @@ export default function MarketplaceB2B() {
           description: 'Electronics supplier with competitive prices.',
           contact_email: 'info@atixc.de',
           website: 'https://atixc.de',
-          logo_url: 'https://example.com/atixc-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/atixc-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -220,7 +220,7 @@ export default function MarketplaceB2B() {
           description: 'Specialized in watches and accessories.',
           contact_email: 'info@ila-uhren.de',
           website: 'https://ila-uhren.de',
-          logo_url: 'https://example.com/ila-uhren-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/ila-uhren-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -236,7 +236,7 @@ export default function MarketplaceB2B() {
           description: 'Office and school supplies with high quality standards.',
           contact_email: 'info@matterhorn.ch',
           website: 'https://matterhorn.ch',
-          logo_url: 'https://example.com/matterhorn-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/matterhorn-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -252,7 +252,87 @@ export default function MarketplaceB2B() {
           description: 'Specialized in children\'s products and baby items.',
           contact_email: 'info@miniheld.de',
           website: 'https://miniheld.de',
-          logo_url: 'https://example.com/miniheld-logo.png',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/miniheld-logo.png',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        {
+          id: '13',
+          name: 'Shop.it',
+          country: 'Italy',
+          category: 'General',
+          delivery_delay: '4-8 days',
+          min_order: 100,
+          verified: true,
+          rating: 4.6,
+          description: 'Italian general merchandise supplier.',
+          contact_email: 'info@shop.it',
+          website: 'https://shop.it',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/shop-it-logo.png',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        {
+          id: '14',
+          name: 'Abaco International',
+          country: 'Italy',
+          category: 'Fashion & Accessories',
+          delivery_delay: '5-9 days',
+          min_order: 150,
+          verified: true,
+          rating: 4.5,
+          description: 'Italian fashion and accessories supplier.',
+          contact_email: 'info@abaco-international.it',
+          website: 'https://abaco-international.it',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/abaco-logo.png',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        {
+          id: '15',
+          name: 'Ariete',
+          country: 'Italy',
+          category: 'Home Appliances',
+          delivery_delay: '4-8 days',
+          min_order: 200,
+          verified: true,
+          rating: 4.7,
+          description: 'Italian home appliances manufacturer.',
+          contact_email: 'info@ariete.it',
+          website: 'https://ariete.it',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/ariete-logo.png',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        {
+          id: '16',
+          name: 'Griffati',
+          country: 'Italy',
+          category: 'Fashion',
+          delivery_delay: '5-10 days',
+          min_order: 120,
+          verified: true,
+          rating: 4.5,
+          description: 'Italian fashion brand.',
+          contact_email: 'info@griffati.it',
+          website: 'https://griffati.it',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/griffati-logo.png',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+        {
+          id: '17',
+          name: 'BestIT',
+          country: 'Italy',
+          category: 'Electronics',
+          delivery_delay: '3-7 days',
+          min_order: 100,
+          verified: true,
+          rating: 4.6,
+          description: 'Italian electronics supplier.',
+          contact_email: 'info@bestit.it',
+          website: 'https://bestit.it',
+          logo_url: 'https://i.ibb.co/Qj1bBfL/bestit-logo.png',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         }
@@ -553,11 +633,11 @@ export default function MarketplaceB2B() {
                                 </div>
                               )}
                             </div>
-                            
+
                             <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                               {supplier.description}
                             </p>
-                            
+
                             <div className="grid grid-cols-2 gap-3 mb-4">
                               <div className="bg-gray-50 p-2 rounded-md">
                                 <p className="text-xs text-gray-500">Catégorie</p>
@@ -579,7 +659,7 @@ export default function MarketplaceB2B() {
                                 <p className="font-medium">{supplier.min_order}€</p>
                               </div>
                             </div>
-                            
+
                             <Button className="w-full">
                               Voir les produits
                             </Button>

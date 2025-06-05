@@ -94,6 +94,1070 @@
         "response_rate": 94,
         "response_time": "3h"
       }
+    },
+    {
+      "id": "shop-it",
+      "name": "Shop.it",
+      "country": "IT",
+      "category": "General",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "2-4 days",
+      "shipping_time": "5-9 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/shop-it-logo.png",
+      "description": "Italian general merchandise supplier with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 94,
+        "response_rate": 92,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "abaco-international",
+      "name": "Abaco International",
+      "country": "IT",
+      "category": "Fashion & Accessories",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/abaco-logo.png",
+      "description": "Italian fashion and accessories supplier with high-quality products.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 96,
+        "response_rate": 90,
+        "response_time": "5h"
+      }
+    },
+    {
+      "id": "ariete",
+      "name": "Ariete",
+      "country": "IT",
+      "category": "Home Appliances",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/ariete-logo.png",
+      "description": "Italian home appliances manufacturer with innovative products.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "griffati",
+      "name": "Griffati",
+      "country": "IT",
+      "category": "Fashion",
+      "verified": true,
+      "rating": 4.5,
+      "processing_time": "2-4 days",
+      "shipping_time": "4-8 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/griffati-logo.png",
+      "description": "Italian fashion brand specializing in trendy clothing and accessories.",
+      "performance": {
+        "on_time_delivery": 92,
+        "quality_rating": 95,
+        "response_rate": 89,
+        "response_time": "6h"
+      }
+    },
+    {
+      "id": "bestit",
+      "name": "BestIT",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "3-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/bestit-logo.png",
+      "description": "Italian electronics supplier with a focus on quality and innovation.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "bigbuy",
+      "name": "BigBuy",
+      "country": "ES",
+      "category": "General",
+      "verified": true,
+      "rating": 4.9,
+      "processing_time": "1-2 days",
+      "shipping_time": "3-7 days",
+      "minimum_order": 0,
+      "logo": "https://i.ibb.co/Qj1bBfL/bigbuy-logo.png",
+      "description": "One of Europe's largest dropshipping suppliers with thousands of products.",
+      "performance": {
+        "on_time_delivery": 98,
+        "quality_rating": 97,
+        "response_rate": 99,
+        "response_time": "1h"
+      }
+    },
+    {
+      "id": "brands-distribution",
+      "name": "Brands Distribution",
+      "country": "IT",
+      "category": "Fashion & Accessories",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-8 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/brands-distribution-logo.png",
+      "description": "Italian distributor of fashion brands and accessories.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "brevi",
+      "name": "Brevi",
+      "country": "IT",
+      "category": "Baby & Kids",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/brevi-logo.png",
+      "description": "Italian manufacturer of baby and children's products.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "caseking",
+      "name": "Caseking.de",
+      "country": "DE",
+      "category": "Computer Hardware",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/caseking-logo.png",
+      "description": "German computer hardware and gaming equipment supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "c-and-c",
+      "name": "C&C",
+      "country": "IT",
+      "category": "Fashion",
+      "verified": true,
+      "rating": 4.5,
+      "processing_time": "2-4 days",
+      "shipping_time": "4-8 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/c-and-c-logo.png",
+      "description": "Italian fashion supplier with a wide range of clothing and accessories.",
+      "performance": {
+        "on_time_delivery": 92,
+        "quality_rating": 94,
+        "response_rate": 90,
+        "response_time": "5h"
+      }
+    },
+    {
+      "id": "cometa",
+      "name": "Cometa",
+      "country": "IT",
+      "category": "IT & Business",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "3-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/cometa-logo.png",
+      "description": "Italian IT and business solutions provider.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "computer-universe",
+      "name": "Computer Universe",
+      "country": "DE",
+      "category": "Electronics & Computers",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/computer-universe-logo.png",
+      "description": "German electronics and computer hardware supplier.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "conrad",
+      "name": "Conrad",
+      "country": "DE",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/conrad-logo.png",
+      "description": "German electronics supplier with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "daicom",
+      "name": "Daicom",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/daicom-logo.png",
+      "description": "Italian electronics and technology supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "dealerpoint",
+      "name": "DealerPoint",
+      "country": "IT",
+      "category": "Electronics & IT",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/dealerpoint-logo.png",
+      "description": "Italian electronics and IT products distributor.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "difox",
+      "name": "Difox",
+      "country": "DE",
+      "category": "Photography & Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/difox-logo.png",
+      "description": "German photography and electronics supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "dnd-distribution",
+      "name": "DND Distribution",
+      "country": "IT",
+      "category": "General",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/dnd-distribution-logo.png",
+      "description": "Italian general merchandise distributor.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "drako",
+      "name": "Drako",
+      "country": "IT",
+      "category": "Toys & Games",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/drako-logo.png",
+      "description": "Italian toys and games supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "eds-group",
+      "name": "EDS Group",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/eds-group-logo.png",
+      "description": "Italian electronics distributor with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "effezeta",
+      "name": "Effezeta",
+      "country": "IT",
+      "category": "Home & Furniture",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "2-4 days",
+      "shipping_time": "5-10 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/effezeta-logo.png",
+      "description": "Italian home and furniture manufacturer.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 98,
+        "response_rate": 94,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "erregame",
+      "name": "Erregame",
+      "country": "IT",
+      "category": "Gaming & Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/erregame-logo.png",
+      "description": "Italian gaming and electronics supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "esprinet",
+      "name": "Esprinet",
+      "country": "IT",
+      "category": "IT & Electronics",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/esprinet-logo.png",
+      "description": "Italian IT and electronics distributor.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "esselte",
+      "name": "Esselte",
+      "country": "IT",
+      "category": "Office Supplies",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/esselte-logo.png",
+      "description": "Italian office supplies manufacturer and distributor.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "focelda",
+      "name": "Focelda",
+      "country": "IT",
+      "category": "IT & Office",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/focelda-logo.png",
+      "description": "Italian IT and office supplies distributor.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "intracom",
+      "name": "Intracom",
+      "country": "IT",
+      "category": "Telecommunications",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/intracom-logo.png",
+      "description": "Italian telecommunications equipment supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "il-triangolo",
+      "name": "Il Triangolo",
+      "country": "IT",
+      "category": "IT & Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/il-triangolo-logo.png",
+      "description": "Italian IT and electronics distributor.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "ingram-micro",
+      "name": "Ingram Micro",
+      "country": "US",
+      "category": "IT & Electronics",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/ingram-micro-logo.png",
+      "description": "Global technology distributor with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "lambdatek",
+      "name": "LambdaTek",
+      "country": "UK",
+      "category": "Computer Hardware",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/lambdatek-logo.png",
+      "description": "UK-based computer hardware supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "ledlux",
+      "name": "LedLux",
+      "country": "IT",
+      "category": "Lighting",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/ledlux-logo.png",
+      "description": "Italian LED lighting supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "lindy",
+      "name": "Lindy",
+      "country": "DE",
+      "category": "IT Accessories",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/lindy-logo.png",
+      "description": "German IT accessories manufacturer and supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "mcdigit",
+      "name": "McDigit",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/mcdigit-logo.png",
+      "description": "Italian electronics supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "mediacom",
+      "name": "Mediacom",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/mediacom-logo.png",
+      "description": "Italian electronics manufacturer and supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "myshopcom",
+      "name": "MyShopCom",
+      "country": "IT",
+      "category": "General",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/myshopcom-logo.png",
+      "description": "Italian general merchandise supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "next",
+      "name": "Next",
+      "country": "IT",
+      "category": "IT & Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/next-logo.png",
+      "description": "Italian IT and electronics distributor.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "powertech",
+      "name": "PowerTech",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/powertech-logo.png",
+      "description": "Italian electronics and power solutions supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "prezzo-bomba",
+      "name": "Prezzo Bomba",
+      "country": "IT",
+      "category": "General",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/prezzo-bomba-logo.png",
+      "description": "Italian general merchandise supplier with competitive prices.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "runner",
+      "name": "Runner",
+      "country": "IT",
+      "category": "Sports & Outdoors",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/runner-logo.png",
+      "description": "Italian sports and outdoor equipment supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "sg-spa",
+      "name": "SG SPA",
+      "country": "IT",
+      "category": "General",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/sg-spa-logo.png",
+      "description": "Italian general merchandise supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "solotempo",
+      "name": "SoloTempo",
+      "country": "IT",
+      "category": "Watches & Jewelry",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/solotempo-logo.png",
+      "description": "Italian watches and jewelry supplier.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "supplies24",
+      "name": "Supplies24",
+      "country": "DE",
+      "category": "Office Supplies",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/supplies24-logo.png",
+      "description": "German office supplies distributor.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "telepart",
+      "name": "TelePart",
+      "country": "DE",
+      "category": "Telecommunications",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/telepart-logo.png",
+      "description": "German telecommunications equipment supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "country": "IT",
+      "category": "IT & Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/terminal-logo.png",
+      "description": "Italian IT and electronics distributor.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "trexon",
+      "name": "Trexon",
+      "country": "DE",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/trexon-logo.png",
+      "description": "German electronics supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "vidaxl",
+      "name": "VidaXL",
+      "country": "NL",
+      "category": "General",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-7 days",
+      "minimum_order": 50,
+      "logo": "https://i.ibb.co/Qj1bBfL/vidaxl-logo.png",
+      "description": "Dutch general merchandise supplier with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "wavedistro",
+      "name": "WaveDistro",
+      "country": "IT",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 120,
+      "logo": "https://i.ibb.co/Qj1bBfL/wavedistro-logo.png",
+      "description": "Italian electronics distributor.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "wwt",
+      "name": "WWT.it",
+      "country": "IT",
+      "category": "IT & Software",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/wwt-logo.png",
+      "description": "Italian IT and software solutions provider.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "shopcom-dropshipping",
+      "name": "Shopcom Dropshipping",
+      "country": "CH",
+      "category": "General",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-7 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/shopcom-logo.png",
+      "description": "Swiss dropshipping provider with a wide range of products.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "innocigs",
+      "name": "InnoCigs",
+      "country": "DE",
+      "category": "Vape & E-cigarettes",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 50,
+      "logo": "https://i.ibb.co/Qj1bBfL/innocigs-logo.png",
+      "description": "German vape and e-cigarette supplier.",
+      "performance": {
+        "on_time_delivery": 96,
+        "quality_rating": 97,
+        "response_rate": 94,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "syntrox-germany",
+      "name": "Syntrox Germany",
+      "country": "DE",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/syntrox-logo.png",
+      "description": "German electronics manufacturer and supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "kaysser",
+      "name": "Kaysser",
+      "country": "DE",
+      "category": "Home & Garden",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/kaysser-logo.png",
+      "description": "German home and garden products supplier.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "trends4cents",
+      "name": "Trends4Cents",
+      "country": "DE",
+      "category": "Fashion",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/trends4cents-logo.png",
+      "description": "German fashion supplier with trendy items at competitive prices.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "kosatec-computer",
+      "name": "Kosatec Computer",
+      "country": "DE",
+      "category": "Computers & IT",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-2 days",
+      "shipping_time": "2-5 days",
+      "minimum_order": 200,
+      "logo": "https://i.ibb.co/Qj1bBfL/kosatec-logo.png",
+      "description": "German computer and IT equipment supplier.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
+    },
+    {
+      "id": "atixc",
+      "name": "Atixc",
+      "country": "DE",
+      "category": "Electronics",
+      "verified": true,
+      "rating": 4.6,
+      "processing_time": "2-3 days",
+      "shipping_time": "4-7 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/atixc-logo.png",
+      "description": "German electronics supplier with competitive prices.",
+      "performance": {
+        "on_time_delivery": 93,
+        "quality_rating": 95,
+        "response_rate": 91,
+        "response_time": "4h"
+      }
+    },
+    {
+      "id": "ila-uhren",
+      "name": "ILA Uhren GmbH",
+      "country": "DE",
+      "category": "Watches & Accessories",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 300,
+      "logo": "https://i.ibb.co/Qj1bBfL/ila-uhren-logo.png",
+      "description": "German watches and accessories supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "matterhorn",
+      "name": "Matterhorn",
+      "country": "CH",
+      "category": "Office & School Supplies",
+      "verified": true,
+      "rating": 4.7,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 150,
+      "logo": "https://i.ibb.co/Qj1bBfL/matterhorn-logo.png",
+      "description": "Swiss office and school supplies supplier.",
+      "performance": {
+        "on_time_delivery": 95,
+        "quality_rating": 96,
+        "response_rate": 93,
+        "response_time": "3h"
+      }
+    },
+    {
+      "id": "miniheld",
+      "name": "MiniHeld",
+      "country": "DE",
+      "category": "Kids & Baby",
+      "verified": true,
+      "rating": 4.8,
+      "processing_time": "1-3 days",
+      "shipping_time": "3-6 days",
+      "minimum_order": 100,
+      "logo": "https://i.ibb.co/Qj1bBfL/miniheld-logo.png",
+      "description": "German kids and baby products supplier.",
+      "performance": {
+        "on_time_delivery": 97,
+        "quality_rating": 98,
+        "response_rate": 95,
+        "response_time": "2h"
+      }
     }
   ],
   "total_suppliers": 400,
