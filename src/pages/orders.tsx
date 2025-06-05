@@ -635,7 +635,7 @@ const Orders: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-3">
           {selectedOrders.length > 0 && (
             <div className="flex gap-2">
-              <Button variant="outline" onClick={handleBatchProcess}>
+              <Button variant="outline\" onClick={handleBatchProcess}>
                 <Package className="h-4 w-4 mr-2" />
                 Process {selectedOrders.length} Orders
               </Button>
