@@ -19,6 +19,7 @@ import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 // Public pages
 import Home from './pages/Home';
 import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import Pricing from './pages/Pricing';
 import Success from './pages/Success';
@@ -65,6 +66,10 @@ import Subscription from './pages/Account/Subscription';
 import AdminDashboard from './pages/admin/Dashboard';
 import UsersAdmin from './pages/admin/Users';
 import AdminAnalytics from './pages/admin/Analytics';
+import Imports from './pages/admin/Imports';
+
+// Auth pages
+import AuthCallback from './pages/auth/AuthCallback';
 
 // Missing modules pages
 import RepricingPage from './pages/repricing';
@@ -87,7 +92,7 @@ const AppRoutes = () => {
               <Routes>
                 {/* Public pages */}
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/success" element={<Success />} />
@@ -96,6 +101,9 @@ const AppRoutes = () => {
                 <Route path="/documentation/:category/:article" element={<Documentation />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/help-center" element={<HelpCenterPage />} />
+
+                {/* Auth callback */}
+                <Route path="/auth/callback" element={<AuthCallback />} />
 
                 {/* AI and tools pages accessible without login */}
                 <Route path="/blog-ai" element={<BlogAIPage />} />
@@ -113,7 +121,7 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
@@ -158,11 +166,12 @@ const AppRoutes = () => {
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="users" element={<UsersAdmin />} />
                     <Route path="analytics" element={<AdminAnalytics />} />
+                    <Route path="imports" element={<Imports />} />
                   </Route>
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
