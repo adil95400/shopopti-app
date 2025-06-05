@@ -388,125 +388,111 @@ export default function MarketplaceB2B() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Sidebar filters */}
-          <div className="lg:col-span-1">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-6">
-              <h2 className="font-medium text-lg mb-4">Filtres</h2>
+        <div className="grid grid-cols-1 gap-6">
+          {/* Horizontal filters bar */}
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <div className="flex flex-col md:flex-row gap-4 items-end">
+              <div className="w-full md:w-auto flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Recherche
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <Input
+                    placeholder="Rechercher un fournisseur..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
               
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Recherche
-                  </label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <Input
-                      placeholder="Rechercher un fournisseur..."
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Pays
-                  </label>
-                  <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={filters.country}
-                    onChange={(e) => handleFilterChange('country', e.target.value)}
-                  >
-                    <option value="">Tous les pays</option>
-                    {countries.map(country => (
-                      <option key={country} value={country}>{country}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Catégorie
-                  </label>
-                  <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={filters.category}
-                    onChange={(e) => handleFilterChange('category', e.target.value)}
-                  >
-                    <option value="">Toutes les catégories</option>
-                    {categories.map(category => (
-                      <option key={category} value={category}>{category}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Note minimale
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    {[1, 2, 3, 4, 5].map((rating) => (
-                      <button
-                        key={rating}
-                        onClick={() => handleFilterChange('minRating', filters.minRating === rating ? 0 : rating)}
-                        className={`flex items-center space-x-1 px-3 py-1.5 rounded-md transition-colors ${
-                          filters.minRating === rating
-                            ? 'bg-primary text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        <Star size={14} className={filters.minRating === rating ? 'text-white' : ''} />
-                        <span>{rating}+</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700">
-                    Fournisseurs vérifiés uniquement
-                  </label>
-                  <div className="relative inline-block w-12 align-middle select-none">
-                    <input
-                      type="checkbox"
-                      id="toggle-verified"
-                      checked={filters.verified}
-                      onChange={(e) => handleFilterChange('verified', e.target.checked)}
-                      className="sr-only"
-                    />
-                    <label
-                      htmlFor="toggle-verified"
-                      className={`block overflow-hidden h-6 rounded-full cursor-pointer ${
-                        filters.verified ? 'bg-primary' : 'bg-gray-300'
+              <div className="w-full md:w-auto md:flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Pays
+                </label>
+                <select
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  value={filters.country}
+                  onChange={(e) => handleFilterChange('country', e.target.value)}
+                >
+                  <option value="">Tous les pays</option>
+                  {countries.map(country => (
+                    <option key={country} value={country}>{country}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="w-full md:w-auto md:flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Catégorie
+                </label>
+                <select
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  value={filters.category}
+                  onChange={(e) => handleFilterChange('category', e.target.value)}
+                >
+                  <option value="">Toutes les catégories</option>
+                  {categories.map(category => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="w-full md:w-auto">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Note minimale
+                </label>
+                <div className="flex items-center space-x-2">
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <button
+                      key={rating}
+                      onClick={() => handleFilterChange('minRating', filters.minRating === rating ? 0 : rating)}
+                      className={`flex items-center space-x-1 px-3 py-1.5 rounded-md transition-colors ${
+                        filters.minRating === rating
+                          ? 'bg-primary text-white'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      <span
-                        className={`block h-6 w-6 rounded-full bg-white transform transition-transform ${
-                          filters.verified ? 'translate-x-6' : 'translate-x-0'
-                        }`}
-                      ></span>
-                    </label>
-                  </div>
+                      <Star size={14} className={filters.minRating === rating ? 'text-white' : ''} />
+                      <span>{rating}+</span>
+                    </button>
+                  ))}
                 </div>
               </div>
               
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">
-                    {filteredSuppliers.length} fournisseurs trouvés
-                  </span>
-                  <Button variant="outline" size="sm" onClick={resetFilters}>
-                    Réinitialiser
-                  </Button>
-                </div>
+              <div className="w-full md:w-auto flex items-center">
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={filters.verified}
+                    onChange={(e) => handleFilterChange('verified', e.target.checked)}
+                    className="sr-only"
+                  />
+                  <div className={`relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in ${
+                    filters.verified ? 'bg-primary' : 'bg-gray-300'
+                  } rounded-full h-6`}>
+                    <span className={`absolute h-6 w-6 bg-white rounded-full transition-transform duration-200 ease-in transform ${
+                      filters.verified ? 'translate-x-4' : 'translate-x-0'
+                    }`}></span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">Fournisseurs vérifiés uniquement</span>
+                </label>
               </div>
+            </div>
+            
+            <div className="mt-4 flex items-center justify-between">
+              <span className="text-sm text-gray-500">
+                {filteredSuppliers.length} fournisseurs trouvés
+              </span>
+              <Button variant="outline" size="sm" onClick={resetFilters}>
+                Réinitialiser les filtres
+              </Button>
             </div>
           </div>
           
           {/* Main content */}
-          <div className="lg:col-span-3">
+          <div>
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="mb-6">
                 <TabsTrigger value="suppliers" className="flex items-center">
@@ -525,7 +511,7 @@ export default function MarketplaceB2B() {
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredSuppliers.length > 0 ? (
                       filteredSuppliers.map((supplier) => (
                         <motion.div
