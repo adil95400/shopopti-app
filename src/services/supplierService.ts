@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase';
 import axios from 'axios';
-import { ExternalSupplier, SupplierProduct, ImportFilter, ImportResult } from '../types/supplier';
+import { ExternalSupplier, SupplierProduct, ImportFilter, ImportResult, OrderRequest, OrderResult } from '../types/supplier';
 
 export const supplierService = {
   async getSuppliers(): Promise<ExternalSupplier[]> {
@@ -91,9 +91,10 @@ export const supplierService = {
   async testConnection(supplier: Omit<ExternalSupplier, 'id' | 'created_at' | 'status'>): Promise<boolean> {
     try {
       // Call the appropriate API endpoint based on supplier type
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}/test`;
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
       
       const response = await axios.post(apiUrl, {
+        type: supplier.type,
         apiKey: supplier.apiKey,
         apiSecret: supplier.apiSecret,
         baseUrl: supplier.baseUrl
@@ -117,7 +118,7 @@ export const supplierService = {
       const supplier = await this.getSupplierById(supplierId);
       
       // Call the appropriate API endpoint based on supplier type
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}/products`;
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}`;
       
       const response = await axios.post(apiUrl, {
         supplierId,
@@ -135,6 +136,66 @@ export const supplierService = {
       return response.data.products;
     } catch (error) {
       console.error('Error fetching products from supplier:', error);
+      throw error;
+    }
+  },
+
+  async getProductById(supplierId: string, productId: string): Promise<SupplierProduct> {
+    try {
+      // Get the supplier details first
+      const supplier = await this.getSupplierById(supplierId);
+      
+      // Call the appropriate API endpoint based on supplier type
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}`;
+      
+      const response = await axios.post(apiUrl, {
+        supplierId,
+        apiKey: supplier.apiKey,
+        apiSecret: supplier.apiSecret,
+        baseUrl: supplier.baseUrl,
+        productId
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+        }
+      });
+      
+      if (!response.data.product) {
+        throw new Error(`Product ${productId} not found`);
+      }
+      
+      return response.data.product;
+    } catch (error) {
+      console.error(`Error fetching product ${productId} from supplier ${supplierId}:`, error);
+      throw error;
+    }
+  },
+
+  async getProductsByIds(supplierId: string, productIds: string[]): Promise<SupplierProduct[]> {
+    try {
+      // Get the supplier details first
+      const supplier = await this.getSupplierById(supplierId);
+      
+      // Call the appropriate API endpoint based on supplier type
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}`;
+      
+      const response = await axios.post(apiUrl, {
+        supplierId,
+        apiKey: supplier.apiKey,
+        apiSecret: supplier.apiSecret,
+        baseUrl: supplier.baseUrl,
+        productIds
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+        }
+      });
+      
+      return response.data.products;
+    } catch (error) {
+      console.error(`Error fetching products from supplier ${supplierId}:`, error);
       throw error;
     }
   },
@@ -172,7 +233,7 @@ export const supplierService = {
       const supplier = await this.getSupplierById(supplierId);
       
       // Call the appropriate API endpoint based on supplier type
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}/import`;
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/import`;
       
       const response = await axios.post(apiUrl, {
         supplierId,
@@ -211,6 +272,60 @@ export const supplierService = {
       return response.data;
     } catch (error) {
       console.error('Error importing products to Shopify:', error);
+      throw error;
+    }
+  },
+
+  async createOrder(supplierId: string, orderData: OrderRequest): Promise<OrderResult> {
+    try {
+      // Get the supplier details first
+      const supplier = await this.getSupplierById(supplierId);
+      
+      // Call the appropriate API endpoint based on supplier type
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}/orders`;
+      
+      const response = await axios.post(apiUrl, {
+        supplierId,
+        apiKey: supplier.apiKey,
+        apiSecret: supplier.apiSecret,
+        baseUrl: supplier.baseUrl,
+        order: orderData
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+        }
+      });
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error creating order with supplier:', error);
+      throw error;
+    }
+  },
+
+  async getOrderStatus(supplierId: string, externalOrderId: string): Promise<{
+    status: string;
+    trackingNumber?: string;
+    estimatedDelivery?: string;
+  }> {
+    try {
+      // Get the supplier details first
+      const supplier = await this.getSupplierById(supplierId);
+      
+      // Call the appropriate API endpoint based on supplier type
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/${supplier.type}/orders/${externalOrderId}`;
+      
+      const response = await axios.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token}`
+        }
+      });
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error getting order status from supplier:', error);
       throw error;
     }
   }

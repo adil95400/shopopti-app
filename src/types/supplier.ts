@@ -76,3 +76,30 @@ export interface ImportResult {
   failedCount: number;
   errors?: string[];
 }
+
+export interface OrderRequest {
+  external_order_id: string;
+  shipping_address: {
+    name: string;
+    address1: string;
+    address2?: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    phone?: string;
+    email?: string;
+  };
+  items: {
+    product_id: string;
+    quantity: number;
+    price: number;
+  }[];
+}
+
+export interface OrderResult {
+  success: boolean;
+  message: string;
+  externalOrderId?: string;
+  errors?: string[];
+}

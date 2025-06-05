@@ -4,6 +4,7 @@ import { parseString } from 'xml2js';
 import { aiService } from './aiService';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { supplierService } from './supplierService';
 
 export interface ProductData {
   id?: string;
@@ -102,7 +103,7 @@ const checkProxyAvailability = async (proxyUrl: string): Promise<boolean> => {
   }
 };
 
-const findWorkingProxy = async (): Promise<string> => {
+export const findWorkingProxy = async (): Promise<string> => {
   const proxyPromises = CORS_PROXIES.map(async proxy => {
     const isAvailable = await checkProxyAvailability(proxy);
     return isAvailable ? proxy : null;
@@ -552,6 +553,59 @@ export const importService = {
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des produits:', error);
       throw new Error('Erreur lors de la sauvegarde des produits');
+    }
+  },
+
+  async importFromSupplier(supplierId: string, productIds: string[]): Promise<ProductData[]> {
+    try {
+      // Récupérer les informations du fournisseur
+      const supplier = await supplierService.getSupplierById(supplierId);
+      
+      // Récupérer les produits du fournisseur
+      const products = await supplierService.getProductsByIds(supplierId, productIds);
+      
+      // Transformer les produits au format Shopopti+
+      const transformedProducts = products.map(product => ({
+        title: product.name,
+        description: product.description,
+        price: product.price,
+        images: product.images,
+        sku: product.sku,
+        stock: product.stock,
+        category: product.category,
+        variants: product.variants,
+        metadata: {
+          source: supplier.type,
+          sourceId: product.id,
+          importDate: new Date().toISOString()
+        }
+      }));
+      
+      // Optimiser les produits avec l'IA
+      const optimizedProducts = await Promise.all(
+        transformedProducts.map(async product => {
+          const optimized = await aiService.optimizeProduct({
+            name: product.title,
+            description: product.description,
+            category: product.category || ''
+          });
+          
+          return {
+            ...product,
+            title: optimized.title,
+            description: optimized.description_html,
+            tags: optimized.tags
+          };
+        })
+      );
+      
+      // Sauvegarder les produits dans la base de données
+      await this.saveProducts(optimizedProducts);
+      
+      return optimizedProducts;
+    } catch (error) {
+      console.error('Error importing from supplier:', error);
+      throw error;
     }
   }
 };
