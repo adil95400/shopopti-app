@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Button } from '../components/ui/button';
 import ProductOptimizer from '../components/ai/ProductOptimizer';
 import AiAssistant from '../components/ai/AiAssistant';
 import CompetitorAnalysis from '../components/ai/CompetitorAnalysis';
