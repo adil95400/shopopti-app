@@ -16,11 +16,9 @@ export default function TrackingPage() {
   const [searchParams] = useSearchParams();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('auto');
-  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<TrackingResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [bulkResults, setBulkResults] = useState<TrackingResult[]>([]);
-  const [bulkLoading, setBulkLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const performTracking = async (number: string, selectedCarrier: string = 'auto') => {
@@ -40,7 +38,6 @@ export default function TrackingPage() {
       startTransition(async () => {
         try {
           setTrackingNumber(number);
-          setLoading(true);
           setError(null);
           
           const trackingResult = await performTracking(number, carrier);
@@ -51,20 +48,17 @@ export default function TrackingPage() {
           setError(err.message || t('error.generic'));
           setResult(null);
           toast.error(err.message || t('error.generic'));
-        } finally {
-          setLoading(false);
         }
       });
     }
   }, [searchParams, carrier, t]);
 
-  const handleSearch = async (number: string) => {
+  const handleSearch = async (number: string, selectedCarrier: string) => {
     startTransition(async () => {
       try {
-        setLoading(true);
         setError(null);
         
-        const trackingResult = await performTracking(number, carrier);
+        const trackingResult = await performTracking(number, selectedCarrier);
         setResult(trackingResult);
         toast.success('Informations de suivi récupérées avec succès');
       } catch (err: any) {
@@ -72,8 +66,6 @@ export default function TrackingPage() {
         setError(err.message || t('error.generic'));
         setResult(null);
         toast.error(err.message || t('error.generic'));
-      } finally {
-        setLoading(false);
       }
     });
   };
@@ -85,7 +77,6 @@ export default function TrackingPage() {
 
     startTransition(async () => {
       try {
-        setBulkLoading(true);
         setBulkResults([]);
 
         const results = await Promise.all(
@@ -108,8 +99,6 @@ export default function TrackingPage() {
       } catch (error) {
         console.error('Error in bulk tracking:', error);
         toast.error('Une erreur est survenue lors du suivi en masse');
-      } finally {
-        setBulkLoading(false);
       }
     });
   };
@@ -126,13 +115,11 @@ export default function TrackingPage() {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
           <TrackingForm 
             onSubmit={(number, selectedCarrier) => {
-              startTransition(() => {
-                setTrackingNumber(number);
-                setCarrier(selectedCarrier);
-                handleSearch(number);
-              });
+              setTrackingNumber(number);
+              setCarrier(selectedCarrier);
+              handleSearch(number, selectedCarrier);
             }}
-            loading={loading || isPending}
+            loading={isPending}
           />
         </div>
 
@@ -164,7 +151,7 @@ export default function TrackingPage() {
           <h2 className="text-lg font-medium mb-4">{t('bulk.title')}</h2>
           <BulkTrackingForm 
             onSubmit={handleBulkTracking}
-            loading={bulkLoading || isPending}
+            loading={isPending}
           />
         </div>
 
