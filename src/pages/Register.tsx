@@ -6,6 +6,7 @@ import { User, Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react
 import { supabase } from '../lib/supabase';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
+import MainNavbar from '../components/layout/MainNavbar';
 
 const Register: React.FC = () => {
   const [name, setName] = useState('');
@@ -74,7 +75,8 @@ const Register: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+      <MainNavbar />
+      <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 mt-16">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div className="flex justify-center">
             <Logo />

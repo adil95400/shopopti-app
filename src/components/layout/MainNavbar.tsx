@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ShoppingBag, 
-  ChevronDown, 
-  Menu, 
-  X, 
-  Search, 
-  User, 
-  Bell, 
-  ShoppingCart, 
-  Settings, 
-  LogOut, 
-  HelpCircle, 
-  CreditCard,
-  Globe,
-  Zap,
-  BarChart3,
-  Package,
-  Truck,
-  Store,
-  MessageSquare,
-  Sparkles,
-  Bot,
-  FileText,
-  Layers
-} from 'lucide-react';
-import { supabase } from '../../lib/supabase';
-import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 import LanguageSelector from '../LanguageSelector';
+import Logo from './Logo';
+import { 
+  Menu, 
+  Bell, 
+  ChevronDown, 
+  Search, 
+  Settings, 
+  LogOut, 
+  CreditCard, 
+  User, 
+  HelpCircle, 
+  BarChart3, 
+  ShoppingBag, 
+  Package, 
+  Truck, 
+  FileText, 
+  Bot, 
+  Globe, 
+  Zap, 
+  Layers
+} from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 
 const MainNavbar: React.FC = () => {
   const { t } = useTranslation();
@@ -126,7 +121,7 @@ const MainNavbar: React.FC = () => {
         { 
           label: 'Produits gagnants', 
           href: '/app/winning-products', 
-          icon: <Sparkles size={18} />,
+          icon: <Zap size={18} />,
           description: 'Découvrez les produits les plus performants du moment'
         },
         { 
@@ -156,7 +151,7 @@ const MainNavbar: React.FC = () => {
         { 
           label: 'Marketplace B2B', 
           href: '/marketplace-b2b', 
-          icon: <Store size={18} />,
+          icon: <Globe size={18} />,
           description: 'Connectez-vous directement avec des fournisseurs vérifiés'
         },
         { 
@@ -216,7 +211,7 @@ const MainNavbar: React.FC = () => {
         { 
           label: 'Webinaires', 
           href: '/webinars', 
-          icon: <MessageSquare size={18} />,
+          icon: <User size={18} />,
           description: 'Formations et événements en ligne'
         },
         { 
@@ -293,7 +288,7 @@ const MainNavbar: React.FC = () => {
                   )}
 
                   {item.items && activeDropdown === item.label && (
-                    <div className="absolute left-0 mt-1 w-72 rounded-md bg-white shadow-lg ring-1 ring-gray-200 z-50">
+                    <div className="absolute left-0 mt-1 w-72 rounded-md border border-gray-200 bg-white shadow-lg z-50">
                       <div className="py-1">
                         {item.items.map((subItem) => (
                           <Link
@@ -501,7 +496,7 @@ const MainNavbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-gray-700 hover:text-primary"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <Menu size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>

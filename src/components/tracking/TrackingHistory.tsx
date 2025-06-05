@@ -1,5 +1,5 @@
 import React from 'react';
-import { Package, Truck, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Package, Truck, CheckCircle, AlertCircle } from 'lucide-react';
 import { TrackingEvent, TrackingResult } from '../../services/trackingService';
 
 interface TrackingHistoryProps {
@@ -12,7 +12,7 @@ const TrackingHistory: React.FC<TrackingHistoryProps> = ({ result }) => {
       {result.history.map((event, index) => (
         <div key={index} className="relative pb-8">
           {index < result.history.length - 1 && (
-            <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200\" aria-hidden="true"></div>
+            <div className="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></div>
           )}
           <div className="relative flex items-start space-x-3">
             <div>
@@ -29,7 +29,7 @@ const TrackingHistory: React.FC<TrackingHistoryProps> = ({ result }) => {
                   result.status.code === 'delivered' ? (
                     <CheckCircle className="h-6 w-6 text-white" />
                   ) : result.status.code === 'exception' ? (
-                    <AlertTriangle className="h-6 w-6 text-white" />
+                    <AlertCircle className="h-6 w-6 text-white" />
                   ) : (
                     <Truck className="h-6 w-6 text-white" />
                   )

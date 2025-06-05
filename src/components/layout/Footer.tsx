@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                 </a>
               </div>
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+                <MapPin className="h-5 w-5 text-gray-400 mt-0.5 mr-2" />
                 <span className="text-gray-400">
                   123 Rue du Commerce<br />
                   75001 Paris, France
