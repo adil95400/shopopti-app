@@ -9,6 +9,11 @@ export default function AutomationsPage() {
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  
+  // Add state for toggle switches
+  const [notificationEnabled, setNotificationEnabled] = useState(true);
+  const [stockUpdateEnabled, setStockUpdateEnabled] = useState(true);
+  const [emailConfirmationEnabled, setEmailConfirmationEnabled] = useState(true);
 
   const sendWebhook = async () => {
     try {
@@ -111,17 +116,20 @@ export default function AutomationsPage() {
               <div className="relative inline-block w-12 align-middle select-none">
                 <input
                   type="checkbox"
-                  id="toggle-1"
+                  checked={notificationEnabled}
+                  onChange={(e) => setNotificationEnabled(e.target.checked)}
                   className="sr-only"
-                  defaultChecked
                 />
                 <label
-                  htmlFor="toggle-1"
-                  className="block overflow-hidden h-6 rounded-full cursor-pointer bg-primary"
+                  className={`block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                    notificationEnabled ? 'bg-primary' : 'bg-gray-300'
+                  }`}
                 >
                   <span
-                    className="block h-6 w-6 rounded-full bg-white transform translate-x-6"
-                  ></span>
+                    className={`block h-6 w-6 rounded-full bg-white transform transition-transform duration-200 ease-in-out ${
+                      notificationEnabled ? 'translate-x-6' : 'translate-x-0'
+                    }`}
+                  />
                 </label>
               </div>
             </div>
@@ -141,17 +149,20 @@ export default function AutomationsPage() {
               <div className="relative inline-block w-12 align-middle select-none">
                 <input
                   type="checkbox"
-                  id="toggle-2"
+                  checked={stockUpdateEnabled}
+                  onChange={(e) => setStockUpdateEnabled(e.target.checked)}
                   className="sr-only"
-                  defaultChecked
                 />
                 <label
-                  htmlFor="toggle-2"
-                  className="block overflow-hidden h-6 rounded-full cursor-pointer bg-primary"
+                  className={`block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                    stockUpdateEnabled ? 'bg-primary' : 'bg-gray-300'
+                  }`}
                 >
                   <span
-                    className="block h-6 w-6 rounded-full bg-white transform translate-x-6"
-                  ></span>
+                    className={`block h-6 w-6 rounded-full bg-white transform transition-transform duration-200 ease-in-out ${
+                      stockUpdateEnabled ? 'translate-x-6' : 'translate-x-0'
+                    }`}
+                  />
                 </label>
               </div>
             </div>
@@ -171,17 +182,20 @@ export default function AutomationsPage() {
               <div className="relative inline-block w-12 align-middle select-none">
                 <input
                   type="checkbox"
-                  id="toggle-3"
+                  checked={emailConfirmationEnabled}
+                  onChange={(e) => setEmailConfirmationEnabled(e.target.checked)}
                   className="sr-only"
-                  defaultChecked
                 />
                 <label
-                  htmlFor="toggle-3"
-                  className="block overflow-hidden h-6 rounded-full cursor-pointer bg-primary"
+                  className={`block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                    emailConfirmationEnabled ? 'bg-primary' : 'bg-gray-300'
+                  }`}
                 >
                   <span
-                    className="block h-6 w-6 rounded-full bg-white transform translate-x-6"
-                  ></span>
+                    className={`block h-6 w-6 rounded-full bg-white transform transition-transform duration-200 ease-in-out ${
+                      emailConfirmationEnabled ? 'translate-x-6' : 'translate-x-0'
+                    }`}
+                  />
                 </label>
               </div>
             </div>
