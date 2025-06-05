@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 
 // Providers
@@ -19,7 +19,6 @@ import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 // Public pages
 import Home from './pages/Home';
 import Login from './pages/Login';
-import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import Pricing from './pages/Pricing';
 import Success from './pages/Success';
@@ -27,26 +26,6 @@ import Cancel from './pages/Cancel';
 import Documentation from './pages/Documentation';
 import FaqPage from './pages/faq';
 import HelpCenterPage from './pages/help-center';
-import AuthCallback from './pages/auth/AuthCallback';
-
-// Dashboard pages
-import Dashboard from './pages/Dashboard';
-import Products from './pages/Products';
-import Orders from './pages/orders';
-import ImportProducts from './pages/ImportProducts';
-import Analytics from './pages/Analytics';
-import Reviews from './pages/Reviews';
-import Suppliers from './pages/Suppliers';
-import Settings from './pages/Settings';
-import Support from './pages/Support';
-import Contact from './pages/Contact';
-import Subscription from './pages/Account/Subscription';
-
-// Admin pages
-import AdminDashboard from './pages/admin/Dashboard';
-import UsersAdmin from './pages/admin/Users';
-import AdminAnalytics from './pages/admin/Analytics';
-import Imports from './pages/admin/Imports';
 
 // AI and tools pages
 import BlogAIPage from './pages/blog-ai';
@@ -69,6 +48,24 @@ import MarketingHub from './pages/MarketingHub';
 import GlobalMarketplaces from './pages/GlobalMarketplaces';
 import AdvancedSuppliers from './pages/AdvancedSuppliers';
 
+// Dashboard pages
+import Dashboard from './pages/Dashboard';
+import Products from './pages/Products';
+import Orders from './pages/Orders';
+import ImportProducts from './pages/ImportProducts';
+import Analytics from './pages/Analytics';
+import Reviews from './pages/Reviews';
+import Suppliers from './pages/Suppliers';
+import Settings from './pages/Settings';
+import Support from './pages/Support';
+import Contact from './pages/Contact';
+import Subscription from './pages/Account/Subscription';
+
+// Admin pages
+import AdminDashboard from './pages/admin/Dashboard';
+import UsersAdmin from './pages/admin/Users';
+import AdminAnalytics from './pages/admin/Analytics';
+
 // Missing modules pages
 import RepricingPage from './pages/repricing';
 import InventoryPage from './pages/inventory';
@@ -81,7 +78,7 @@ import ABTestingPage from './pages/ab-testing';
 
 const AppRoutes = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <LanguageProvider>
         <UserProvider>
           <RoleProvider>
@@ -90,8 +87,7 @@ const AppRoutes = () => {
               <Routes>
                 {/* Public pages */}
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/login-old" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/success" element={<Success />} />
@@ -100,7 +96,6 @@ const AppRoutes = () => {
                 <Route path="/documentation/:category/:article" element={<Documentation />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/help-center" element={<HelpCenterPage />} />
-                <Route path="/auth/callback" element={<AuthCallback />} />
 
                 {/* AI and tools pages accessible without login */}
                 <Route path="/blog-ai" element={<BlogAIPage />} />
@@ -118,11 +113,11 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
-                  <Route path="dashboard\" element={<Dashboard />} />
-                  <Route path="products\" element={<Products />} />
-                  <Route path="orders\" element={<Orders />} />
-                  <Route path="import-products\" element={<ImportProducts />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="products" element={<Products />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="import-products" element={<ImportProducts />} />
                   <Route path="analytics" element={<Analytics />} />
                   <Route path="reviews" element={<Reviews />} />
                   <Route path="suppliers" element={<Suppliers />} />
@@ -163,12 +158,11 @@ const AppRoutes = () => {
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="users" element={<UsersAdmin />} />
                     <Route path="analytics" element={<AdminAnalytics />} />
-                    <Route path="imports" element={<Imports />} />
                   </Route>
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
@@ -177,7 +171,7 @@ const AppRoutes = () => {
           </RoleProvider>
         </UserProvider>
       </LanguageProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
