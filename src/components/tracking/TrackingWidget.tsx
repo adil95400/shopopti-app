@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react';
+import React, { useState } from 'react';
 import { useTracking } from '../../hooks/useTracking';
 import { Package, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,14 +14,11 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
   const { t } = useTranslation('tracking');
   const [number, setNumber] = useState('');
   const { trackPackage, isPending } = useTracking();
-  const [, startTransition] = useTransition();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (number.trim()) {
-      startTransition(() => {
-        trackPackage(number.trim());
-      });
+      trackPackage(number.trim());
     }
   };
 

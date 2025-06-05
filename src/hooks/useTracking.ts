@@ -18,22 +18,24 @@ export function useTracking() {
       return;
     }
 
-    setError(null);
-    
-    try {
-      const trackingResult = await trackingService.trackPackage(
-        trackingToUse, 
-        { carrier: carrierToUse !== 'auto' ? carrierToUse : undefined }
-      );
+    startTransition(async () => {
+      setError(null);
       
-      setResult(trackingResult);
-      toast.success('Informations de suivi récupérées avec succès');
-    } catch (err: any) {
-      console.error('Erreur de suivi:', err);
-      setError(err.message || "Une erreur est survenue lors du suivi du colis");
-      setResult(null);
-      toast.error(err.message || "Une erreur est survenue lors du suivi du colis");
-    }
+      try {
+        const trackingResult = await trackingService.trackPackage(
+          trackingToUse, 
+          { carrier: carrierToUse !== 'auto' ? carrierToUse : undefined }
+        );
+        
+        setResult(trackingResult);
+        toast.success('Informations de suivi récupérées avec succès');
+      } catch (err: any) {
+        console.error('Erreur de suivi:', err);
+        setError(err.message || "Une erreur est survenue lors du suivi du colis");
+        setResult(null);
+        toast.error(err.message || "Une erreur est survenue lors du suivi du colis");
+      }
+    });
   };
 
   return {
