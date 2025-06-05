@@ -18,7 +18,6 @@ import SubscriptionBanner from './components/stripe/SubscriptionBanner';
 
 // Public pages
 import Home from './pages/Home';
-import Login from './pages/Login';
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import Pricing from './pages/Pricing';
@@ -27,6 +26,9 @@ import Cancel from './pages/Cancel';
 import Documentation from './pages/Documentation';
 import FaqPage from './pages/faq';
 import HelpCenterPage from './pages/help-center';
+
+// Auth pages
+import AuthCallback from './pages/auth/AuthCallback';
 
 // AI and tools pages
 import BlogAIPage from './pages/blog-ai';
@@ -67,9 +69,6 @@ import AdminDashboard from './pages/admin/Dashboard';
 import UsersAdmin from './pages/admin/Users';
 import AdminAnalytics from './pages/admin/Analytics';
 import Imports from './pages/admin/Imports';
-
-// Auth pages
-import AuthCallback from './pages/auth/AuthCallback';
 
 // Missing modules pages
 import RepricingPage from './pages/repricing';
@@ -121,7 +120,7 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
@@ -171,7 +170,7 @@ const AppRoutes = () => {
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
