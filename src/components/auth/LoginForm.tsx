@@ -84,18 +84,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, isModal = false }) => {
         </div>
       )}
       
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center ml-auto">
-          <span className="text-sm text-gray-600 mr-2">Language:</span>
-          <button className="flex items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" className="h-5 w-8" />
-            <svg className="h-4 w-4 ml-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      
       <SocialLoginButtons 
         onLoginStart={() => setLoading(true)}
         onLoginComplete={() => {

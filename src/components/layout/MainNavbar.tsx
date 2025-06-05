@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
-import LanguageSelector from '../LanguageSelector';
 import Logo from './Logo';
 import LoginModal from '../auth/LoginModal';
 import { 
@@ -324,8 +323,6 @@ const MainNavbar: React.FC = () => {
               />
             </div>
             
-            <LanguageSelector />
-            
             {isAuthenticated ? (
               <>
                 <motion.div 
@@ -628,7 +625,7 @@ const MainNavbar: React.FC = () => {
             className="fixed top-16 right-0 w-full md:w-80 md:right-4 rounded-md border border-gray-200 bg-white shadow-lg z-20 md:hidden"
           >
             <div className="border-b border-gray-200 px-4 py-3">
-              <h3 className="font-medium">{t('common.notifications')}</h3>
+              <h3 className="font-medium">Notifications</h3>
             </div>
             <div className="max-h-96 overflow-y-auto p-2">
               {notifications.map((notification) => (
