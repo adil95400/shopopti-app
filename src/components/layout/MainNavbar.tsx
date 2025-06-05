@@ -23,7 +23,8 @@ import {
   Bot, 
   Globe, 
   Zap, 
-  Layers
+  Layers,
+  X
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
@@ -496,7 +497,7 @@ const MainNavbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-gray-700 hover:text-primary"
             >
-              {mobileMenuOpen ? <Menu size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>

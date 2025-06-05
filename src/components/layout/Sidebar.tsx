@@ -99,57 +99,61 @@ export default function Sidebar() {
       {/* Drawer menu */}
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50" onClick={() => setOpen(false)}>
-          <div className="bg-white w-64 h-full p-4" onClick={e => e.stopPropagation()}>
+          <div className="bg-white w-64 h-full p-4 overflow-y-auto" onClick={e => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-4">
               <Logo />
               <button onClick={() => setOpen(false)}><X size={20} /></button>
             </div>
-            {sections.map((section, i) => (
-              <div key={i} className="mb-4">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
-                <div className="flex flex-col gap-1">
-                  {section.links.map(link => (
-                    <NavLink
-                      key={link.path}
-                      to={link.path}
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 px-3 py-2 rounded hover:bg-muted/50 ${isActive ? 'bg-muted font-semibold' : ''}`
-                      }
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.icon} {link.label}
-                    </NavLink>
-                  ))}
+            <div className="space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
+              {sections.map((section, i) => (
+                <div key={i} className="mb-4">
+                  <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
+                  <div className="flex flex-col gap-1">
+                    {section.links.map(link => (
+                      <NavLink
+                        key={link.path}
+                        to={link.path}
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 px-3 py-2 rounded hover:bg-muted/50 ${isActive ? 'bg-muted font-semibold' : ''}`
+                        }
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.icon} {link.label}
+                      </NavLink>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       )}
 
       {/* Desktop sidebar */}
-      <aside className="w-64 hidden md:block bg-muted p-4 border-r min-h-screen">
+      <aside className="w-64 hidden md:block bg-muted p-4 border-r min-h-screen overflow-y-auto">
         <div className="mb-6">
           <Logo />
         </div>
-        {sections.map((section, i) => (
-          <div key={i} className="mb-4">
-            <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
-            <div className="flex flex-col gap-1">
-              {section.links.map(link => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-3 py-2 rounded hover:bg-primary/10 ${isActive ? 'bg-primary/20 font-semibold' : ''}`
-                  }
-                >
-                  {link.icon} {link.label}
-                </NavLink>
-              ))}
+        <div className="space-y-4 overflow-y-auto max-h-[calc(100vh-100px)]">
+          {sections.map((section, i) => (
+            <div key={i} className="mb-4">
+              <h3 className="text-sm font-semibold text-muted-foreground mb-2">{section.title}</h3>
+              <div className="flex flex-col gap-1">
+                {section.links.map(link => (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-3 py-2 rounded hover:bg-primary/10 ${isActive ? 'bg-primary/20 font-semibold' : ''}`
+                    }
+                  >
+                    {link.icon} {link.label}
+                  </NavLink>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </aside>
     </>
   );
