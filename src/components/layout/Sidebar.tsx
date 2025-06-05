@@ -49,6 +49,7 @@ const sections = [
     title: "Intégrations",
     links: [
       { path: "/app/integrations", label: "Intégrations", icon: <Code size={18} /> },
+      { path: "/app/multi-platform-integration", label: "Intégration Multiplateforme", icon: <Layers size={18} /> },
       { path: "/app/webhooks", label: "Webhooks", icon: <Webhook size={18} /> },
       { path: "/app/international-selling", label: "International", icon: <Languages size={18} /> },
       { path: "/app/custom-reports", label: "Rapports personnalisés", icon: <FileBarChart2 size={18} /> },

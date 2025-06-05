@@ -50,6 +50,7 @@ import CustomReports from './pages/CustomReports';
 import MarketingHub from './pages/MarketingHub';
 import GlobalMarketplaces from './pages/GlobalMarketplaces';
 import AdvancedSuppliers from './pages/AdvancedSuppliers';
+import MultiPlatformIntegration from './pages/MultiPlatformIntegration';
 
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
@@ -148,6 +149,7 @@ const AppRoutes = () => {
                   <Route path="marketing-hub" element={<MarketingHub />} />
                   <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
                   <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
+                  <Route path="multi-platform-integration" element={<MultiPlatformIntegration />} />
                   
                   {/* Missing modules */}
                   <Route path="repricing" element={<RepricingPage />} />
