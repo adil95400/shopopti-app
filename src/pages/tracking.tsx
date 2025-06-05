@@ -23,43 +23,59 @@ export default function TrackingPage() {
   const [bulkLoading, setBulkLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
 
+  const performTracking = async (number: string, selectedCarrier: string = 'auto') => {
+    if (!number.trim()) {
+      throw new Error(t('error.invalidNumber'));
+    }
+
+    return await trackingService.trackPackage(
+      number,
+      { carrier: selectedCarrier !== 'auto' ? selectedCarrier : undefined }
+    );
+  };
+
   useEffect(() => {
     const number = searchParams.get('number');
     if (number) {
-      setTrackingNumber(number);
-      startTransition(() => {
-        handleSearch(number);
+      startTransition(async () => {
+        try {
+          setTrackingNumber(number);
+          setLoading(true);
+          setError(null);
+          
+          const trackingResult = await performTracking(number, carrier);
+          setResult(trackingResult);
+          toast.success('Informations de suivi récupérées avec succès');
+        } catch (err: any) {
+          console.error('Erreur de suivi:', err);
+          setError(err.message || t('error.generic'));
+          setResult(null);
+          toast.error(err.message || t('error.generic'));
+        } finally {
+          setLoading(false);
+        }
       });
     }
-  }, [searchParams]);
+  }, [searchParams, carrier, t]);
 
-  const handleSearch = async (number?: string) => {
-    const trackingToUse = number || trackingNumber;
-
-    if (!trackingToUse.trim()) {
-      setError(t('error.invalidNumber'));
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const trackingResult = await trackingService.trackPackage(
-        trackingToUse,
-        { carrier: carrier !== 'auto' ? carrier : undefined }
-      );
-
-      setResult(trackingResult);
-      toast.success('Informations de suivi récupérées avec succès');
-    } catch (err: any) {
-      console.error('Erreur de suivi:', err);
-      setError(err.message || t('error.generic'));
-      setResult(null);
-      toast.error(err.message || t('error.generic'));
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = async (number: string) => {
+    startTransition(async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const trackingResult = await performTracking(number, carrier);
+        setResult(trackingResult);
+        toast.success('Informations de suivi récupérées avec succès');
+      } catch (err: any) {
+        console.error('Erreur de suivi:', err);
+        setError(err.message || t('error.generic'));
+        setResult(null);
+        toast.error(err.message || t('error.generic'));
+      } finally {
+        setLoading(false);
+      }
+    });
   };
 
   const handleBulkTracking = async (trackingNumbers: string[]) => {
@@ -67,33 +83,35 @@ export default function TrackingPage() {
 
     const limitedNumbers = trackingNumbers.slice(0, 10);
 
-    setBulkLoading(true);
-    setBulkResults([]);
+    startTransition(async () => {
+      try {
+        setBulkLoading(true);
+        setBulkResults([]);
 
-    try {
-      const results = await Promise.all(
-        limitedNumbers.map(number =>
-          trackingService.trackPackage(number).catch(error => {
-            console.error(`Error tracking ${number}:`, error);
-            return null;
-          })
-        )
-      );
+        const results = await Promise.all(
+          limitedNumbers.map(number =>
+            performTracking(number).catch(error => {
+              console.error(`Error tracking ${number}:`, error);
+              return null;
+            })
+          )
+        );
 
-      const successfulResults = results.filter(Boolean) as TrackingResult[];
-      setBulkResults(successfulResults);
+        const successfulResults = results.filter(Boolean) as TrackingResult[];
+        setBulkResults(successfulResults);
 
-      if (successfulResults.length > 0) {
-        toast.success(`${successfulResults.length} colis suivis avec succès`);
-      } else {
-        toast.error("Aucun colis n'a pu être suivi");
+        if (successfulResults.length > 0) {
+          toast.success(`${successfulResults.length} colis suivis avec succès`);
+        } else {
+          toast.error("Aucun colis n'a pu être suivi");
+        }
+      } catch (error) {
+        console.error('Error in bulk tracking:', error);
+        toast.error('Une erreur est survenue lors du suivi en masse');
+      } finally {
+        setBulkLoading(false);
       }
-    } catch (error) {
-      console.error('Error in bulk tracking:', error);
-      toast.error('Une erreur est survenue lors du suivi en masse');
-    } finally {
-      setBulkLoading(false);
-    }
+    });
   };
 
   return (
@@ -108,9 +126,9 @@ export default function TrackingPage() {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
           <TrackingForm 
             onSubmit={(number, selectedCarrier) => {
-              setTrackingNumber(number);
-              setCarrier(selectedCarrier);
               startTransition(() => {
+                setTrackingNumber(number);
+                setCarrier(selectedCarrier);
                 handleSearch(number);
               });
             }}
@@ -146,7 +164,7 @@ export default function TrackingPage() {
           <h2 className="text-lg font-medium mb-4">{t('bulk.title')}</h2>
           <BulkTrackingForm 
             onSubmit={handleBulkTracking}
-            loading={bulkLoading}
+            loading={bulkLoading || isPending}
           />
         </div>
 
