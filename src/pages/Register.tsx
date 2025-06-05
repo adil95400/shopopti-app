@@ -7,237 +7,106 @@ import { supabase } from '../lib/supabase';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import MainNavbar from '../components/layout/MainNavbar';
+import RegisterForm from '../components/auth/RegisterForm';
+import Footer from '../components/layout/Footer';
 
 const Register: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    
-    if (password !== confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
-      return;
-    }
-    
-    setLoading(true);
-
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            name
-          }
-        }
-      });
-      
-      if (error) {
-        throw error;
-      }
-      
-      if (data.user) {
-        // Créer un profil utilisateur dans la base de données
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            { 
-              id: data.user.id,
-              name,
-              email,
-              created_at: new Date().toISOString()
-            }
-          ]);
-          
-        if (profileError) {
-          console.error('Erreur lors de la création du profil:', profileError);
-        }
-        
-        navigate('/app/dashboard');
-      } else {
-        setError('Une erreur est survenue lors de l\'inscription');
-      }
-    } catch (err: any) {
-      console.error('Erreur d\'inscription:', err);
-      setError(err.message || 'Une erreur est survenue. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <MainNavbar />
-      <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 mt-16">
-        <div className="mx-auto w-full max-w-sm lg:w-96">
-          <div className="flex justify-center">
-            <Logo />
-          </div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mt-8"
-          >
-            <div className="mt-6">
-              <h2 className="text-2xl font-bold text-gray-900">Créez votre compte</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Vous avez déjà un compte ?{' '}
-                <Link to="/login" className="font-medium text-primary hover:text-primary-600">
-                  Connectez-vous
-                </Link>
-              </p>
-            </div>
-
-            <AnimatePresence mode="wait">
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 flex items-start p-3 rounded-md bg-red-50"
-                >
-                  <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 mr-2" />
-                  <p className="text-sm text-red-500">{error}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Nom complet
-                </label>
-                <div className="mt-1">
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    icon={<User size={16} className="text-gray-400" />}
-                    placeholder="Jean Dupont"
-                  />
+      
+      <div className="pt-24 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="md:w-1/2 md:pr-8 mb-8 md:mb-0"
+            >
+              <div className="max-w-md mx-auto md:mx-0 md:ml-auto">
+                <div className="text-center md:text-left mb-8">
+                  <h1 className="text-3xl font-bold text-gray-900">Join Shopopti+ Today</h1>
+                  <p className="mt-3 text-lg text-gray-600">
+                    Create your account and start optimizing your e-commerce business with AI-powered tools.
+                  </p>
                 </div>
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Adresse email
-                </label>
-                <div className="mt-1">
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    icon={<Mail size={16} className="text-gray-400" />}
-                    placeholder="vous@exemple.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Mot de passe
-                </label>
-                <div className="mt-1">
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    icon={<Lock size={16} className="text-gray-400" />}
-                    minLength={8}
-                  />
-                </div>
-                <p className="mt-1 text-xs text-gray-500">Min. 8 caractères</p>
-              </div>
-
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                  Confirmer le mot de passe
-                </label>
-                <div className="mt-1">
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    icon={<Lock size={16} className="text-gray-400" />}
-                    minLength={8}
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  required
-                  className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                />
-                <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                  J'accepte les{' '}
-                  <a href="#" className="font-medium text-primary hover:text-primary-600">
-                    Conditions d'utilisation
-                  </a>{' '}
-                  et la{' '}
-                  <a href="#" className="font-medium text-primary hover:text-primary-600">
-                    Politique de confidentialité
-                  </a>
-                </label>
-              </div>
-
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full mt-4"
-              >
-                {loading ? (
-                  <Loader2 className="h-5 w-5 animate-spin text-white" />
-                ) : (
-                  <div className="flex items-center justify-center">
-                    Créer un compte
-                    <ArrowRight size={16} className="ml-2" />
+                
+                <div className="bg-white rounded-lg shadow-lg p-8">
+                  <div className="space-y-4 text-center md:text-left">
+                    <h3 className="text-lg font-medium">Why join Shopopti+?</h3>
+                    
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+                          <svg className="h-3 w-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span>AI-powered product optimization</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+                          <svg className="h-3 w-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span>Bulk order processing and automation</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+                          <svg className="h-3 w-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span>Multi-store management from one dashboard</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+                          <svg className="h-3 w-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span>Advanced analytics and performance tracking</span>
+                      </li>
+                    </ul>
+                    
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-sm text-gray-600">
+                        "Shopopti+ has transformed my business. I've increased sales by 35% in just 3 months!"
+                      </p>
+                      <div className="flex items-center mt-2">
+                        <img 
+                          src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                          alt="User" 
+                          className="h-8 w-8 rounded-full object-cover"
+                        />
+                        <div className="ml-2">
+                          <p className="text-sm font-medium">Thomas Martin</p>
+                          <p className="text-xs text-gray-500">TechStyle Founder</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                )}
-              </Button>
-            </form>
-          </motion.div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="md:w-1/2 md:pl-8"
+            >
+              <div className="max-w-md mx-auto">
+                <RegisterForm />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
       
-      <div className="relative hidden w-0 flex-1 lg:block">
-        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-primary to-primary-600 object-cover"></div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-          <div className="max-w-2xl text-center text-white">
-            <h1 className="text-4xl font-bold">Transformez votre business e-commerce avec l'IA</h1>
-            <p className="mt-4 text-xl">Rejoignez des milliers de marchands qui utilisent Shopopti+ pour développer leur activité en ligne</p>
-          </div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

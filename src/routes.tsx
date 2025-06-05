@@ -27,6 +27,7 @@ import Cancel from './pages/Cancel';
 import Documentation from './pages/Documentation';
 import FaqPage from './pages/faq';
 import HelpCenterPage from './pages/help-center';
+import AuthCallback from './pages/auth/AuthCallback';
 
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
@@ -98,6 +99,7 @@ const AppRoutes = () => {
                 <Route path="/documentation/:category/:article" element={<Documentation />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/help-center" element={<HelpCenterPage />} />
+                <Route path="/auth/callback" element={<AuthCallback />} />
 
                 {/* AI and tools pages accessible without login */}
                 <Route path="/blog-ai" element={<BlogAIPage />} />

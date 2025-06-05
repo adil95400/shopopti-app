@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 import LanguageSelector from '../LanguageSelector';
 import Logo from './Logo';
+import LoginModal from '../auth/LoginModal';
 import { 
   Menu, 
   Bell, 
@@ -37,19 +38,20 @@ const MainNavbar: React.FC = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est connecté
+    // Check if user is logged in
     const checkAuth = async () => {
       const { data } = await supabase.auth.getSession();
       setIsAuthenticated(!!data.session);
       
       if (data.session?.user) {
-        // Dans une application réelle, récupérez les données utilisateur depuis Supabase
+        // In a real app, you would fetch user data from Supabase
         setUserProfile({
-          name: 'Utilisateur Shopopti+',
+          name: 'Shopopti+ User',
           email: data.session.user.email,
           plan: 'pro'
         });
@@ -58,13 +60,13 @@ const MainNavbar: React.FC = () => {
     
     checkAuth();
     
-    // Écouter les changements d'authentification
+    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setIsAuthenticated(!!session);
         if (session?.user) {
           setUserProfile({
-            name: 'Utilisateur Shopopti+',
+            name: 'Shopopti+ User',
             email: session.user.email,
             plan: 'pro'
           });
@@ -104,32 +106,32 @@ const MainNavbar: React.FC = () => {
 
   const navItems = [
     {
-      label: 'Produits',
+      label: 'Products',
       href: '#',
       items: [
         { 
-          label: 'Recherche de produits', 
+          label: 'Product Research', 
           href: '/app/products', 
           icon: <Search size={18} />,
-          description: 'Trouvez des produits à fort potentiel pour votre boutique'
+          description: 'Find high-potential products for your store'
         },
         { 
-          label: 'Importation', 
+          label: 'Import', 
           href: '/app/import-products', 
           icon: <Package size={18} />,
-          description: 'Importez des produits depuis différentes sources'
+          description: 'Import products from various sources'
         },
         { 
-          label: 'Produits gagnants', 
+          label: 'Winning Products', 
           href: '/app/winning-products', 
           icon: <Zap size={18} />,
-          description: 'Découvrez les produits les plus performants du moment'
+          description: 'Discover the best-performing products'
         },
         { 
-          label: 'Optimisation IA', 
+          label: 'AI Optimization', 
           href: '/app/ai-hub', 
           icon: <Bot size={18} />,
-          description: 'Optimisez vos fiches produits avec l\'intelligence artificielle'
+          description: 'Optimize your product listings with AI'
         }
       ]
     },
@@ -141,90 +143,90 @@ const MainNavbar: React.FC = () => {
           label: 'Dropshipping', 
           href: '/app/dropshipping', 
           icon: <Truck size={18} />,
-          description: 'Solution complète pour le dropshipping'
+          description: 'Complete dropshipping solution'
         },
         { 
-          label: 'Multi-canal', 
+          label: 'Multi-channel', 
           href: '/app/multi-channel', 
           icon: <Layers size={18} />,
-          description: 'Vendez sur plusieurs plateformes simultanément'
+          description: 'Sell on multiple platforms simultaneously'
         },
         { 
-          label: 'Marketplace B2B', 
+          label: 'B2B Marketplace', 
           href: '/marketplace-b2b', 
           icon: <Globe size={18} />,
-          description: 'Connectez-vous directement avec des fournisseurs vérifiés'
+          description: 'Connect directly with verified suppliers'
         },
         { 
-          label: 'Automatisations', 
+          label: 'Automations', 
           href: '/app/automations', 
           icon: <Zap size={18} />,
-          description: 'Automatisez vos tâches répétitives'
+          description: 'Automate your repetitive tasks'
         }
       ]
     },
     {
-      label: 'Outils IA',
+      label: 'AI Tools',
       href: '#',
       items: [
         { 
-          label: 'Centre IA', 
+          label: 'AI Hub', 
           href: '/app/ai-hub', 
           icon: <Bot size={18} />,
-          description: 'Tous vos outils IA centralisés'
+          description: 'All your AI tools in one place'
         },
         { 
-          label: 'Blog IA', 
+          label: 'Blog AI', 
           href: '/blog-ai', 
           icon: <FileText size={18} />,
-          description: 'Générez du contenu optimisé pour votre blog'
+          description: 'Generate optimized content for your blog'
         },
         { 
-          label: 'SEO IA', 
+          label: 'SEO AI', 
           href: '/seo-ai', 
           icon: <Globe size={18} />,
-          description: 'Optimisez votre référencement avec l\'IA'
+          description: 'Optimize your SEO with AI'
         },
         { 
-          label: 'Analyse concurrentielle', 
+          label: 'Competitor Analysis', 
           href: '/app/seo-competitor', 
           icon: <Search size={18} />,
-          description: 'Analysez vos concurrents et identifiez des opportunités'
+          description: 'Analyze competitors and identify opportunities'
         }
       ]
     },
     {
-      label: 'Ressources',
+      label: 'Resources',
       href: '#',
       items: [
         { 
-          label: 'Centre d\'aide', 
+          label: 'Help Center', 
           href: '/help-center', 
           icon: <HelpCircle size={18} />,
-          description: 'Guides et documentation pour vous aider'
+          description: 'Guides and documentation to help you'
         },
         { 
           label: 'Blog', 
           href: '/blog', 
           icon: <FileText size={18} />,
-          description: 'Articles, conseils et actualités e-commerce'
+          description: 'Articles, tips, and e-commerce news'
         },
         { 
-          label: 'Webinaires', 
+          label: 'Webinars', 
           href: '/webinars', 
           icon: <User size={18} />,
-          description: 'Formations et événements en ligne'
+          description: 'Online training and events'
         },
         { 
           label: 'API', 
           href: '/api-docs', 
           icon: <Layers size={18} />,
-          description: 'Documentation technique pour les développeurs'
+          description: 'Technical documentation for developers'
         }
       ]
     },
     { 
-      label: 'Tarifs', 
+      label: 'Pricing', 
       href: '/pricing' 
     }
   ];
@@ -233,21 +235,21 @@ const MainNavbar: React.FC = () => {
     {
       id: 1,
       title: t('common.newOrder'),
-      message: 'Commande #2345 - 129.99€',
+      message: 'Order #2345 - $129.99',
       time: '10 ' + t('common.minutes'),
       read: false
     },
     {
       id: 2,
       title: t('common.lowStock'),
-      message: 'Le produit "Écouteurs sans fil" a un stock faible (3 restants)',
+      message: 'Product "Wireless Earbuds" has low stock (3 remaining)',
       time: '1 ' + t('common.hours'),
       read: true
     },
     {
       id: 3,
-      title: 'Mise à jour disponible',
-      message: 'Une nouvelle version de Shopopti+ est disponible',
+      title: 'Update Available',
+      message: 'A new version of Shopopti+ is available',
       time: '3 ' + t('common.hours'),
       read: true
     }
@@ -358,7 +360,7 @@ const MainNavbar: React.FC = () => {
                         className="absolute right-0 top-full mt-1 w-80 rounded-md border border-gray-200 bg-white shadow-lg z-20"
                       >
                         <div className="border-b border-gray-200 px-4 py-3">
-                          <h3 className="font-medium">{t('common.notifications')}</h3>
+                          <h3 className="font-medium">Notifications</h3>
                         </div>
                         <div className="max-h-96 overflow-y-auto p-2">
                           {notifications.map((notification) => (
@@ -374,7 +376,7 @@ const MainNavbar: React.FC = () => {
                         </div>
                         <div className="border-t border-gray-200 p-2">
                           <button className="text-center w-full text-sm text-primary hover:text-primary-dark">
-                            Voir toutes les notifications
+                            View all notifications
                           </button>
                         </div>
                       </motion.div>
@@ -402,13 +404,13 @@ const MainNavbar: React.FC = () => {
                         className="absolute right-0 top-full mt-1 w-56 rounded-md border border-gray-200 bg-white shadow-lg z-20"
                       >
                         <div className="border-b border-gray-200 px-4 py-3">
-                          <p className="text-sm font-medium">{userProfile?.name || 'Utilisateur'}</p>
-                          <p className="text-xs text-gray-500">{userProfile?.email || 'utilisateur@exemple.com'}</p>
+                          <p className="text-sm font-medium">{userProfile?.name || 'User'}</p>
+                          <p className="text-xs text-gray-500">{userProfile?.email || 'user@example.com'}</p>
                           {userProfile?.plan && (
                             <div className="mt-1 flex items-center">
                               <span className="inline-flex items-center rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary">
-                                {userProfile.plan === 'pro' ? 'Forfait Pro' : 
-                                 userProfile.plan === 'agency' ? 'Forfait Agence' : 'Forfait Gratuit'}
+                                {userProfile.plan === 'pro' ? 'Pro Plan' : 
+                                 userProfile.plan === 'agency' ? 'Agency Plan' : 'Free Plan'}
                               </span>
                             </div>
                           )}
@@ -432,7 +434,7 @@ const MainNavbar: React.FC = () => {
                             className="flex w-full items-center rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             <CreditCard size={16} className="mr-2" />
-                            Abonnement
+                            Subscription
                           </button>
                           <button 
                             onClick={() => {
@@ -452,7 +454,7 @@ const MainNavbar: React.FC = () => {
                             className="flex w-full items-center rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             <HelpCircle size={16} className="mr-2" />
-                            Centre d'aide
+                            Help Center
                           </button>
                           <button 
                             onClick={handleLogout} 
@@ -469,9 +471,13 @@ const MainNavbar: React.FC = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className="text-gray-700 hover:text-primary font-medium">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setShowLoginModal(true)}
+                  className="text-gray-700 hover:text-primary font-medium"
+                >
                   {t('common.signIn')}
-                </Link>
+                </Button>
                 <Link
                   to="/register"
                   className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-600"
@@ -588,13 +594,16 @@ const MainNavbar: React.FC = () => {
                   </>
                 ) : (
                   <div className="flex flex-col space-y-2 px-3">
-                    <Link
-                      to="/login"
-                      className="block py-2 text-gray-700 hover:text-primary font-medium"
-                      onClick={() => setMobileMenuOpen(false)}
+                    <Button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setShowLoginModal(true);
+                      }}
+                      variant="outline"
+                      className="w-full justify-center"
                     >
                       {t('common.signIn')}
-                    </Link>
+                    </Button>
                     <Link
                       to="/register"
                       className="flex justify-center items-center py-2 bg-primary text-white rounded-md font-medium"
@@ -638,12 +647,14 @@ const MainNavbar: React.FC = () => {
                 className="text-center w-full text-sm text-primary hover:text-primary-dark"
                 onClick={() => setShowNotifications(false)}
               >
-                Fermer
+                Close
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+      
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </nav>
   );
 };

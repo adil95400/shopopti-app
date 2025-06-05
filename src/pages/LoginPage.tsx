@@ -21,9 +21,9 @@ const LoginPage: React.FC = () => {
             >
               <div className="max-w-md mx-auto md:mx-0 md:ml-auto">
                 <div className="text-center md:text-left mb-8">
-                  <h1 className="text-3xl font-bold text-gray-900">Bienvenue sur Shopopti+</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">Welcome to Shopopti+</h1>
                   <p className="mt-3 text-lg text-gray-600">
-                    Connectez-vous pour accéder à votre compte et gérer votre boutique en ligne.
+                    Sign in to access your account and manage your online store.
                   </p>
                 </div>
                 
@@ -35,9 +35,9 @@ const LoginPage: React.FC = () => {
                   </div>
                   
                   <div className="space-y-4 text-center">
-                    <h3 className="text-lg font-medium">Optimisez votre e-commerce</h3>
+                    <h3 className="text-lg font-medium">Optimize Your E-commerce</h3>
                     <p className="text-gray-600">
-                      Accédez à tous vos outils d'optimisation, de gestion des commandes et d'analyse en un seul endroit.
+                      Access all your optimization tools, order management, and analytics in one place.
                     </p>
                     
                     <div className="pt-4 border-t border-gray-200">
@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
                           />
                         </div>
                         <span className="text-sm text-gray-600">
-                          Rejoint par +10 000 e-commerçants
+                          Joined by +10,000 e-commerce sellers
                         </span>
                       </div>
                     </div>
