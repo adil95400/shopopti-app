@@ -32,7 +32,7 @@ import AuthCallback from './pages/auth/AuthCallback';
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
-import Orders from './pages/Orders';
+import Orders from './pages/orders';
 import ImportProducts from './pages/ImportProducts';
 import Analytics from './pages/Analytics';
 import Reviews from './pages/Reviews';
@@ -46,6 +46,7 @@ import Subscription from './pages/Account/Subscription';
 import AdminDashboard from './pages/admin/Dashboard';
 import UsersAdmin from './pages/admin/Users';
 import AdminAnalytics from './pages/admin/Analytics';
+import Imports from './pages/admin/Imports';
 
 // AI and tools pages
 import BlogAIPage from './pages/blog-ai';
@@ -162,6 +163,7 @@ const AppRoutes = () => {
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="users" element={<UsersAdmin />} />
                     <Route path="analytics" element={<AdminAnalytics />} />
+                    <Route path="imports" element={<Imports />} />
                   </Route>
                 </Route>
                 

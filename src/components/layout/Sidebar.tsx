@@ -82,6 +82,14 @@ const sections = [
       { path: "/app/automations", label: "Automations CRM", icon: <Zap size={18} /> },
       { path: "/app/integrations", label: "Intégrations", icon: <Database size={18} /> },
     ]
+  },
+  {
+    title: "Administration",
+    links: [
+      { path: "/app/admin/dashboard", label: "Admin Dashboard", icon: <LayoutDashboard size={18} /> },
+      { path: "/app/admin/users", label: "User Management", icon: <Building size={18} /> },
+      { path: "/app/admin/imports", label: "Supplier Imports", icon: <Import size={18} /> },
+    ]
   }
 ];
 
