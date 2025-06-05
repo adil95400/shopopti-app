@@ -54,7 +54,6 @@ const URLImporter: React.FC<URLImporterProps> = ({ marketplace }) => {
       return (
         <motion.div
           key="error"
-          layout
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -80,7 +79,6 @@ const URLImporter: React.FC<URLImporterProps> = ({ marketplace }) => {
       return (
         <motion.div
           key="preview"
-          layout
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
