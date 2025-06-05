@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../components/layout/Logo';
-import { User, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
+import { User, Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 
 const Register: React.FC = () => {
   const [name, setName] = useState('');
@@ -94,22 +96,27 @@ const Register: React.FC = () => {
               </p>
             </div>
 
-            {error && (
-              <div className="mt-4 rounded-md bg-red-50 p-3 text-sm text-red-500">
-                {error}
-              </div>
-            )}
+            <AnimatePresence mode="wait">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mt-4 flex items-start p-3 rounded-md bg-red-50"
+                >
+                  <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 mr-2" />
+                  <p className="text-sm text-red-500">{error}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Nom complet
                 </label>
-                <div className="relative mt-1">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                    <User size={16} />
-                  </div>
-                  <input
+                <div className="mt-1">
+                  <Input
                     id="name"
                     name="name"
                     type="text"
@@ -117,7 +124,7 @@ const Register: React.FC = () => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    icon={<User size={16} className="text-gray-400" />}
                     placeholder="Jean Dupont"
                   />
                 </div>
@@ -127,11 +134,8 @@ const Register: React.FC = () => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Adresse email
                 </label>
-                <div className="relative mt-1">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                    <Mail size={16} />
-                  </div>
-                  <input
+                <div className="mt-1">
+                  <Input
                     id="email"
                     name="email"
                     type="email"
@@ -139,7 +143,7 @@ const Register: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    icon={<Mail size={16} className="text-gray-400" />}
                     placeholder="vous@exemple.com"
                   />
                 </div>
@@ -149,11 +153,8 @@ const Register: React.FC = () => {
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Mot de passe
                 </label>
-                <div className="relative mt-1">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                    <Lock size={16} />
-                  </div>
-                  <input
+                <div className="mt-1">
+                  <Input
                     id="password"
                     name="password"
                     type="password"
@@ -161,7 +162,7 @@ const Register: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    icon={<Lock size={16} className="text-gray-400" />}
                     minLength={8}
                   />
                 </div>
@@ -172,11 +173,8 @@ const Register: React.FC = () => {
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                   Confirmer le mot de passe
                 </label>
-                <div className="relative mt-1">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                    <Lock size={16} />
-                  </div>
-                  <input
+                <div className="mt-1">
+                  <Input
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password"
@@ -184,7 +182,7 @@ const Register: React.FC = () => {
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full rounded-md border border-gray-300 pl-10 pr-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    icon={<Lock size={16} className="text-gray-400" />}
                     minLength={8}
                   />
                 </div>
@@ -210,24 +208,20 @@ const Register: React.FC = () => {
                 </label>
               </div>
 
-              <div>
-                <motion.button
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
-                  type="submit"
-                  disabled={loading}
-                  className="w-full flex justify-center items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 mt-4"
-                >
-                  {loading ? (
-                    <Loader2 className="h-5 w-5 animate-spin text-white" />
-                  ) : (
-                    <>
-                      Créer un compte
-                      <ArrowRight size={16} className="ml-2" />
-                    </>
-                  )}
-                </motion.button>
-              </div>
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full mt-4"
+              >
+                {loading ? (
+                  <Loader2 className="h-5 w-5 animate-spin text-white" />
+                ) : (
+                  <div className="flex items-center justify-center">
+                    Créer un compte
+                    <ArrowRight size={16} className="ml-2" />
+                  </div>
+                )}
+              </Button>
             </form>
           </motion.div>
         </div>

@@ -20,18 +20,19 @@ import {
   Package,
   Truck,
   Store,
-  MessageSquare
+  MessageSquare,
+  Sparkles,
+  Bot,
+  FileText,
+  Layers
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import Logo from './Logo';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
+import LanguageSelector from '../LanguageSelector';
 
-interface MainNavbarProps {
-  // Add any props if needed
-}
-
-const MainNavbar: React.FC<MainNavbarProps> = () => {
+const MainNavbar: React.FC = () => {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -95,6 +96,11 @@ const MainNavbar: React.FC<MainNavbarProps> = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Close mobile menu when location changes
+    setMobileMenuOpen(false);
+  }, [location]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/login');
@@ -102,46 +108,129 @@ const MainNavbar: React.FC<MainNavbarProps> = () => {
 
   const navItems = [
     {
-      label: t('nav.products'),
+      label: 'Produits',
       href: '#',
       items: [
-        { label: t('nav.findProducts'), href: '/app/products', icon: <Search size={18} /> },
-        { label: t('nav.import'), href: '/app/import-products', icon: <Package size={18} /> },
-        { label: t('nav.winningProducts'), href: '/app/winning-products', icon: <Zap size={18} /> },
-        { label: t('nav.aiOptimization'), href: '/app/ai-hub', icon: <ShoppingBag size={18} /> }
+        { 
+          label: 'Recherche de produits', 
+          href: '/app/products', 
+          icon: <Search size={18} />,
+          description: 'Trouvez des produits à fort potentiel pour votre boutique'
+        },
+        { 
+          label: 'Importation', 
+          href: '/app/import-products', 
+          icon: <Package size={18} />,
+          description: 'Importez des produits depuis différentes sources'
+        },
+        { 
+          label: 'Produits gagnants', 
+          href: '/app/winning-products', 
+          icon: <Sparkles size={18} />,
+          description: 'Découvrez les produits les plus performants du moment'
+        },
+        { 
+          label: 'Optimisation IA', 
+          href: '/app/ai-hub', 
+          icon: <Bot size={18} />,
+          description: 'Optimisez vos fiches produits avec l\'intelligence artificielle'
+        }
       ]
     },
     {
-      label: t('nav.sales'),
+      label: 'Solutions',
       href: '#',
       items: [
-        { label: t('nav.orders'), href: '/app/orders', icon: <ShoppingCart size={18} /> },
-        { label: t('nav.tracking'), href: '/tracking', icon: <Truck size={18} /> },
-        { label: t('nav.invoices'), href: '/generate-invoice', icon: <CreditCard size={18} /> },
-        { label: t('nav.reviews'), href: '/app/reviews', icon: <MessageSquare size={18} /> }
+        { 
+          label: 'Dropshipping', 
+          href: '/app/dropshipping', 
+          icon: <Truck size={18} />,
+          description: 'Solution complète pour le dropshipping'
+        },
+        { 
+          label: 'Multi-canal', 
+          href: '/app/multi-channel', 
+          icon: <Layers size={18} />,
+          description: 'Vendez sur plusieurs plateformes simultanément'
+        },
+        { 
+          label: 'Marketplace B2B', 
+          href: '/marketplace-b2b', 
+          icon: <Store size={18} />,
+          description: 'Connectez-vous directement avec des fournisseurs vérifiés'
+        },
+        { 
+          label: 'Automatisations', 
+          href: '/app/automations', 
+          icon: <Zap size={18} />,
+          description: 'Automatisez vos tâches répétitives'
+        }
       ]
     },
     {
-      label: t('nav.marketing'),
+      label: 'Outils IA',
       href: '#',
       items: [
-        { label: t('nav.analytics'), href: '/app/analytics', icon: <BarChart3 size={18} /> },
-        { label: t('nav.blogAI'), href: '/blog-ai', icon: <Zap size={18} /> },
-        { label: t('nav.seoAI'), href: '/seo-ai', icon: <Globe size={18} /> },
-        { label: t('nav.campaigns'), href: '/app/marketing-hub', icon: <Bell size={18} /> }
+        { 
+          label: 'Centre IA', 
+          href: '/app/ai-hub', 
+          icon: <Bot size={18} />,
+          description: 'Tous vos outils IA centralisés'
+        },
+        { 
+          label: 'Blog IA', 
+          href: '/blog-ai', 
+          icon: <FileText size={18} />,
+          description: 'Générez du contenu optimisé pour votre blog'
+        },
+        { 
+          label: 'SEO IA', 
+          href: '/seo-ai', 
+          icon: <Globe size={18} />,
+          description: 'Optimisez votre référencement avec l\'IA'
+        },
+        { 
+          label: 'Analyse concurrentielle', 
+          href: '/app/seo-competitor', 
+          icon: <Search size={18} />,
+          description: 'Analysez vos concurrents et identifiez des opportunités'
+        }
       ]
     },
     {
-      label: t('nav.suppliers'),
+      label: 'Ressources',
       href: '#',
       items: [
-        { label: t('nav.supplierDirectory'), href: '/app/advanced-suppliers', icon: <Store size={18} /> },
-        { label: t('nav.dropshipping'), href: '/app/dropshipping', icon: <Truck size={18} /> },
-        { label: t('nav.b2bMarketplace'), href: '/marketplace-b2b', icon: <ShoppingBag size={18} /> },
-        { label: t('nav.automation'), href: '/app/automations', icon: <Zap size={18} /> }
+        { 
+          label: 'Centre d\'aide', 
+          href: '/help-center', 
+          icon: <HelpCircle size={18} />,
+          description: 'Guides et documentation pour vous aider'
+        },
+        { 
+          label: 'Blog', 
+          href: '/blog', 
+          icon: <FileText size={18} />,
+          description: 'Articles, conseils et actualités e-commerce'
+        },
+        { 
+          label: 'Webinaires', 
+          href: '/webinars', 
+          icon: <MessageSquare size={18} />,
+          description: 'Formations et événements en ligne'
+        },
+        { 
+          label: 'API', 
+          href: '/api-docs', 
+          icon: <Layers size={18} />,
+          description: 'Documentation technique pour les développeurs'
+        }
       ]
     },
-    { label: t('nav.pricing'), href: '/pricing' }
+    { 
+      label: 'Tarifs', 
+      href: '/pricing' 
+    }
   ];
 
   const notifications = [
@@ -204,17 +293,18 @@ const MainNavbar: React.FC<MainNavbarProps> = () => {
                   )}
 
                   {item.items && activeDropdown === item.label && (
-                    <div className="absolute left-0 mt-1 w-64 rounded-md bg-white shadow-lg ring-1 ring-gray-200 z-50">
+                    <div className="absolute left-0 mt-1 w-72 rounded-md bg-white shadow-lg ring-1 ring-gray-200 z-50">
                       <div className="py-1">
                         {item.items.map((subItem) => (
                           <Link
                             key={subItem.label}
                             to={subItem.href}
-                            className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary"
+                            className="flex items-start px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary"
                           >
-                            <span className="mr-3 text-gray-400">{subItem.icon}</span>
+                            <span className="mr-3 text-gray-400 mt-0.5">{subItem.icon}</span>
                             <div>
                               <p className="font-medium">{subItem.label}</p>
+                              <p className="text-xs text-gray-500">{subItem.description}</p>
                             </div>
                           </Link>
                         ))}
@@ -235,6 +325,8 @@ const MainNavbar: React.FC<MainNavbarProps> = () => {
                 className="pl-10 pr-4 py-2 w-40 lg:w-64 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
+            
+            <LanguageSelector />
             
             {isAuthenticated ? (
               <>

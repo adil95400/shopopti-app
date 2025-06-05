@@ -1,7 +1,7 @@
 import React, { useState, useTransition } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Loader2, Search } from 'lucide-react';
+import { Loader2, Search, Package } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface TrackingFormProps {
@@ -48,7 +48,10 @@ const TrackingForm: React.FC<TrackingFormProps> = ({ onSubmit, loading }) => {
                 {t('form.searching')}
               </>
             ) : (
-              t('form.track')
+              <>
+                <Package className="mr-2 h-4 w-4" />
+                {t('form.track')}
+              </>
             )}
           </Button>
         </div>
