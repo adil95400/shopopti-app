@@ -36,6 +36,7 @@ import MarketplaceImporter from '../components/import/MarketplaceImporter';
 import SupplierCatalogImporter from '../components/import/SupplierCatalogImporter';
 import MainNavbar from '../components/layout/MainNavbar';
 import Footer from '../components/layout/Footer';
+import { toast } from 'sonner';
 
 const importMethods = [
   {
@@ -116,7 +117,7 @@ const marketplaces = [
 ];
 
 const ImportProducts: React.FC = () => {
-  const { isConnected } = useShop();
+  const { isConnected, connectShopify } = useShop();
   const [selectedMethod, setSelectedMethod] = useState(importMethods[0]);
   const [recentImports, setRecentImports] = useState([
     { id: 1, source: 'AliExpress', date: '2025-06-01', count: 15, status: 'completed' },
@@ -141,6 +142,78 @@ const ImportProducts: React.FC = () => {
             Connecter une boutique
           </Button>
         </div>
+        
+        {showMarketplaceSelector && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-bold">Connecter une marketplace</h2>
+                  <button
+                    onClick={() => setShowMarketplaceSelector(false)}
+                    className="text-gray-400 hover:text-gray-500"
+                  >
+                    <span className="sr-only">Fermer</span>
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                <p className="text-gray-600 mb-6">
+                  Sélectionnez une marketplace pour connecter votre boutique et importer des produits.
+                </p>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                  {marketplaces.map((marketplace) => (
+                    <div
+                      key={marketplace.id}
+                      className="border rounded-lg p-4 flex flex-col items-center justify-center hover:border-primary hover:shadow-md cursor-pointer transition-all"
+                      onClick={() => {
+                        // In a real app, this would open a connection flow
+                        console.log(`Connecting to ${marketplace.name}...`);
+                        
+                        // For now, we'll simulate connecting to Shopify
+                        if (marketplace.id === 'shopify') {
+                          connectShopify('mystore.myshopify.com', 'fake-access-token')
+                            .then(success => {
+                              if (success) {
+                                toast.success('Successfully connected to Shopify');
+                              }
+                            })
+                            .catch(error => {
+                              console.error('Error connecting to Shopify:', error);
+                              toast.error('Failed to connect to Shopify');
+                            });
+                        }
+                        
+                        setShowMarketplaceSelector(false);
+                      }}
+                    >
+                      <img
+                        src={marketplace.logo}
+                        alt={marketplace.name}
+                        className="h-12 object-contain mb-3"
+                      />
+                      <span className="text-sm font-medium">{marketplace.name}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <p className="text-sm text-gray-500 mb-4">
+                    Vous ne trouvez pas votre marketplace ? Nous pouvons vous aider à créer une intégration personnalisée.
+                  </p>
+                  <Button variant="outline" className="w-full">
+                    <Layers className="h-4 w-4 mr-2" />
+                    Demander une intégration personnalisée
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <Footer />
       </div>
     );
@@ -697,6 +770,21 @@ const ImportProducts: React.FC = () => {
                         onClick={() => {
                           // In a real app, this would open a connection flow
                           console.log(`Connecting to ${marketplace.name}...`);
+                          
+                          // For now, we'll simulate connecting to Shopify
+                          if (marketplace.id === 'shopify') {
+                            connectShopify('mystore.myshopify.com', 'fake-access-token')
+                              .then(success => {
+                                if (success) {
+                                  toast.success('Successfully connected to Shopify');
+                                }
+                              })
+                              .catch(error => {
+                                console.error('Error connecting to Shopify:', error);
+                                toast.error('Failed to connect to Shopify');
+                              });
+                          }
+                          
                           setShowMarketplaceSelector(false);
                         }}
                       >
