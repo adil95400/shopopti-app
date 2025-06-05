@@ -50,7 +50,7 @@ import CustomReports from './pages/CustomReports';
 import MarketingHub from './pages/MarketingHub';
 import GlobalMarketplaces from './pages/GlobalMarketplaces';
 import AdvancedSuppliers from './pages/AdvancedSuppliers';
-import MultiPlatformIntegration from './pages/MultiPlatformIntegration';
+import WinningProducts from './pages/WinningProducts';
 
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
@@ -121,7 +121,7 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Navigate to="/app/dashboard\" replace />} />
+                  <Route index element={<Navigate to="/app/dashboard" replace />} />
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
@@ -134,6 +134,7 @@ const AppRoutes = () => {
                   <Route path="contact" element={<Contact />} />
                   <Route path="subscription" element={<Subscription />} />
                   <Route path="automations" element={<AutomationsPage />} />
+                  <Route path="winning-products" element={<WinningProducts />} />
                   
                   {/* Advanced modules */}
                   <Route path="seo-audit" element={<SeoAuditPage />} />
@@ -149,7 +150,6 @@ const AppRoutes = () => {
                   <Route path="marketing-hub" element={<MarketingHub />} />
                   <Route path="global-marketplaces" element={<GlobalMarketplaces />} />
                   <Route path="advanced-suppliers" element={<AdvancedSuppliers />} />
-                  <Route path="multi-platform-integration" element={<MultiPlatformIntegration />} />
                   
                   {/* Missing modules */}
                   <Route path="repricing" element={<RepricingPage />} />
@@ -172,7 +172,7 @@ const AppRoutes = () => {
                 </Route>
                 
                 {/* Default redirect */}
-                <Route path="*" element={<Navigate to="/\" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               
               <Toaster position="top-right" expand={true} richColors />
