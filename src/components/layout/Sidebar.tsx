@@ -1,99 +1,126 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  Menu, X, LayoutDashboard, FileText, Bot, Truck,
-  Sparkles, Globe, Zap, Import, Search, CreditCard,
-  ShoppingBag, BarChart3, Share2, Settings, Code,
-  Webhook, Languages, FileBarChart2, Building, Megaphone,
-  DollarSign, Package, MessageSquare, RefreshCw, ArrowDownUp,
-  GitBranch, FileCode, SplitSquareVertical, Database, Layers
+  Menu,
+  X,
+  LayoutDashboard,
+  FileText,
+  Bot,
+  Truck,
+  Sparkles,
+  Globe,
+  Zap,
+  Import,
+  Search,
+  CreditCard,
+  ShoppingBag,
+  BarChart3,
+  Share2,
+  Settings,
+  Code,
+  Webhook,
+  Languages,
+  FileBarChart2,
+  Building,
+  Megaphone,
+  DollarSign,
+  Package,
+  MessageSquare,
+  RefreshCw,
+  GitBranch,
+  FileCode,
+  SplitSquareVertical,
+  Mail,
+  HelpCircle,
+  Star
 } from 'lucide-react';
 import Logo from './Logo';
 
 const sections = [
   {
-    title: "Tableau de bord",
+    title: 'Tableau de bord',
     links: [
-      { path: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-      { path: "/app/import-products", label: "Import produits", icon: <Import size={18} /> },
+      { path: '/app/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+      { path: '/app/products', label: 'Produits', icon: <ShoppingBag size={18} /> },
+      { path: '/app/orders', label: 'Commandes', icon: <Package size={18} /> },
+      { path: '/app/import-products', label: 'Import produits', icon: <Import size={18} /> },
+      { path: '/app/analytics', label: 'Analytics', icon: <BarChart3 size={18} /> },
+      { path: '/app/reviews', label: 'Reviews', icon: <Star size={18} /> },
+      { path: '/app/suppliers', label: 'Fournisseurs', icon: <Building size={18} /> },
+      { path: '/app/settings', label: 'Param\u00e8tres', icon: <Settings size={18} /> },
+      { path: '/app/support', label: 'Support', icon: <HelpCircle size={18} /> },
+      { path: '/app/contact', label: 'Contact', icon: <Mail size={18} /> },
+      { path: '/app/subscription', label: 'Abonnement', icon: <CreditCard size={18} /> },
+      { path: '/app/advanced-analytics', label: 'Advanced Analytics', icon: <BarChart3 size={18} /> }
     ]
   },
   {
-    title: "Outils IA",
+    title: 'Outils IA',
     links: [
-      { path: "/blog-ai", label: "Blog IA", icon: <Bot size={18} /> },
-      { path: "/seo-ai", label: "SEO IA", icon: <Sparkles size={18} /> },
-      { path: "/app/seo-audit", label: "Audit SEO", icon: <Sparkles size={18} /> },
-      { path: "/app/seo-competitor", label: "Analyse concurrente", icon: <Search size={18} /> },
-      { path: "/app/ai-hub", label: "AI Hub", icon: <Bot size={18} /> },
+      { path: '/blog-ai', label: 'Blog IA', icon: <Bot size={18} /> },
+      { path: '/seo-ai', label: 'SEO IA', icon: <Sparkles size={18} /> },
+      { path: '/app/seo-audit', label: 'Audit SEO', icon: <Search size={18} /> },
+      { path: '/app/seo-competitor', label: 'SEO Concurrent', icon: <Sparkles size={18} /> },
+      { path: '/app/ai-hub', label: 'AI Hub', icon: <Bot size={18} /> }
     ]
   },
   {
-    title: "Dropshipping",
+    title: 'Dropshipping \x26 Marketplaces',
     links: [
-      { path: "/app/dropshipping", label: "Dropshipping", icon: <ShoppingBag size={18} /> },
-      { path: "/app/advanced-suppliers", label: "Fournisseurs Avancés", icon: <Building size={18} /> },
-      { path: "/app/multi-channel", label: "Multi-Channel", icon: <Share2 size={18} /> },
-      { path: "/app/global-marketplaces", label: "Marketplaces Mondiales", icon: <Globe size={18} /> },
-      { path: "/app/automations", label: "Automations", icon: <Zap size={18} /> },
-      { path: "/app/advanced-analytics", label: "Advanced Analytics", icon: <BarChart3 size={18} /> },
+      { path: '/app/dropshipping', label: 'Dropshipping', icon: <Truck size={18} /> },
+      { path: '/app/advanced-suppliers', label: 'Fournisseurs avanc\u00e9s', icon: <Building size={18} /> },
+      { path: '/app/winning-products', label: 'Winning Products', icon: <Zap size={18} /> },
+      { path: '/app/multi-channel', label: 'Multi-Channel', icon: <Share2 size={18} /> },
+      { path: '/app/global-marketplaces', label: 'Global Marketplaces', icon: <Globe size={18} /> },
+      { path: '/app/international-selling', label: 'International Selling', icon: <Languages size={18} /> },
+      { path: '/marketplace-b2b', label: 'Marketplace B2B', icon: <Globe size={18} /> }
     ]
   },
   {
-    title: "Marketing",
+    title: 'Marketing \x26 Automations',
     links: [
-      { path: "/app/marketing-hub", label: "Marketing Hub", icon: <Megaphone size={18} /> },
+      { path: '/app/marketing-hub', label: 'Marketing Hub', icon: <Megaphone size={18} /> },
+      { path: '/app/automations', label: 'Automations', icon: <Zap size={18} /> },
+      { path: '/app/funnels', label: 'Funnels', icon: <GitBranch size={18} /> },
+      { path: '/app/ab-testing', label: 'A/B Testing', icon: <SplitSquareVertical size={18} /> },
+      { path: '/app/custom-reports', label: 'Rapports personnalis\u00e9s', icon: <FileBarChart2 size={18} /> }
     ]
   },
   {
-    title: "Intégrations",
+    title: 'Int\u00e9grations',
     links: [
-      { path: "/app/integrations", label: "Intégrations", icon: <Code size={18} /> },
-      { path: "/app/multi-platform-integration", label: "Intégration Multiplateforme", icon: <Layers size={18} /> },
-      { path: "/app/webhooks", label: "Webhooks", icon: <Webhook size={18} /> },
-      { path: "/app/international-selling", label: "International", icon: <Languages size={18} /> },
-      { path: "/app/custom-reports", label: "Rapports personnalisés", icon: <FileBarChart2 size={18} /> },
+      { path: '/app/integrations', label: 'Int\u00e9grations', icon: <Code size={18} /> },
+      { path: '/app/webhooks', label: 'Webhooks', icon: <Webhook size={18} /> }
     ]
   },
   {
-    title: "Modules Avancés",
+    title: 'Modules Avanc\u00e9s',
     links: [
-      { path: "/app/repricing", label: "Optimisation des prix", icon: <DollarSign size={18} /> },
-      { path: "/app/inventory", label: "Gestion des stocks", icon: <Package size={18} /> },
-      { path: "/app/chat-support", label: "Support client IA", icon: <MessageSquare size={18} /> },
-      { path: "/app/returns", label: "Gestion des retours", icon: <RefreshCw size={18} /> },
-      { path: "/app/accounting", label: "Centre fiscal", icon: <FileText size={18} /> },
-      { path: "/app/funnels", label: "Tunnels de vente", icon: <GitBranch size={18} /> },
-      { path: "/app/templates", label: "Template Builder", icon: <FileCode size={18} /> },
-      { path: "/app/ab-testing", label: "A/B Testing", icon: <SplitSquareVertical size={18} /> },
+      { path: '/app/repricing', label: 'Repricing', icon: <DollarSign size={18} /> },
+      { path: '/app/inventory', label: 'Inventory', icon: <Package size={18} /> },
+      { path: '/app/chat-support', label: 'Chat Support', icon: <MessageSquare size={18} /> },
+      { path: '/app/returns', label: 'Returns', icon: <RefreshCw size={18} /> },
+      { path: '/app/accounting', label: 'Comptabilit\u00e9', icon: <FileText size={18} /> },
+      { path: '/app/templates', label: 'Templates', icon: <FileCode size={18} /> }
     ]
   },
   {
-    title: "Utilitaires",
+    title: 'Utilitaires',
     links: [
-      { path: "/tracking", label: "Suivi de livraison", icon: <Truck size={18} /> },
-      { path: "/generate-invoice", label: "Factures PDF", icon: <FileText size={18} /> },
-      { path: "/app/subscription", label: "Abonnement", icon: <CreditCard size={18} /> },
+      { path: '/tracking', label: 'Suivi de livraison', icon: <Truck size={18} /> },
+      { path: '/generate-invoice', label: 'Factures PDF', icon: <FileText size={18} /> }
     ]
   },
   {
-    title: "Business",
+    title: 'Administration',
     links: [
-      { path: "/marketplace-b2b", label: "Marketplace B2B", icon: <Globe size={18} /> },
-      { path: "/app/automations", label: "Automations CRM", icon: <Zap size={18} /> },
-      { path: "/app/integrations", label: "Intégrations", icon: <Database size={18} /> },
-    ]
-  },
-  {
-    title: "Administration",
-    links: [
-      { path: "/app/admin/dashboard", label: "Admin Dashboard", icon: <LayoutDashboard size={18} /> },
-      { path: "/app/admin/users", label: "User Management", icon: <Building size={18} /> },
-      { path: "/app/admin/imports", label: "Supplier Imports", icon: <Import size={18} /> },
+      { path: '/app/admin/dashboard', label: 'Dashboard Admin', icon: <LayoutDashboard size={18} /> },
+      { path: '/app/admin/users', label: 'Utilisateurs', icon: <Building size={18} /> },
+      { path: '/app/admin/analytics', label: 'Analytics Admin', icon: <BarChart3 size={18} /> },
+      { path: '/app/admin/imports', label: 'Imports', icon: <Import size={18} /> }
     ]
   }
 ];
-
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
 
