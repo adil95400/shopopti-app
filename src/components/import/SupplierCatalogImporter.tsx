@@ -325,7 +325,7 @@ const SupplierCatalogImporter: React.FC = () => {
                 >
                   <div className="relative h-48">
                     <img
-                      src={product.images[0] || 'https://via.placeholder.com/300x200'}
+                      src={product.images?.[0] || 'https://via.placeholder.com/300x200'}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
