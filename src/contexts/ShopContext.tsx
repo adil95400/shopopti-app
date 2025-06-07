@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 type StoreType = 'shopify' | 'woocommerce' | 'etsy' | 'amazon' | 'tiktok';
 
@@ -161,30 +162,178 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   const connectEtsy = async (apiKey: string, shopId: string): Promise<boolean> => {
     try {
-      // Implémentation à venir
-      return false;
-    } catch (error) {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+
+      const response = await axios.post(apiUrl, {
+        type: 'etsy',
+        apiKey,
+        shopId
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.error || 'Validation échouée');
+      }
+
+      const { data, error } = await supabase
+        .from('store_connections')
+        .insert([{ 
+          user_id: session.user.id,
+          platform: 'etsy',
+          store_url: `https://etsy.com/shop/${shopId}`,
+          api_key: apiKey,
+          status: 'active'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setConnections([...connections, data]);
+      setStoreId(data.id);
+      setStoreType('etsy');
+      setStore({
+        name: getStoreName(data.store_url, 'etsy'),
+        url: data.store_url,
+        platform: 'etsy',
+        status: 'active'
+      });
+
+      toast.success('Connexion à Etsy réussie');
+      return true;
+    } catch (error: any) {
       console.error('Erreur lors de la connexion à Etsy:', error);
+      toast.error(`Erreur de connexion: ${error.message}`);
       return false;
     }
   };
 
   const connectAmazon = async (sellerId: string, marketplace: string, accessKey: string, secretKey: string): Promise<boolean> => {
     try {
-      // Implémentation à venir
-      return false;
-    } catch (error) {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+
+      const response = await axios.post(apiUrl, {
+        type: 'amazon',
+        apiKey: accessKey,
+        apiSecret: secretKey,
+        baseUrl: marketplace,
+        sellerId
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.error || 'Validation échouée');
+      }
+
+      const { data, error } = await supabase
+        .from('store_connections')
+        .insert([{ 
+          user_id: session.user.id,
+          platform: 'amazon',
+          store_url: marketplace,
+          api_key: accessKey,
+          api_secret: secretKey,
+          scopes: [sellerId],
+          status: 'active'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setConnections([...connections, data]);
+      setStoreId(data.id);
+      setStoreType('amazon');
+      setStore({
+        name: getStoreName(data.store_url, 'amazon'),
+        url: data.store_url,
+        platform: 'amazon',
+        status: 'active'
+      });
+
+      toast.success('Connexion à Amazon réussie');
+      return true;
+    } catch (error: any) {
       console.error('Erreur lors de la connexion à Amazon:', error);
+      toast.error(`Erreur de connexion: ${error.message}`);
       return false;
     }
   };
 
   const connectTikTok = async (accessToken: string, shopId: string): Promise<boolean> => {
     try {
-      // Implémentation à venir
-      return false;
-    } catch (error) {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+
+      const response = await axios.post(apiUrl, {
+        type: 'tiktok',
+        apiKey: accessToken,
+        shopId
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.error || 'Validation échouée');
+      }
+
+      const { data, error } = await supabase
+        .from('store_connections')
+        .insert([{ 
+          user_id: session.user.id,
+          platform: 'tiktok',
+          store_url: `https://www.tiktok.com/@${shopId}`,
+          api_key: accessToken,
+          status: 'active'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setConnections([...connections, data]);
+      setStoreId(data.id);
+      setStoreType('tiktok');
+      setStore({
+        name: getStoreName(data.store_url, 'tiktok'),
+        url: data.store_url,
+        platform: 'tiktok',
+        status: 'active'
+      });
+
+      toast.success('Connexion à TikTok réussie');
+      return true;
+    } catch (error: any) {
       console.error('Erreur lors de la connexion à TikTok:', error);
+      toast.error(`Erreur de connexion: ${error.message}`);
       return false;
     }
   };
@@ -214,11 +363,30 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   const refreshConnection = async (connectionId: string) => {
     try {
-      // Simuler un rafraîchissement de la connexion
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Dans une application réelle, vous feriez une requête pour vérifier et rafraîchir la connexion
-      
+      const connection = connections.find(c => c.id === connectionId);
+      if (!connection) {
+        throw new Error('Connexion introuvable');
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+
+      await axios.post(apiUrl, {
+        type: connection.platform,
+        apiKey: connection.api_key,
+        apiSecret: connection.api_secret,
+        baseUrl: connection.store_url
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
       toast.success('Connexion rafraîchie avec succès');
     } catch (error) {
       console.error('Erreur lors du rafraîchissement de la connexion:', error);
