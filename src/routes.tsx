@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { ShopProvider } from './contexts/ShopContext';
 import { UserProvider } from './contexts/UserContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { CurrencyProvider } from './contexts/CurrencyContext';
 import { RoleProvider } from './context/RoleContext';
 
 // Layouts
@@ -85,9 +86,10 @@ const AppRoutes = () => {
   return (
     <HashRouter>
       <LanguageProvider>
-        <UserProvider>
-          <RoleProvider>
-            <ShopProvider>
+        <CurrencyProvider>
+          <UserProvider>
+            <RoleProvider>
+              <ShopProvider>
               <SubscriptionBanner />
               <Routes>
                 {/* Public pages */}
@@ -180,6 +182,7 @@ const AppRoutes = () => {
             </ShopProvider>
           </RoleProvider>
         </UserProvider>
+        </CurrencyProvider>
       </LanguageProvider>
     </HashRouter>
   );
