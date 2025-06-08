@@ -18,7 +18,7 @@ const TrackingWidget: React.FC<TrackingWidgetProps> = ({ compact = false }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (number.trim()) {
-      trackPackage(number.trim());
+      await trackPackage(number.trim());
     }
   };
 
