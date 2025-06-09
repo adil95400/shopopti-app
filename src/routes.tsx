@@ -41,6 +41,7 @@ import SeoAuditPage from './pages/SeoAudit';
 import SeoCompetitorPage from './pages/seo-competitor';
 import Dropshipping from './pages/Dropshipping';
 import MultiChannel from './pages/MultiChannel';
+import MultiChannelIntegrations from './pages/MultiChannelIntegrations';
 import AiHub from './pages/AiHub';
 import AdvancedAnalytics from './pages/AdvancedAnalytics';
 import Integrations from './pages/Integrations';
@@ -144,6 +145,10 @@ const AppRoutes = () => {
                   <Route path="ai-hub" element={<AiHub />} />
                   <Route path="advanced-analytics" element={<AdvancedAnalytics />} />
                   <Route path="integrations" element={<Integrations />} />
+                  <Route
+                    path="multi-channel-integrations"
+                    element={<MultiChannelIntegrations />}
+                  />
                   <Route path="webhooks" element={<Webhooks />} />
                   <Route path="international-selling" element={<InternationalSelling />} />
                   <Route path="custom-reports" element={<CustomReports />} />

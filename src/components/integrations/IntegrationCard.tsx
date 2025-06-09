@@ -16,13 +16,17 @@ interface IntegrationCardProps {
   onConnect: (id: string) => Promise<void>;
   onDisconnect: (id: string) => Promise<void>;
   onConfigure: (id: string) => void;
+  connectLabel?: string;
+  disconnectLabel?: string;
 }
 
 const IntegrationCard: React.FC<IntegrationCardProps> = ({
   integration,
   onConnect,
   onDisconnect,
-  onConfigure
+  onConfigure,
+  connectLabel = 'Connect',
+  disconnectLabel = 'Disconnect'
 }) => {
   const [loading, setLoading] = useState(false);
   
@@ -102,7 +106,7 @@ const IntegrationCard: React.FC<IntegrationCardProps> = ({
               ) : (
                 <>
                   <X className="h-4 w-4 mr-2" />
-                  Disconnect
+                  {disconnectLabel}
                 </>
               )}
             </Button>
@@ -117,7 +121,7 @@ const IntegrationCard: React.FC<IntegrationCardProps> = ({
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              'Connect'
+              connectLabel
             )}
           </Button>
         )}
