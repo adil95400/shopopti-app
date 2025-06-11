@@ -1,0 +1,20 @@
+{
+  "title": "Générateur de Blog IA",
+  "subtitle": "Propulsé par IA avancée",
+  "form": {
+    "settings": "Paramètres de l'article",
+    "productLabel": "Produit ou sujet de l'article *",
+    "keywordsLabel": "Mots-clés (séparés par des virgules)",
+    "keywordsHelper": "Laissez vide pour que l'IA détermine les mots-clés pertinents",
+    "toneLabel": "Ton de l'article",
+    "lengthLabel": "Longueur approximative",
+    "generate": "Générer l'article",
+    "generating": "Génération en cours..."
+  },
+  "result": {
+    "title": "Article généré",
+    "copy": "Copier",
+    "copied": "Copié",
+    "download": "Télécharger"
+  }
+}

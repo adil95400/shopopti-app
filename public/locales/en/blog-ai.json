@@ -1,0 +1,20 @@
+{
+  "title": "AI Blog Generator",
+  "subtitle": "Powered by advanced AI",
+  "form": {
+    "settings": "Article settings",
+    "productLabel": "Product or topic *",
+    "keywordsLabel": "Keywords (comma separated)",
+    "keywordsHelper": "Leave empty to let the AI decide",
+    "toneLabel": "Article tone",
+    "lengthLabel": "Approximate length",
+    "generate": "Generate article",
+    "generating": "Generating..."
+  },
+  "result": {
+    "title": "Generated article",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download"
+  }
+}
