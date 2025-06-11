@@ -59,6 +59,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import ImportProducts from './pages/ImportProducts';
+import ImportPage from './pages/import';
 import Analytics from './pages/Analytics';
 import Reviews from './pages/Reviews';
 import Suppliers from './pages/Suppliers';
@@ -129,6 +130,7 @@ const AppRoutes = () => {
                   <Route path="products" element={<Products />} />
                   <Route path="orders" element={<Orders />} />
                   <Route path="import-products" element={<ImportProducts />} />
+                  <Route path="import" element={<ImportPage />} />
                   <Route path="analytics" element={<Analytics />} />
                   <Route path="reviews" element={<Reviews />} />
                   <Route path="suppliers" element={<Suppliers />} />
