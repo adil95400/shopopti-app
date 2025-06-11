@@ -10,7 +10,8 @@
   "host_permissions": [
     "https://*.aliexpress.com/*",
     "https://*.amazon.com/*",
-    "https://*.myshopify.com/*"
+    "https://*.myshopify.com/*",
+    "https://app.shopopti.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
