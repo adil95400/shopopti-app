@@ -24,3 +24,20 @@
 ```bash
 git tag v6.8-final
 git push origin v6.8-final
+```
+
+### 📱 Mobile app
+
+Le dossier `mobile/` contient l'application Flutter générée via :
+
+```bash
+flutter create shopopti_mobile
+```
+
+#### Build & Run
+
+```bash
+cd mobile
+flutter pub get
+flutter run
+```

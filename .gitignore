@@ -19,6 +19,7 @@ dist-ssr/
 .supabase/.temp/
 supabase/.temp/
 .supabase/functions/.output/
+mobile/build/
 
 # ──────────────────────────────
 # 💻 IDE / éditeurs
