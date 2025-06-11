@@ -69,7 +69,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    // Mettre à jour la langue actuelle lorsque i18n.language change
+    // Update current language when i18n.language changes
     const language = availableLanguages.find(lang => lang.code === i18n.language);
     if (language) {
       setCurrentLanguage(language);
