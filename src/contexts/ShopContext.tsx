@@ -104,25 +104,56 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   const connectShopify = async (url: string, accessToken: string): Promise<boolean> => {
     try {
-      // Vérifier la validité de l'URL et du token
       if (!url || !accessToken) {
-        throw new Error('URL et token d\'accès requis');
+        throw new Error("URL et token d'accès requis");
       }
-      
-      // Simuler une vérification API
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Dans une application réelle, vous feriez une requête à l'API Shopify pour vérifier les identifiants
-      
-      setStoreId('shopify-1');
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+      const response = await axios.post(apiUrl, {
+        type: 'shopify',
+        apiKey: accessToken,
+        baseUrl: url
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.error || 'Validation échouée');
+      }
+
+      const { data, error } = await supabase
+        .from('store_connections')
+        .insert([{ 
+          user_id: session.user.id,
+          platform: 'shopify',
+          store_url: url,
+          api_key: accessToken,
+          status: 'active'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setConnections([...connections, data]);
+      setStoreId(data.id);
       setStoreType('shopify');
       setStore({
-        name: getStoreName(url, 'shopify'),
-        url: url,
+        name: getStoreName(data.store_url, 'shopify'),
+        url: data.store_url,
         platform: 'shopify',
         status: 'active'
       });
-      
+
+      toast.success('Connexion à Shopify réussie');
       return true;
     } catch (error: any) {
       console.error('Erreur lors de la connexion à Shopify:', error);
@@ -133,25 +164,58 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   const connectWooCommerce = async (url: string, consumerKey: string, consumerSecret: string): Promise<boolean> => {
     try {
-      // Vérifier la validité de l'URL et des clés
       if (!url || !consumerKey || !consumerSecret) {
         throw new Error('URL, clé consommateur et secret consommateur requis');
       }
-      
-      // Simuler une vérification API
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Dans une application réelle, vous feriez une requête à l'API WooCommerce pour vérifier les identifiants
-      
-      setStoreId('woo-1');
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) {
+        throw new Error('Utilisateur non authentifié');
+      }
+
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/providers/test`;
+      const response = await axios.post(apiUrl, {
+        type: 'woocommerce',
+        apiKey: consumerKey,
+        apiSecret: consumerSecret,
+        baseUrl: url
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.data.success) {
+        throw new Error(response.data.error || 'Validation échouée');
+      }
+
+      const { data, error } = await supabase
+        .from('store_connections')
+        .insert([{ 
+          user_id: session.user.id,
+          platform: 'woocommerce',
+          store_url: url,
+          api_key: consumerKey,
+          api_secret: consumerSecret,
+          status: 'active'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setConnections([...connections, data]);
+      setStoreId(data.id);
       setStoreType('woocommerce');
       setStore({
-        name: getStoreName(url, 'woocommerce'),
-        url: url,
+        name: getStoreName(data.store_url, 'woocommerce'),
+        url: data.store_url,
         platform: 'woocommerce',
         status: 'active'
       });
-      
+
+      toast.success('Connexion à WooCommerce réussie');
       return true;
     } catch (error: any) {
       console.error('Erreur lors de la connexion à WooCommerce:', error);
