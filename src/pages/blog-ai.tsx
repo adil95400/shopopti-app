@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { askChatGPT } from '@/lib/openai';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,6 +16,7 @@ export default function BlogAIPage() {
   const [blogContent, setBlogContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { t } = useTranslation('blog-ai');
 
   const generateBlog = async () => {
     if (!productName.trim()) {
@@ -72,17 +74,17 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
       <MainNavbar />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-16">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Générateur de Blog IA</h1>
-          <div className="text-sm text-gray-500">Propulsé par IA avancée</div>
+          <h1 className="text-2xl font-bold">{t('title')}</h1>
+          <div className="text-sm text-gray-500">{t('subtitle')}</div>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
-          <h2 className="text-lg font-medium mb-4">Paramètres de l'article</h2>
+          <h2 className="text-lg font-medium mb-4">{t('form.settings')}</h2>
           
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Produit ou sujet de l'article *
+                {t('form.productLabel')}
               </label>
               <Input
                 placeholder="Ex: Écouteurs sans fil à réduction de bruit"
@@ -93,7 +95,7 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Mots-clés (séparés par des virgules)
+                {t('form.keywordsLabel')}
               </label>
               <Input
                 placeholder="Ex: écouteurs bluetooth, réduction de bruit, sans fil, audio"
@@ -101,14 +103,14 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
                 onChange={(e) => setKeywords(e.target.value)}
               />
               <p className="text-xs text-gray-500 mt-1">
-                Laissez vide pour que l'IA détermine les mots-clés pertinents
+                {t('form.keywordsHelper')}
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Ton de l'article
+                  {t('form.toneLabel')}
                 </label>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -125,7 +127,7 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Longueur approximative (mots)
+                  {t('form.lengthLabel')}
                 </label>
                 <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -148,10 +150,10 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Génération en cours...
+                  {t('form.generating')}
                 </>
               ) : (
-                'Générer l\'article'
+                t('form.generate')
               )}
             </Button>
           </div>
@@ -160,7 +162,7 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
         {blogContent && (
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-medium">Article généré</h2>
+              <h2 className="text-lg font-medium">{t('result.title')}</h2>
               <div className="flex space-x-2">
                 <Button 
                   variant="outline" 
@@ -170,12 +172,12 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
                   {copied ? (
                     <>
                       <Check className="mr-2 h-4 w-4" />
-                      Copié
+                      {t('result.copied')}
                     </>
                   ) : (
                     <>
                       <Copy className="mr-2 h-4 w-4" />
-                      Copier
+                      {t('result.copy')}
                     </>
                   )}
                 </Button>
@@ -185,7 +187,7 @@ Format : Article complet en HTML simple (utilise des balises h1, h2, p, ul, li, 
                   onClick={downloadAsHTML}
                 >
                   <Download className="mr-2 h-4 w-4" />
-                  Télécharger
+                  {t('result.download')}
                 </Button>
               </div>
             </div>
