@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { useRole } from '../../context/RoleContext';
+import { useRole } from '../../contexts/RoleContext';
 import { BarChart3, TrendingUp, DollarSign, Users, Calendar, Download, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Navigate } from 'react-router-dom';

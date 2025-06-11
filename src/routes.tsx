@@ -7,7 +7,7 @@ import { ShopProvider } from './contexts/ShopContext';
 import { UserProvider } from './contexts/UserContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { CurrencyProvider } from './contexts/CurrencyContext';
-import { RoleProvider } from './context/RoleContext';
+import { RoleProvider } from './contexts/RoleContext';
 
 // Layouts
 import Layout from './components/layout/Layout';
