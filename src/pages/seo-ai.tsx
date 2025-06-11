@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { askChatGPT } from '@/lib/openai';
+import { askChatGPT } from '@/lib/ai/openai';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';

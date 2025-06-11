@@ -1,9 +1,4 @@
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true
-});
+import { openai } from '@/lib/ai/openai';
 
 export const aiService = {
   async generateProductDescription(product: {
