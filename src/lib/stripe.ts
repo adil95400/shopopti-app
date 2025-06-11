@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { supabase } from './supabase';
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
@@ -71,5 +72,3 @@ export const getCustomerPortalLink = async (customerId: string) => {
     throw error;
   }
 };
-
-import { supabase } from './supabase';
