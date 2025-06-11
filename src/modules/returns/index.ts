@@ -200,7 +200,6 @@ export const returnsService = {
   async processRefund(id: string, refundDetails: RefundDetails): Promise<void> {
     try {
       // In a real app, you would process the refund through your payment processor
-      console.log(`Processing refund for return request ${id}: ${JSON.stringify(refundDetails)}`);
       
       // Update the return request with the refund amount
       const { error } = await supabase
