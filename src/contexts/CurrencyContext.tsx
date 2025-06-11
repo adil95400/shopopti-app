@@ -28,7 +28,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
         .from('user_settings')
         .select('currency')
         .eq('user_id', session.user.id)
-        .single();
+        .maybeSingle();
       if (data?.currency) {
         setCurrencyState(data.currency);
       }
@@ -42,7 +42,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
           .from('user_settings')
           .select('currency')
           .eq('user_id', session.user.id)
-          .single();
+          .maybeSingle();
         if (data?.currency) {
           setCurrencyState(data.currency);
         }

@@ -34,7 +34,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         .from('user_settings')
         .select('language')
         .eq('user_id', session.user.id)
-        .single();
+        .maybeSingle();
       if (data?.language) {
         const language = availableLanguages.find(l => l.code === data.language);
         if (language) {
@@ -52,7 +52,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
           .from('user_settings')
           .select('language')
           .eq('user_id', session.user.id)
-          .single();
+          .maybeSingle();
         if (data?.language) {
           const language = availableLanguages.find(l => l.code === data.language);
           if (language) {
