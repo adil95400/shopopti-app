@@ -24,3 +24,10 @@
 ```bash
 git tag v6.8-final
 git push origin v6.8-final
+
+### 📚 Documentation API
+
+L'application FastAPI expose une interface Swagger disponible sur `/docs`.
+Vous pouvez également récupérer le schéma brut via `/openapi.json`.
+En local, lancez `uvicorn backend.main:app` puis ouvrez
+<http://localhost:8000/docs> pour explorer les différentes routes.
