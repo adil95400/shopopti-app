@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { importService } from './importService';
+import { findWorkingProxy } from '../utils/proxyUtils';
 
 interface ScrapingOptions {
   proxy?: boolean;
@@ -70,7 +71,7 @@ export const scrapingService = {
       }
 
       // Use proxy if enabled
-      const proxyUrl = options.proxy ? await importService.findWorkingProxy() : '';
+      const proxyUrl = options.proxy ? await findWorkingProxy() : '';
       const finalUrl = proxyUrl ? `${proxyUrl}${encodeURIComponent(url)}` : url;
 
       const { data } = await axios.get(finalUrl, {
