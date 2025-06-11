@@ -19,7 +19,6 @@ const AiHub: React.FC = () => {
   };
 
   const handleProductOptimize = (optimizedProduct: any) => {
-    console.log('Optimized product:', optimizedProduct);
     // In a real app, you would save the optimized product to your database
     alert('Product optimized successfully!');
   };
