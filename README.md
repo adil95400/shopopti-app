@@ -24,3 +24,30 @@
 ```bash
 git tag v6.8-final
 git push origin v6.8-final
+```
+
+## 🏁 Mise en route
+
+1. **Cloner le dépôt**
+```bash
+git clone https://github.com/your-user/shopopti-app.git
+cd shopopti-app
+```
+2. **Installer les dépendances**
+```bash
+npm install
+```
+3. **Configurer l'environnement**
+```bash
+cp .env.example .env
+# puis renseignez vos clés dans .env
+```
+4. **Démarrer le serveur de développement**
+```bash
+npm run dev
+```
+5. **Générer la version de production**
+```bash
+npm run build
+npm run preview
+```
