@@ -15,10 +15,11 @@ if [ ! -f "package.json" ]; then
   exit 1
 fi
 
-# 3. Ajouter au git et pousser
-git add .
-git commit -m "fix: repositionner les fichiers à la racine pour Vercel"
-git push origin v6.8
-
-echo "✅ Push effectué. Tu peux maintenant redeployer sur Vercel."
+# 3. Instructions Git
+echo "\n✅ Les fichiers sont prêts. Exécutez les commandes suivantes pour enregistrer"
+echo "manuellement les changements :"
+echo "\n   git add ."
+echo "   git commit -m 'fix: repositionner les fichiers à la racine pour Vercel'"
+echo "   git push origin <votre-branche>"
+echo "\nEnsuite, redeployez sur Vercel."
 
