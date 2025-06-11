@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import { motion } from 'framer-motion';
 import ChatbotWidget from '../ChatbotWidget';
-import Logo from './Logo';
 
 const Layout: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
