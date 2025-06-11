@@ -63,6 +63,7 @@ import Analytics from './pages/Analytics';
 import Reviews from './pages/Reviews';
 import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
+import MultilingualConfig from './pages/MultilingualConfig';
 import Support from './pages/Support';
 import Contact from './pages/Contact';
 import Subscription from './pages/Account/Subscription';
@@ -133,6 +134,7 @@ const AppRoutes = () => {
                   <Route path="reviews" element={<Reviews />} />
                   <Route path="suppliers" element={<Suppliers />} />
                   <Route path="settings" element={<Settings />} />
+                  <Route path="language-settings" element={<MultilingualConfig />} />
                   <Route path="support" element={<Support />} />
                   <Route path="contact" element={<Contact />} />
                   <Route path="subscription" element={<Subscription />} />
